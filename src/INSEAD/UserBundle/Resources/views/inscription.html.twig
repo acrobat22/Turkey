@@ -1,0 +1,34 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+
+    <div class="container-fluid inscription">
+        <div class="row">
+            <div class="header-logo-inscription">
+                <a href=""><img src="" /></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-4 col-xs-offset-1 col-md-4 col-xs-10 custom_jumbotron">
+                <h1>You want to...</h1>
+
+                <div class="form-group">
+                    <a class="btn btn-primary btn-lg" href="{{ path('fos_user_registration_register', { 'type': 'asker' }) }}" role="button">Ask questions</a>
+                    <a class="btn btn-primary btn-lg" href="{{ path('fos_user_registration_register', { 'type': 'answer' }) }}" role="button">Answer questions</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-4 col-xs-offset-1 col-md-4 col-xs-10 custom_jumbotron">
+                <h1>Sign up for Turkey</h1>
+
+                <div class="form-group">
+                    <a class="btn btn-success btn-lg" href="{{ path('fos_user_security_login') }}" role="button">Sign up</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

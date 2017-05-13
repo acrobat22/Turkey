@@ -1,0 +1,24 @@
+# -------------------------
+# INSEAD Bundle user
+# -------------------------
+insead_homepage:
+    prefix:     /
+    type:     annotation
+    resource: "@INSEADUserBundle/Controller/RegistrationController.php"
+
+# -------------------------
+# INSEAD             ANSWER
+# -------------------------
+insead_turkey_answer:
+    resource: '@INSEADTurkeyBundle/Resources/config/routing/answer/answer.yml'
+    prefix: /answer
+
+# -------------------------
+# INSEAD              ASKER
+# -------------------------
+insead_turkey_asker:
+    resource: '@INSEADTurkeyBundle/Resources/config/routing/asker/asker.yml'
+    prefix: /asker
+
+
+

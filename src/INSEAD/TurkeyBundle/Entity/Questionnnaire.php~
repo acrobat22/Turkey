@@ -1,0 +1,67 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: acrobat
+ * Date: 11/05/2017
+ * Time: 00:18
+ */
+
+namespace INSEAD\TurkeyBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+
+
+/**
+ * @ORM\Entity
+ */
+class Questionnnaire
+{
+    public function __construct()
+    {
+        $this->dateCreate = new \Datetime();
+        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(name="dateCreate", type="datetime")
+     */
+    private $dateCreate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="INSEAD\UserBundle\Entity\User", fetch="EAGER")
+     * @ORM\JoinColumn
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="INSEAD\TurkeyBundle\Entity\Question", cascade={"all"}, mappedBy="questionnaire")
+     */
+    private $questions;
+
+
+    //***************************************//
+    //                                       //
+    //           GENERATED CODE              //
+    //                                       //
+    //***************************************//
+
+}

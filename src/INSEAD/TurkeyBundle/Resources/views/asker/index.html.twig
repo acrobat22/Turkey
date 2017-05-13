@@ -1,0 +1,55 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+    <h1>Askers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Last_name</th>
+                <th>Firstname</th>
+                <th>Company</th>
+                <th>Sector</th>
+                <th>Jobfunction</th>
+                <th>Joblevel</th>
+                <th>Location</th>
+                <th>Annual</th>
+                <th>Marketing</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for asker in askers %}
+            <tr>
+                <td><a href="{{ path('asker_show', { 'id': asker.id }) }}">{{ asker.id }}</a></td>
+                <td>{{ asker.lastname }}</td>
+                <td>{{ asker.firstName }}</td>
+                <td>{{ asker.company }}</td>
+                <td>{{ asker.sector }}</td>
+                <td>{{ asker.jobFunction }}</td>
+                <td>{{ asker.jobLevel }}</td>
+                <td>{{ asker.location }}</td>
+                <td>{{ asker.annual }}</td>
+                <td>{{ asker.marketing }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('asker_show', { 'id': asker.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('asker_edit', { 'id': asker.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('asker_new') }}">Create a new asker</a>
+        </li>
+    </ul>
+{% endblock %}

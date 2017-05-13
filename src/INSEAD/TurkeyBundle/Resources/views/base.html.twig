@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang={{ app.request.locale }}>
+{#<html lang=en>#}
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Turkey - {% block title %}{% endblock %}</title>
+
+    <!--
+      o              o                 o                      o     o                                                             o
+     <|>            <|>               <|>                   _<|>_  <|>                                                           <|>
+     / \            / \               / >                          < >                                                           < \
+     \o/            \o/    o__  __o   \o__ __o       __o__    o     |        o__  __o       \o__ __o__ __o      o__ __o/    o__ __o/    o__  __o
+      |              |    /v      |>   |     v\     />  \    <|>    o__/_   /v      |>       |     |     |>    /v     |    /v     |    /v      |>
+     < >            < >  />      //   / \     <\    \o       / \    |      />      //       / \   / \   / \   />     / \  />     / \  />      //
+      \o    o/\o    o/   \o    o/     \o/      /     v\      \o/    |      \o    o/         \o/   \o/   \o/   \      \o/  \      \o/  \o    o/
+       v\  /v  v\  /v     v\  /v __o   |      o       <\      |     o       v\  /v __o       |     |     |     o      |    o      |    v\  /v __o
+        <\/>    <\/>       <\/> __/>  / \  __/>  _\o__</     / \    <\__     <\/> __/>      / \   / \   / \    <\__  / \   <\__  / \    <\/> __/>
+
+
+
+                   o                           o          o                 o       o                        o     o
+                  <|>                         <|\        <|>               <|>     <|>                      <|>  _<|>_
+                  / >                         / \\o      / \               < >     / >                      / \
+                  \o__ __o     o      o       \o/ v\     \o/     o__ __o/   |      \o__ __o       o__ __o/  \o/    o      o__  __o
+                   |     v\   <|>    <|>       |   <\     |     /v     |    o__/_   |     v\     /v     |    |    <|>    /v      |>
+                  / \     <\  < >    < >      / \    \o  / \   />     / \   |      / \     <\   />     / \  / \   / \   />      //
+                  \o/      /   \o    o/       \o/     v\ \o/   \      \o/   |      \o/     o/   \      \o/  \o/   \o/   \o    o/
+                   |      o     v\  /v         |       <\ |     o      |    o       |     <|     o      |    |     |     v\  /v __o
+                  / \  __/>      <\/>         / \        < \    <\__  / \   <\__   / \    / \    <\__  / \  / \   / \     <\/> __/>
+                                  /
+                                 o
+                              __/>
+                   o__ __o           o           o__ __o         o__ __o__/_   o          o        o__ __o       o         o   __o__
+                  <|     v\         <|>         <|     v\       <|    v       <|\        <|>      /v     v\     <|>       <|>    |
+                  / \     <\        / \         / \     <\      < >           / \\o      / \     />       <\    < >       < >   / \
+                  \o/     o/      o/   \o       \o/     o/       |            \o/ v\     \o/   o/                |         |    \o/
+                   |__  _<|      <|__ __|>       |__  _<|        o__/_         |   <\     |   <|       _\__o__   o__/_ _\__o     |
+                   |       \     /       \       |       \       |            / \    \o  / \   \\          |     |         |    < >
+                  <o>      /   o/         \o    <o>       \o    <o>           \o/     v\ \o/     \         /    <o>       <o>    |
+                   |      o   /v           v\    |         v\    |             |       <\ |       o       o      |         |     o
+                  / \  __/>  />             <\  / \         <\  / \  _\o__/_  / \        < \      <\__ __/>     / \       / \  __|>_
+
+                                                                                                                                  -->
+    {% block stylesheets %}
+        {# Font icones #}
+        <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+        {# dataTable #}
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+
+        {#<link rel="stylesheet" href="{{ asset('twbs_bootstrap/css/bootstrap.min.css') }}">#}
+        {#<link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />#}
+
+        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+        <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'>
+
+
+        {# prefixtree #}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+        {#jQuery UI (optional)#}
+        {#<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>#}
+        {#<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>#}
+
+        {% stylesheets filter="cssrewrite, ?scssphp"
+        'bundles/inseadturkey/css/*'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
+
+    {% endblock %}
+
+    {#<link rel="icon" type="image/x-icon" href="{{ asset('bundles/vpcoaching/images/Logo16x16.ico') }}" />#}
+</head>
+    <body>
+    {# HEADER #}
+    {% block header %}
+        <!-- ********************************************************* -->
+        <!--                         NAVBAR                            -->
+        <!-- ********************************************************* -->
+        <header>
+            {{ include('@INSEADTurkey/Default/navbar.html.twig') }}
+        </header>
+    {% endblock %}
+
+    {% block body %}
+
+    {% endblock %}
+
+        {# FOOTER #}
+        {% block footer %}
+            <!-- ********************************************************* -->
+            <!--                       FOOTER                              -->
+            <!-- ********************************************************* -->
+            <footer>
+                <div class="container">
+                    <div class="text-center row">
+                        <p>Copyright &copy; Turkey © {{ 'now'|date('Y') }}</p>
+                    </div>
+                </div>
+            </footer>
+        {% endblock %}
+
+
+        {% block javascripts %}
+            {#<script src="{{ asset('twbs_bootstrap/js/bootstrap.min.js') }}"></script>#}
+            {#<script src="{{ asset('assets/js/main.js') }}"></script>#}
+            {# javascript a2lix #}
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+            <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+
+            {% javascripts '@INSEADTurkeyBundle/Resources/public/js/*' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+        {% endblock %}
+
+        <!--
+        |"|          ( ( (                      .      .                      |"|
+)|(          _|_|_       '. ___ .'     `  _ ,  '    .  .:::.         ()_()         _|_|_
+(o o)         (o o)      '  (> <) '    -  (o)o)  -     :(o o):  .     (o o)         (o o)
+ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo--ooO'(_)--Ooo-ooO--(_)--Ooo-ooO--`o'--Ooo-ooO--(_)--Ooo-
+___        |                  ...           |"|             ( ( (             .
+/_\ `*      |.===.        o,*,(o o)         _|_|_          '. ___ .'       ,-_-|
+(o o)        {}o o{}      8(o o)(_)Ooo       (o o)         '  (> <) '      ([o o])
+ooO--(_)--Ooo-ooO--(_)--Ooo-ooO-(_)---Ooo----ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-
+|                             ___         |             _     _       .      .        |"|
+(((         |.===.         ()_()         .|||.        |.===.      o' \,=./ `o   .  .:::.         _|_|_
+(o o)        {}o o{}        (o o)         (o o)        {}o o{}        (o o)        :(o o):  .     (o o)
+ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--`o'--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
+                _
+,,,           ___           ((_           +++           (((          -*~*-          ***           |||
+(o o)         (o o)         (o o)         (o o)         (o o)         (o o)         (o o)         (o o)
+ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
+                                                                                           -->
+    </body>
+</html>

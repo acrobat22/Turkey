@@ -1,0 +1,14 @@
+# -------------------------
+# Bundle INSEAD Turkey
+# -------------------------
+insead_turkey:
+    resource: "@INSEADTurkeyBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# -------------------------
+# Bundle INSEAD user
+# -------------------------
+insead_user:
+    resource: "@INSEADUserBundle/Resources/config/routing.yml"
+    prefix:   /
+

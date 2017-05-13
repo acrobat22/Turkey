@@ -1,0 +1,25 @@
+insead_inscription:
+    path:     /
+    defaults: { _controller: "INSEADUserBundle:Registration:inscription" }
+
+fos_user_registration_register:
+    path: /{type}
+    defaults: { _controller: "FOSUserBundle:Registration:register" }
+    methods:  [GET, POST]
+    requirements:
+        type:  school|teacher
+
+fos_user_registration_check_email:
+    path: /check-email
+    defaults: { _controller: "FOSUserBundle:Registration:checkEmail" }
+    methods:  GET
+
+fos_user_registration_confirm:
+    path: /confirm/{token}
+    defaults: { _controller: "FOSUserBundle:Registration:confirm" }
+    methods:  GET
+
+fos_user_registration_confirmed:
+    path: /confirmed
+    defaults: { _controller: "FOSUserBundle:Registration:confirmed" }
+    methods:  GET

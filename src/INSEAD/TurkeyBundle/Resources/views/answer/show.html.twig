@@ -1,0 +1,72 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+    <h1>Answer</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ answer.id }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ answer.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ answer.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Company</th>
+                <td>{{ answer.company }}</td>
+            </tr>
+            <tr>
+                <th>Sector</th>
+                <td>{{ answer.sector }}</td>
+            </tr>
+            <tr>
+                <th>Jobfunction</th>
+                <td>{{ answer.jobFunction }}</td>
+            </tr>
+            <tr>
+                <th>Joblevel</th>
+                <td>{{ answer.jobLevel }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ answer.location }}</td>
+            </tr>
+            <tr>
+                <th>Education</th>
+                <td>{{ answer.education }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ answer.gender }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{% if answer.birthdate %}{{ answer.birthdate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Creditearned</th>
+                <td>{{ answer.creditEarned }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('answer_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('answer_edit', { 'id': answer.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -82,3 +82,16 @@ select {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 15px 15px 15px rgba(0.8, 0.8, 0.8, 0.8), inset 0 -5px 12px rgba(0, 0, 0, 0);
     padding:5px;
 }
+/**************************/
+/*       home             */
+/*    asker_answer        */
+/*         button         */
+/**************************/
+.btn_custom {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+    width: 70%;
+    font-size: 35px;
+}

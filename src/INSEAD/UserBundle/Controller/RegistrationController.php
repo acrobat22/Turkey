@@ -54,7 +54,7 @@ class RegistrationController extends BaseRegistrationController
     public function registerAction(Request $request)
     {
         // Récupération Asker ou Answer envoyer par page inscription.html.twig
-        $type = $request->query->get('type');
+        $type = $request->attributes->get('type');
 
         /** @var $formFactory FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
@@ -148,6 +148,7 @@ class RegistrationController extends BaseRegistrationController
         $userByType = $this->get('helper_services')->getCurrentUser() ;
         /* récupération id pour parametre url */
         $idUser = $userByType->getId();
+
 
         // Redirection en fonction du role du user
         if ($user->getRoles()[0] == "ROLE_ASKER") {

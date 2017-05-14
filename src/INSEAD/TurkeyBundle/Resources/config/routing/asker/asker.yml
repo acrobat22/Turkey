@@ -26,3 +26,8 @@ asker_delete:
 asker_index:
     path: /index
     defaults: { _controller: "INSEADTurkeyBundle:Asker:index" }
+
+
+asker_show:
+    path: /{id}/shox
+    defaults: { _controller: "INSEADTurkeyBundle:Asker:show" }

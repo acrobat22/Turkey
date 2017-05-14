@@ -2,11 +2,24 @@
 # INSEAD HOMEPAGE
 # -------------------------
 homepage:
-    prefix: /
-    type: annotation
-    resource: "@INSEADTurkeyBundle/Controller/DefaultController.php"
+    path: /
+#    type: annotation
+    defaults: { _controller: "INSEADTurkeyBundle:Default:index"}
+    methods:  [GET, POST]
     options:
         expose: true
+# -------------------------
+# INSEAD HOMEPAGE
+# une fois connectée
+# -------------------------
+home_connected:
+    prefix: /connected/
+    resource: "@INSEADTurkeyBundle/Controller/UserController.php"
+    type:     annotation
+#    defaults:    { _controller: "INSEADTurkeyBundle:User:homeConnected"}
+#    methods:  [GET]
+#    options:
+#        expose: true
 
 # -------------------------
 # INSEAD             ANSWER

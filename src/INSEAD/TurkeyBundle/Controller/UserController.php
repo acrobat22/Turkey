@@ -8,25 +8,24 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use INSEAD\TurkeyBundle\Entity\Asker;
 use INSEAD\TurkeyBundle\Entity\Answer;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-
+/**
+ * connected
+ *
+ * @Route("/")
+ */
 class UserController extends Controller
 {
-//    /**
-//     * @Route("/")
-//     */
-//    public function indexAction()
-//    {
-//        return $this->render('INSEADUserBundle:Default:index.html.twig');
-//    }
+
 
     /**
      * home.
      *
-     * @Route("/", name="home")
+     * @Route("/", name="home_connected")
      * @Method("GET")
      */
-    public function homeAction()
+    public function homeConnectedAction()
     {
         $current_user = $this->get('helper_services')->getCurrentUser();
         return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(

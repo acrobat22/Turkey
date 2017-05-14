@@ -1,3 +1,4 @@
+{#
 <!-- navigation panel -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -28,17 +29,9 @@
                     </li>
                 {% endif %}
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    {#<li><a href="{{ path('admin_dashboard') }}">Admin</a> </li>#}
                 {% endif %}
-                {#<li><a class="cool-link active" href="{{ path('translation_home') }}#home">Accueil</a></li>#}
-                {#<li><a class="cool-link" href="{{ path('translation_home') }}#why">Pourquoi un coach ?</a></li>#}
-                {#<li><a class="cool-link" href="{{ path('translation_home') }}#whoami">Qui suis-je</a></li>#}
-                {#<li><a class="cool-link" href="{{ path('translation_home') }}#approche">Mon approche</a></li>#}
-                {#<li><a class="cool-link" href="{{ path('translation_home') }}#prestation">Prestation</a></li>#}
-                {#<li><a class="cool-link" href="{{ path('translation_home') }}#inspirationHomePage">Inspirations</a></li>#}
-                {#<li><a class="cool-link" href="{{ path('translation_home') }}#faq">F.A.Q.</a></li>#}
-                {#<li><a class="cool-link fa fa-envelope" href="{{ path('translation_home') }}#myModalContact" role="button" data-toggle="modal"></a></li>#}
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+#}

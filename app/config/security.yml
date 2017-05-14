@@ -29,7 +29,7 @@ security:
               login_path: fos_user_security_login
               check_path: fos_user_security_check
               # Route utilisée après validation du login
-              default_target_path: /
+              default_target_path: /connected
             logout:
               # Route après logout
               path:       fos_user_security_logout
@@ -37,8 +37,8 @@ security:
 #            remember_me:
 #              secret:     '%secret%'
 
-    access_control:
-        - { path: ^/?$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#    access_control:
+#        - { path: ^/?$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/admin/(login|register), role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/admin/, role: ROLE_ADMIN }

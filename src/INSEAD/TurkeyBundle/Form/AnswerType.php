@@ -33,8 +33,7 @@ class AnswerType extends AbstractType
             ])
             ->add('birthdate', BirthdayType::class, array(
                 'placeholder' => 'Select a value', 'required' => true ))
-            ->add('creditEarned', HiddenType::class)
-            ->add('user', HiddenType::class);
+            ->add('creditEarned', HiddenType::class);
     }
     
     /**

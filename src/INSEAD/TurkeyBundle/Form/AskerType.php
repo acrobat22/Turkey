@@ -25,7 +25,6 @@ class AskerType extends AbstractType
             ->add('location', null, array('required' => true))
             ->add('annual', null, array('required' => true))
             ->add('marketing', null, array('required' => true));
-//            ->add('user');
     }
     
     /**

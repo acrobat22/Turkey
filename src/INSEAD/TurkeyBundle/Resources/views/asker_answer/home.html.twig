@@ -1,131 +1,45 @@
 {% extends '@INSEADTurkey/base.html.twig' %}
 
-{% block content %}
-
-    <section id="home">
+{% block body %}
+    <section class="container"  style="padding-top: 150px">
         <div class="row">
-            <h1 class="title_section">Bienvenue {{ user.firstName|default('') }} !</h1>
-            {% if (user is asker and (user.firstName is empty or user.lastName is empty)) or (user is answer and user.name is empty) %}
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Attention !</strong> Veuillez compléter votre profil
-                </div>
-            {% endif %}
+            <h1 class="text-center">Welcome {{ user.firstName|default('')|capitalize }}!</h1>
         </div>
+
         <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="col-sm-1 hidden-xs">
-                            <i class="fa fa-user fa-3x icon_blue" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-sm-7 col-xs-12">
-                            <p class="home_txt">Modifier votre profil</p>
-                        </div>
-                        <div class="col-sm-4 col-xs-12">
-                            {#{% if user is asker %}#}
-                                {#<a href="{{ path('teacher_info', {'id': user.id}) }}" class="btn btn-success btn_custom">Mon profil</a>#}
-                            {#{% elseif user is answer %}#}
-                                {#<a href="{{ path('school_info_edit', {'id': user.id}) }}" class="btn btn-success btn_custom">Mon profil</a>#}
-                            {#{% endif %}#}
-                        </div>
-                    </div>
-                </div>
+            <div class="col-xs-9 col-xs-offset-3">
+                {% if user.user.roles[0] == 'ROLE_ASKER' %}
+                    {# ASKER #}
+                    <a href="{{ path('asker_edit', {'id': user.id}) }}" class="btn btn-success btn_custom">Ask A Question</a>
+                {% elseif user.user.roles[0] == 'ROLE_ANSWER' %}
+                    {# ANSWER #}
+                    <a href="{{ path('asker_edit', {'id': user.id}) }}" class="btn btn-success btn_custom">Start Answering</a>
+                {% endif %}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="col-sm-1 hidden-xs">
-                            <i class="fa fa-globe fa-3x icon_blue" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-sm-7 col-xs-12">
-                            <p class="home_txt">Modifier mes coordonnées</p>
-                        </div>
-                        <div class="col-sm-4 col-xs-12">
-                            {#{% if user is asker %}#}
-                                {#<a href="{{ path('teacher_adresse', {'id': user.id}) }}" class="btn btn-success btn_custom">Mes coordonnées</a>#}
-                            {#{% elseif user is answer %}#}
-                                {#<a href="{{ path('school_adresse', {'id': user.id}) }}" class="btn btn-success btn_custom">Mes coordonnées</a>#}
-                            {#{% endif %}#}
-                        </div>
-                    </div>
-                </div>
+            <div class="col-xs-9 col-xs-offset-3">
+                {% if user.user.roles[0] == 'ROLE_ASKER' %}
+                    {# ASKER #}
+                    <a href="{{ path('asker_edit', {'id': user.id}) }}" class="btn btn-success btn_custom">My Question</a>
+                {% elseif user.user.roles[0] == 'ROLE_ANSWER' %}
+                    {# ANSWER #}
+                    <a href="{{ path('asker_edit', {'id': user.id}) }}" class="btn btn-success btn_custom">My Account</a>
+                {% endif %}
             </div>
         </div>
 
-        {% if user is asker %}
+        {% if user.user.roles[0] == 'ROLE_ASKER' %}
+            {# ASKER #}
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="col-sm-1 hidden-xs">
-                                <i class="fa fa-calendar fa-3x icon_blue" aria-hidden="true"></i>
-                            </div>
-                            <div class="col-sm-7 col-xs-12">
-                                <p class="home_txt">Ajouter des disponibilités</p>
-                            </div>
-
-                        </div>
-                    </div>
+                <div class="col-xs-9 col-xs-offset-3">
+                    <a href="{{ path('asker_edit', {'id': user.id}) }}" class="btn btn-success btn_custom">My Account</a>
                 </div>
             </div>
-            {#<div class="row">#}
-            {#<div class="col-xs-12">#}
-            {#<div class="panel panel-default">#}
-            {#<div class="panel-body">#}
-            {#<div class="col-sm-1 hidden-xs">#}
-            {#<i class="fa fa-credit-card fa-3x icon_blue" aria-hidden="true"></i>#}
-            {#</div>#}
-            {#<div class="col-sm-7 col-xs-12">#}
-            {#<p class="home_txt">Voir ma balance</p>#}
-            {#</div>#}
-            {#<div class="col-sm-4 col-xs-12">#}
-            {#<a href="{{ path('teacher_balance', {'id': user.id}) }}" class="btn btn-success btn_custom">Ma balance</a>#}
-            {#</div>#}
-            {#</div>#}
-            {#</div>#}
-            {#</div>#}
-            {#</div>#}
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="col-sm-1 hidden-xs">
-                                <i class="fa fa-newspaper-o fa-3x icon_blue" aria-hidden="true"></i>
-                            </div>
-                            <div class="col-sm-7 col-xs-12">
-                                <p class="home_txt">Voir mon profil public</p>
-                            </div>
-                            <div class="col-sm-4 col-xs-12">
-                                {#<a href="{{ path('teacher_show_public_profil', {'id': user.id}) }}" class="btn btn-success btn_custom" target="_blank">Mon profil public</a>#}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-        {% if user is answer %}
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="col-sm-1 hidden-xs">
-                                <i class="fa fa-search fa-3x icon_blue" aria-hidden="true"></i>
-                            </div>
-                            <div class="col-sm-7 col-xs-12">
-                                <p class="home_txt">Faire une nouvelle recherche</p>
-                            </div>
-                            <div class="col-sm-4 col-xs-12">
-                                {#<a href="{{ path('tr_main_homepage') }}" class="btn btn-success btn_custom">Nouvelle recherche</a>#}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        {% elseif user.user.roles[0] == 'ROLE_ANSWER' %}
+            {# ANSWER #}
+            {# nothing #}
         {% endif %}
     </section>
 

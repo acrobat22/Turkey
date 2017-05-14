@@ -12,7 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+// * @ORM\Entity(repositoryClass="@INSEAD\TurkeyBundle\Entity\AskerRepository")
+* @ORM\Entity
  */
 class Asker
 {
@@ -30,7 +31,7 @@ class Asker
     private $user;
 
     /**
-     * @ORM\Column(name="last_name", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      *
      * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
      * @Assert\Length(
@@ -44,42 +45,42 @@ class Asker
     protected $last_name;
 
     /**
-     * @ORM\Column(name="first_name", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
     protected $firstName;
 
     /**
-     * @ORM\Column(name="company", type="string", length=255)
+     * @ORM\Column(name="company", type="string", length=255, nullable=true)
      */
     protected $company;
 
     /**
-     * @ORM\Column(name="sector", type="string", length=255)
+     * @ORM\Column(name="sector", type="string", length=255, nullable=true)
      */
     protected $sector;
 
     /**
-     * @ORM\Column(name="job_function", type="string", length=255)
+     * @ORM\Column(name="job_function", type="string", length=255, nullable=true)
      */
     protected $jobFunction;
 
     /**
-     * @ORM\Column(name="job_level", type="string", length=255)
+     * @ORM\Column(name="job_level", type="string", length=255, nullable=true)
      */
     protected $jobLevel;
 
     /**
-     * @ORM\Column(name="location", type="string", length=255)
+     * @ORM\Column(name="location", type="string", length=255, nullable=true)
      */
     protected $location;
 
     /**
-     * @ORM\Column(name="annual", type="integer")
+     * @ORM\Column(name="annual", type="integer", nullable=true)
      */
     protected $annual;
 
     /**
-     * @ORM\Column(name="marketing", type="string", length=255)
+     * @ORM\Column(name="marketing", type="string", length=255, nullable=true)
      */
     protected $marketing;
 

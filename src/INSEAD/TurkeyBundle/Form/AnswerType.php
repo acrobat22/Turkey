@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class AnswerType extends AbstractType
 {
@@ -16,14 +17,14 @@ class AnswerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastName')
-            ->add('firstName')
-            ->add('company')
-            ->add('sector')
-            ->add('jobFunction')
-            ->add('jobLevel')
-            ->add('location')
-            ->add('education')
+            ->add('lastName', null, array('required' => true))
+            ->add('firstName', null, array('required' => true))
+            ->add('company', null, array('required' => true))
+            ->add('sector', null, array('required' => true))
+            ->add('jobFunction', null, array('required' => true))
+            ->add('jobLevel', null, array('required' => true))
+            ->add('location', null, array('required' => true))
+            ->add('education', null, array('required' => true))
             ->add('gender', ChoiceType::class, [
                 'choices'=> [
                     'Female' =>'Female',
@@ -31,9 +32,9 @@ class AnswerType extends AbstractType
             ],
             ])
             ->add('birthdate', BirthdayType::class, array(
-                'placeholder' => 'Select a value',))
-            ->add('creditEarned')
-            ->add('user');
+                'placeholder' => 'Select a value', 'required' => true ))
+            ->add('creditEarned', HiddenType::class)
+            ->add('user', HiddenType::class);
     }
     
     /**

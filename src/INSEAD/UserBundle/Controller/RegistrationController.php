@@ -24,10 +24,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Controller\RegistrationController as BaseRegistrationController;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 /**
  * Question controller.
  *
@@ -38,17 +37,24 @@ class RegistrationController extends BaseRegistrationController
     /**
      * inscription.
      *
-     * @Route("/", name="inscription")
+     * @Route("/", name="insead_inscription")
      * @Method("GET")
      */
     public function inscriptionAction()
     {
-        return $this->render("@INSEADUser/inscription.html.twig");
+        return $this->render("@INSEADTurkey/homepage.html.twig");
     }
 
+    /**
+     * register.
+     *
+     * @Route("/{type}", name="register")
+     * @Method("GET")
+     */
     public function registerAction(Request $request)
     {
-        $type = $request->attributes->get('type');
+        // Récupération Asker ou Answer envoyer par page inscription.html.twig
+        $type = $request->query->get('type');
 
         /** @var $formFactory FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
@@ -75,17 +81,21 @@ class RegistrationController extends BaseRegistrationController
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                // Si user type ASKER,
                 if ($type == 'asker'){
                     $user->setRoles(['ROLE_ASKER']);
                     $asker = new Asker();
                     $asker->setUser($user);
                     $em->persist($asker);
+                    $em->persist($user);
                 }
+                // Si user type ANSWER,
                 elseif ($type == 'answer'){
                     $user->setRoles(['ROLE_ANSWER']);
                     $answer = new Answer();
                     $answer->setUser($user);
                     $em->persist($answer);
+                    $em->persist($user);
                 }
                 $em->flush();
                 $event = new FormEvent($form, $request);
@@ -116,17 +126,37 @@ class RegistrationController extends BaseRegistrationController
             'type' => $type
         ));
 
-//        if ($type == "answer") {
-//        return $this->container->get('templating')->renderResponse('@INSEADTurkey/answer/new.html.twig', array(
-//            'form' => $form->createView(),
-//            'type' => $type
-//        ));
-//        } else {
-//            return $this->container->get('templating')->renderResponse('@INSEADTurkey/asker/new.html.twig', array(
-//                'form' => $form->createView(),
-//                'type' => $type
-//            ));
-//        }
     }
+
+    /**
+     * comfimed. Tell the user his account is now confirmed
+     *
+     * @Route("/{type}", name="registration_confirmed")
+     * @Method("GET")
+     */
+//fos_user_registration_confirmed
+    public function confirmedAction()
+    {
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $this->get('helper_services')->setFlash('Welcome '. $user->getUsername() .'!');
+
+        /* récupération du user current*/
+        $userByType = $this->get('helper_services')->getCurrentUser() ;
+        /* récupération id pour parametre url */
+        $idUser = $userByType->getId();
+
+        // Redirection en fonction du role du user
+        if ($user->getRoles()[0] == "ROLE_ASKER") {
+            return $this->redirect($this->generateUrl('asker_edit', array('id' => $idUser)));
+
+        } elseif ($user->getRoles()[0] == "ROLE_ANSWER") {
+            return $this->redirect($this->generateUrl('answer_edit', array('id' => $idUser)));
+        }
+    }
+
 
 }

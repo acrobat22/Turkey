@@ -7,7 +7,7 @@ fos_user_registration_register:
     defaults: { _controller: "FOSUserBundle:Registration:register" }
     methods:  [GET, POST]
     requirements:
-        type:  school|teacher
+        type:  asker|answer
 
 fos_user_registration_check_email:
     path: /check-email

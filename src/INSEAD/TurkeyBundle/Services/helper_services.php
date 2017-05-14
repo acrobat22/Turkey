@@ -30,10 +30,18 @@ class helper_services
      */
     public function getCurrentUser(){
         $user_connect = $this->container->get('security.token_storage')->getToken()->getUser();
-        $user = $this->em->getRepository('INSEADTurkey:Asker')->findOneByUser($user_connect);
+        $user = $this->em->getRepository('INSEADTurkeyBundle:Asker')->findOneByUser($user_connect);
         if (empty($user)) {
-            $user = $this->em->getRepository('INSEADTurkey:Answer')->findOneByUser($user_connect);
+            $user = $this->em->getRepository('INSEADTurkeyBundle:Answer')->findOneByUser($user_connect);
         }
         return $user;
+    }
+
+    /**
+     * Set Flash Message
+     */
+    public function setFlash($value)
+    {
+        $this->container->get('session')->getFlashBag()->set('notif', $value);
     }
 }

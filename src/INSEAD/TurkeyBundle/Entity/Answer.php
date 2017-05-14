@@ -12,10 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+// * @ORM\Entity(repositoryClass="@INSEAD\TurkeyBundle\Entity\AnswerRepository")
  * @ORM\Entity
  */
 class Answer
 {
+    public function __construct()
+    {
+        $this->creditEarned = 0;
+    }
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -30,7 +36,7 @@ class Answer
     private $user;
 
     /**
-     * @ORM\Column(name="last_name", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      *
      * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
      * @Assert\Length(
@@ -44,47 +50,47 @@ class Answer
     protected $lastName;
 
     /**
-     * @ORM\Column(name="first_name", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
     protected $firstName;
 
     /**
-     * @ORM\Column(name="company", type="string", length=255)
+     * @ORM\Column(name="company", type="string", length=255, nullable=true)
      */
     protected $company;
 
     /**
-     * @ORM\Column(name="sector", type="string", length=255)
+     * @ORM\Column(name="sector", type="string", length=255, nullable=true)
      */
     protected $sector;
 
     /**
-     * @ORM\Column(name="job_function", type="string", length=255)
+     * @ORM\Column(name="job_function", type="string", length=255, nullable=true)
      */
     protected $jobFunction;
 
     /**
-     * @ORM\Column(name="job_level", type="string", length=255)
+     * @ORM\Column(name="job_level", type="string", length=255, nullable=true)
      */
     protected $jobLevel;
 
     /**
-     * @ORM\Column(name="location", type="string", length=255)
+     * @ORM\Column(name="location", type="string", length=255, nullable=true)
      */
     protected $location;
 
     /**
-     * @ORM\Column(name="education", type="string", length=255)
+     * @ORM\Column(name="education", type="string", length=255, nullable=true)
      */
     protected $education;
 
     /**
-     * @ORM\Column(name="gender", type="string", length=255)
+     * @ORM\Column(name="gender", type="string", length=255, nullable=true)
      */
     protected $gender;
 
     /**
-     * @ORM\Column(name="birthdate", type="date")
+     * @ORM\Column(name="birthdate", type="date", nullable=true)
      */
     protected $birthdate;
 

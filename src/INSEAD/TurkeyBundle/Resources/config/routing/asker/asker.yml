@@ -5,3 +5,24 @@ asker_home:
     path: /home
     defaults: { _controller: "INSEADTurkeyBundle:User:home" }
 #    type:     annotation
+
+#---------------------------
+# ASKER
+#---------------------------
+#insead_asker:
+#    defaults: { _controller: "@INSEADTurkeyBundle/Controller/AnswerController.php" }
+#    path:   /
+
+asker_edit:
+    path: /{id}/edit
+    defaults: { _controller: "INSEADTurkeyBundle:Asker:edit" }
+    options:
+        expose: true
+
+asker_delete:
+    path: /{id}/delete
+    defaults: { _controller: "INSEADTurkeyBundle:Asker:delete" }
+
+asker_index:
+    path: /index
+    defaults: { _controller: "INSEADTurkeyBundle:Asker:index" }

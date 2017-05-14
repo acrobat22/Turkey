@@ -9,7 +9,8 @@ services:
         class: INSEAD\UserBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
-#Methode helper
+
+#Methode helper => helper_services.php
     helper_services:
         class: INSEAD\TurkeyBundle\Services\helper_services
         arguments: ['@doctrine.orm.entity_manager' ,'@service_container', '@security.token_storage']

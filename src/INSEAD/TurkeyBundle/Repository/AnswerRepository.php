@@ -2,16 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: acrobat
- * Date: 11/05/2017
- * Time: 00:24
+ * Date: 14/05/2017
+ * Time: 12:31
  */
 
 namespace INSEAD\TurkeyBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use INSEAD\TurkeyBundle\Entity\Answer;
 
-class ReponseRepository extends \Doctrine\ORM\EntityRepository
+class AnswerRepository extends \Doctrine\ORM\EntityRepository
 {
 
 }

@@ -4,8 +4,9 @@ namespace INSEAD\TurkeyBundle\Controller;
 
 use INSEAD\TurkeyBundle\Entity\Asker;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -89,7 +90,9 @@ class AskerController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('asker_edit', array('id' => $asker->getId()));
+//            return $this->redirectToRoute('asker_edit', array('id' => $asker->getId()));
+            return $this->redirectToRoute('homepage');
+
         }
 
         return $this->render('@INSEADTurkey/asker/edit.html.twig', array(

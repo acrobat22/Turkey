@@ -11,7 +11,7 @@ namespace INSEAD\TurkeyBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
-class QuestionRepository
+class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
 
 }

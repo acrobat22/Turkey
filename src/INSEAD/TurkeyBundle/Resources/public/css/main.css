@@ -1,0 +1,84 @@
+/**************************/
+/*       Edit Asker       */
+/*          et            */
+/*       Edit Answer      */
+/*         select         */
+/**************************/
+select {
+
+    padding: 10px !important;
+    margin: 0 0 20px 0 !important;
+}
+
+.bootstrap-select .btn-default {
+    color: #828A99;
+    border-color: #828A99;
+    background-color: #464A52;
+    border-radius: 3px;
+}
+
+.bootstrap-select.open .btn-default,
+.bootstrap-select.open .btn-default:hover {
+    color: #FFF;
+    border-color: #828A99;
+    background-color: #464A52;
+    border-radius: 3px;
+
+}
+
+.bootstrap-select .dropdown-menu {
+    border-color: #828A99;
+    background-color: #464A52;
+    border-radius: 3px;
+}
+
+.bootstrap-select .btn-default:focus {
+    outline: none !important;
+}
+
+.bootstrap-select .dropdown-menu li a {
+    color: #828A99;
+    padding: 8px 10px;
+}
+
+.bootstrap-select .dropdown-menu li.selected a {
+    background: #595E69;
+    color: #FFF;
+}
+
+.bootstrap-select .dropdown-menu li a:hover {
+    color: #FFF;
+    background: #50555E;
+}
+
+.bootstrap-select .dropdown-menu li a:active {
+    color: #FFF;
+    background: #50555E;
+}
+
+.bootstrap-select .btn-default:active {
+    color: #FFF;
+    background: #50555E;
+}
+
+.bootstrap-select a:focus {
+    outline: none !important;
+}
+
+
+/**************************/
+/*       Edit Asker       */
+/*          et            */
+/*       Edit Answer      */
+/*         button         */
+/**************************/
+.buttonCustom{
+    height: 60px;
+    width: 400px;
+    font-size: 30px;
+    radios:10px;
+    color:#fff;
+    background-color:	#1874CD;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 15px 15px 15px rgba(0.8, 0.8, 0.8, 0.8), inset 0 -5px 12px rgba(0, 0, 0, 0);
+    padding:5px;
+}

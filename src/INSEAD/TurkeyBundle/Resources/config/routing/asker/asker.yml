@@ -1,10 +1,10 @@
 #---------------------------
 # Home interface for ASKER
 #---------------------------
-asker_home:
-    path: /home
-    defaults: { _controller: "INSEADTurkeyBundle:User:home" }
-#    type:     annotation
+#asker_home:
+#    path: /home
+#    defaults: { _controller: "INSEADTurkeyBundle:User:home" }
+##    type:     annotation
 
 #---------------------------
 # ASKER

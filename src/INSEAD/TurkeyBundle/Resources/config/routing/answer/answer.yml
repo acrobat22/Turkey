@@ -1,9 +1,9 @@
 #---------------------------
 #Home interface for ANSWER
 #---------------------------
-answer_home:
-    path: /home
-    defaults: { _controller: "INSEADTurkeyBundle:User:home" }
+#answer_home:
+#    path: /home
+#    defaults: { _controller: "INSEADTurkeyBundle:User:home" }
 
 #---------------------------
 # ANSWER

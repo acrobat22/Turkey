@@ -89,9 +89,10 @@ class AskerController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-//            return $this->redirectToRoute('asker_edit', array('id' => $asker->getId()));
-            return $this->redirectToRoute('homepage');
+            $current_user = $this->get('helper_services')->getCurrentUser();
+            return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
+                'user' => $current_user,
+                'asker' => $asker));
 
         }
 

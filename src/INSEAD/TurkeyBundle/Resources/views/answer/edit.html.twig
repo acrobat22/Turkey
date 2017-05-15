@@ -3,13 +3,6 @@
 {% block body %}
 
     <div class="container-fluid inscription" style="padding-top: 150px">
-        {% for flash_message in app.session.flashBag.get('notif') %}
-            <div class="alert  alert-dismissable" role="alert">
-                Cet email est déjà enregistré,  merci d'en utiliser un autre !
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-            </div>
-        {% endfor %}
         <div class="row">
             <div class="header-logo-inscription">
                 <a href=""><img src="" /></a>

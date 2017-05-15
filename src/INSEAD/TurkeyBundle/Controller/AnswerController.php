@@ -88,8 +88,10 @@ class AnswerController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('answer_edit', array('id' => $answer->getId()));
+            $current_user = $this->get('helper_services')->getCurrentUser();
+            return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
+                'user' => $current_user,
+                'asker' => $answer));
         }
 
         return $this->render('@INSEADTurkey/answer/edit.html.twig', array(

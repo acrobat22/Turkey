@@ -16,10 +16,6 @@ home_connected:
     prefix: /connected/
     resource: "@INSEADTurkeyBundle/Controller/UserController.php"
     type:     annotation
-#    defaults:    { _controller: "INSEADTurkeyBundle:User:homeConnected"}
-#    methods:  [GET]
-#    options:
-#        expose: true
 
 # -------------------------
 # INSEAD             ANSWER

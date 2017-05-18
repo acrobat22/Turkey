@@ -64,7 +64,7 @@ class AnswerController extends Controller
             $em = $this->getDoctrine()->getManager();
             $current_user = $this->get('helper_services')->getCurrentUser();
 
-            // Pas credit si profil incomplet
+            // Gestion du bonus de + 5 si profil complet
             if ($answer->getBonusInscription() === false)
             {
                 if ($answer->getLastName() === NULL

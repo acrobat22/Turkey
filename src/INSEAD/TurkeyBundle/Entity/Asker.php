@@ -20,7 +20,7 @@ class Asker
 
     public function __toString()
     {
-        return $this->last_name;
+        return $this->firstName;
     }
 
     /**
@@ -48,7 +48,7 @@ class Asker
      *     groups={"Registration", "Profile"}
      * )
      */
-    protected $last_name;
+    protected $lastName;
 
     /**
      * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
@@ -96,6 +96,7 @@ class Asker
     //                                       //
     //***************************************//
 
+
     /**
      * Get id
      *
@@ -115,7 +116,7 @@ class Asker
      */
     public function setLastName($lastName)
     {
-        $this->last_name = $lastName;
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -127,7 +128,7 @@ class Asker
      */
     public function getLastName()
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
     /**

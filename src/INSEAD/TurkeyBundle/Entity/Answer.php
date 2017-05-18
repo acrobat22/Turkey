@@ -107,7 +107,7 @@ class Answer
     /**
      * @ORM\Column(name="bonus_inscription", type="boolean")
      */
-    protected $bonusInscription;
+    protected $bonusInscription = false;
 
     //***************************************//
     //                                       //

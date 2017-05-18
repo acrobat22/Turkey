@@ -132,16 +132,9 @@ select {
 .btn_customAsker:active,
 .btn_customAsker.active
 {
-    margin-top: 5px !important;
-    margin-bottom: 5px !important;
-    padding-top: 50px !important;
-    padding-bottom: 50px !important;
-    width: 70%;
-    font-size: 35px;
     background-color: #00FBB7;
     border: 5px solid #00FBB7;
     color: white ;
-    font-family: 'Roboto', sans-serif;
 }
 
 .btn_customAnswer {
@@ -162,14 +155,30 @@ select {
 .btn_customAnswer:active,
 .btn_customAnswer.active
 {
+    background-color: #BB51FF;
+    border: 5px solid #BB51FF;
+    color: white ;
+}
+
+.btn_customSignUp {
     margin-top: 5px !important;
     margin-bottom: 5px !important;
     padding-top: 50px !important;
     padding-bottom: 50px !important;
     width: 70%;
     font-size: 35px;
-    background-color: #BB51FF;
-    border: 5px solid #BB51FF;
-    color: white ;
+    background-color: white;
+    border: 5px solid #ffa500;
+    color: #ffa500 ;
     font-family: 'Roboto', sans-serif;
+}
+
+.btn_customSignUp:hover,
+.btn_customSignUp:focus,
+.btn_customSignUp:active,
+.btn_customSignUp.active
+{
+    background-color: #ffa500;
+    border: 5px solid #ffa500;
+    color: white ;
 }

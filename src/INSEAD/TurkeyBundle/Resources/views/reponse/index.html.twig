@@ -40,12 +40,16 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('reponse_new') }}">Create a new reponse</a>
-        </li>
-    </ul>
+    <div class="row" style="display: inline-flex">
+        <a class="btn btn-warning"
+           role="button"
+           data-toggle="tooltip"
+           title="Home"
+           href="{{ path('home_connected') }}"
+           style="margin-right: 15px;">
+            <i class="fa fa-home" aria-hidden="true"></i>
+        </a>
+    </div>
 </section>
 {% endblock %}
 {% block javascripts %}

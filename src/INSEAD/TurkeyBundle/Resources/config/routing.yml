@@ -8,6 +8,7 @@ homepage:
     methods:  [GET, POST]
     options:
         expose: true
+
 # -------------------------
 # INSEAD HOMEPAGE
 # une fois connectée

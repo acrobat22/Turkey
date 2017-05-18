@@ -9,6 +9,12 @@
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.question) }}
+        {{ form_widget(form.question, { 'attr': {'placeholder': 'Pick your question'|trans|convert_encoding('ISO-8859-1', 'Windows-1252')} }) }}
+        {{ form_errors(form.question) }}
+    </div>
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
@@ -19,3 +25,5 @@
     </ul>
 </section>
 {% endblock %}
+
+

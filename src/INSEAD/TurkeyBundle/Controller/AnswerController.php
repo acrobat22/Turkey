@@ -33,32 +33,6 @@ class AnswerController extends Controller
     }
 
     /**
-     * Creates a new answer entity.
-     *
-     * @Route("/new", name="answer_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $answer = new Answer();
-        $form = $this->createForm('INSEAD\TurkeyBundle\Form\AnswerType', $answer);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($answer);
-            $em->flush();
-
-            return $this->redirectToRoute('answer_show', array('id' => $answer->getId()));
-        }
-
-        return $this->render('@INSEADTurkey/answer/new.html.twig', array(
-            'answer' => $answer,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
      * Finds and displays a answer entity.
      *
      * @Route("/{id}", name="answer_show")
@@ -87,8 +61,31 @@ class AnswerController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
             $current_user = $this->get('helper_services')->getCurrentUser();
+
+            // Pas credit si profil incomplet
+            if ($answer->getBonusInscription() === false)
+            {
+                if ($answer->getLastName() === NULL
+                    or $answer->getCompany() === NULL
+                    or $answer->getSector() === NULL
+                    or $answer->getJobFunction() === NULL
+                    or $answer->getJobLevel() === NULL
+                    or $answer->getLocation() === NULL
+                    or $answer->getEducation() === NULL
+                    or $answer->getBirthdate() === NULL
+                ) {
+                    // rien
+                } else {
+                    // mise à jour compteur Answer
+                    $countReponseAnswer = $answer->getCreditEarned();
+                    $answer->setCreditEarned($countReponseAnswer + 5);
+                    $answer->setBonusInscription(true);
+                }
+            }
+
+            $em->flush();
             return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
                 'user' => $current_user,
                 'asker' => $answer));

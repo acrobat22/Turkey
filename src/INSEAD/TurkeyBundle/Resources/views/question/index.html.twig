@@ -10,7 +10,7 @@
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Textquestion</th>
+                <th>Question</th>
                 <th>Asker</th>
                 <th>Datecreate</th>
                 <th>Actions</th>
@@ -24,18 +24,59 @@
                     <td>{{ question.asker }}</td>
                     <td>{% if question.dateCreate %}{{ question.dateCreate|localizeddate('short', 'none') }}{% endif %}</td>
                     <td>
-                        <a class="btn btn-info" role="button" href="{{ path('question_edit', { 'id': question.id }) }}">
+                        {#*******************#}
+                        {# BOUTON TYPE ASKER #}
+                        {#*******************#}
+                        {# modifier question #}
+                        {% if is_granted('ROLE_ASKER') %}
+                        <a class="btn btn-info"
+                           role="button"
+                           data-toggle="tooltip"
+                           title="edit"
+                           href="{{ path('question_edit', { 'id': question.id }) }}">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
+                        {# liste réponse par question #}
+                        <a class="btn btn-success"
+                           role="button"
+                           data-toggle="tooltip"
+                           title="list response"
+                           href="{{ path('reponse_index', {'idQuestion': question.id }) }}">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                        </a>
+                        {# CSV #}
+                        <a class="btn"
+                           style="background-color: orange; color: white"
+                           role="button"
+                           data-toggle="tooltip"
+                           title="export CSV"
+                           href="{{ path('csvExport', {'idQuestion': question.id }) }}">
+                            <i class="fa fa-file-o" aria-hidden="true"></i>
+                        </a>
+                        {% endif %}
+                        {#*******************#}
+                        {# BOUTON TYPE ASKER #}
+                        {#*******************#}
+                        {# répondre #}
+                        {% if is_granted('ROLE_ANSWER') %}
+                        <a class="btn btn-warning"
+                           role="button"
+                           data-toggle="tooltip"
+                           title="answer"
+                           href="{{ path('reponse_new', {'idQuestion': question.id }) }}">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-
+        {% if is_granted('ROLE_ASKER') %}
         <a class="btn btn-primary" role="button" href="{{ path('question_new') }}">
             Create a new question
         </a>
+        {% endif %}
     </section>
 {% endblock %}
 {% block javascripts %}
@@ -70,7 +111,7 @@
         $(document).ready( function () {
             $('#tableQuestionIndex').DataTable( {
                 "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-                "iDisplayLength": 5,
+                "iDisplayLength": 50,
                 "language": {
                     "sProcessing":     "Traitement en cours...",
                     "sSearch":         "Rechercher&nbsp;:",

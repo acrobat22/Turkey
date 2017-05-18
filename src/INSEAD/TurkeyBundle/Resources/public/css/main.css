@@ -1,4 +1,22 @@
 /**************************/
+/*                        */
+/*           FONTS        */
+/*                        */
+/**************************/
+
+h1, h2, h3, h4, h5, h6 {
+    /*font-family: 'Roboto', sans-serif;*/
+    font-family: 'Rasa', serif;
+}
+
+/*
+Asker
+color: #00FBB7 ;
+
+Answer
+color: #BB51FF ;
+*/
+/**************************/
 /*       Edit Asker       */
 /*          et            */
 /*       Edit Answer      */
@@ -78,7 +96,7 @@ select {
     font-size: 30px;
     radios:10px;
     color:#fff;
-    background-color:	#1874CD;
+    background-color:#1874CD;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 15px 15px 15px rgba(0.8, 0.8, 0.8, 0.8), inset 0 -5px 12px rgba(0, 0, 0, 0);
     padding:5px;
 }
@@ -94,4 +112,64 @@ select {
     padding-bottom: 50px !important;
     width: 70%;
     font-size: 35px;
+}
+
+.btn_customAsker {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+    width: 70%;
+    font-size: 35px;
+    background-color: white;
+    border: 5px solid #00FBB7;
+    color: #00FBB7 ;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn_customAsker:hover,
+.btn_customAsker:focus,
+.btn_customAsker:active,
+.btn_customAsker.active
+{
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+    width: 70%;
+    font-size: 35px;
+    background-color: #00FBB7;
+    border: 5px solid #00FBB7;
+    color: white ;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn_customAnswer {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+    width: 70%;
+    font-size: 35px;
+    background-color: white;
+    border: 5px solid #BB51FF;
+    color: #BB51FF ;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn_customAnswer:hover,
+.btn_customAnswer:focus,
+.btn_customAnswer:active,
+.btn_customAnswer.active
+{
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+    width: 70%;
+    font-size: 35px;
+    background-color: #BB51FF;
+    border: 5px solid #BB51FF;
+    color: white ;
+    font-family: 'Roboto', sans-serif;
 }

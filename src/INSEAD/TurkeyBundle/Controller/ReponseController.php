@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Reponse controller.
@@ -21,14 +22,17 @@ class ReponseController extends Controller
      * @Route("/", name="reponse_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $idQuestion = $request->get('idQuestion');
         $em = $this->getDoctrine()->getManager();
+        $question = $em->getRepository('INSEADTurkeyBundle:Question')->findOneBy(array('id' => $idQuestion));
 
-        $reponses = $em->getRepository('INSEADTurkeyBundle:Reponse')->findAll();
+        $reponses = $em->getRepository('INSEADTurkeyBundle:Reponse')->findBy(array('question' => $idQuestion));
 
         return $this->render('@INSEADTurkey/reponse/index.html.twig', array(
             'reponses' => $reponses,
+            'question' => $question,
         ));
     }
 
@@ -40,16 +44,19 @@ class ReponseController extends Controller
      */
     public function newAction(Request $request)
     {
+        $idQuestion = $request->get('idQuestion');
+        $em = $this->getDoctrine()->getManager();
+        $question = $em->getRepository('INSEADTurkeyBundle:Question')->findOneBy(array('id' => $idQuestion));
+
         $reponse = new Reponse();
         $form = $this->createForm('INSEAD\TurkeyBundle\Form\ReponseType', $reponse);
         $form->handleRequest($request);
         $current_user = $this->get('helper_services')->getCurrentUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($reponse);
 
-            // Script test si réponse dans blacklist
+            // Script test si les mots de la réponse son dans dictionary
             $words = $this->get('helper_services')->getDictionaryWord();
             $teststring = $reponse->getTextReponse();
             $nbDeMots = str_word_count($teststring);
@@ -66,17 +73,20 @@ class ReponseController extends Controller
                 preg_match_all($pattern, $teststring, $matches);
             }
 
-//            var_dump(empty($matches[0]));
-//            die();
-            // fin test blacklist
-
+            // si pas de mots interdits, validation de l'enregistrement
             if (empty($matches[0])) {
             $reponse->setAnswer($current_user);
+            $reponse->setQuestion($question);
+
+            // mise à jour compteur Answer
+            $countReponseAnswer = $reponse->getAnswer()->getCreditEarned();
+            $reponse->getAnswer()->setCreditEarned(++$countReponseAnswer);
+
             $em->flush();
 
-            return $this->redirectToRoute('reponse_show', array('id' => $reponse->getId()));
-            } else {
+            return $this->redirectToRoute('question_index');
 
+            } else {
                 $wordsInterdits = implode(", ", $matches[0]);
                 $this->get('helper_services')->setFlash('Votre réponse contient des mots interdits : '. $wordsInterdits);
 
@@ -169,4 +179,41 @@ class ReponseController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Export user en CSV.
+     * @Route("/csv", name="csvExport")
+     */
+    public function generateCsvAction(Request $request)
+    {
+        $idQuestion = $request->get('idQuestion');
+        $em = $this->getDoctrine()->getManager();
+        $question = $em->getRepository('INSEADTurkeyBundle:Question')->findOneBy(array('id' => $idQuestion));
+        $reponses = $em->getRepository('INSEADTurkeyBundle:Reponse')->findBy(array('question' => $idQuestion));
+
+        $response= new StreamedResponse();
+        $response->setCallback(function() use ($reponses, $question) {
+            $handle = fopen('php://output','w+');
+            fputcsv($handle, array('question', 'id', 'Reponse', 'Responder Company', 'Responder Sector', 'Responder Job function', 'Responder Job level', 'Responder Gender'),';');
+
+            foreach ($reponses as $reponse) {
+                fputcsv($handle, array(
+                    $question->getQuestion(),
+                    $reponse->getId(),
+                    $reponse->getTextReponse(),
+                    $reponse->getAnswer()->getCompany(),
+                    $reponse->getAnswer()->getSector(),
+                    $reponse->getAnswer()->getJobFunction(),
+                    $reponse->getAnswer()->getJobLevel(),
+                    $reponse->getAnswer()->getGender(),
+                ),';');
+            }
+            fclose($handle);
+        });
+        $response->setStatusCode(200);
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
+        $response->headers->set('Content-Disposition','attachment; filename="listeDesReponses.csv"');
+        return $response;
+    }
+
 }

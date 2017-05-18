@@ -2,35 +2,33 @@
 
 {% block body %}
     <section class="container"  style="padding-top: 150px">
-    <div class="row">
-        {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
-    </div>
-    {#--------- DEBUT Message quand base de données pas assez remplie -------------------------------------#}
-    {% for flash_message in app.session.flashBag.get('notif') %}
-        <div class="alert alert-danger text-center">
-            <strong>{{ flash_message|capitalize }}</strong>
+        <div class="row">
+            {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
         </div>
-    {% endfor %}
-    {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
+        {#--------- DEBUT Message quand base de données pas assez remplie -------------------------------------#}
+        {% for flash_message in app.session.flashBag.get('notif') %}
+            <div class="alert alert-danger text-center">
+                <strong>{{ flash_message|capitalize }}</strong>
+            </div>
+        {% endfor %}
+        {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
 
-        <h1>Survey creation</h1>
-
-    {{ form_start(form) }}
+        <h1>Response creation</h1>
+        {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('reponse_index') }}">Back to the list</a>
-        </li>
-    </ul>
+        {{ form_end(form) }}
+        <ul>
+            <li>
+                <a href="{{ path('reponse_index') }}">Back to the list</a>
+            </li>
+        </ul>
     </section>
 {% endblock %}
 {% block javascripts %}
-<script>
-    $(document).ready(function(){
+    <script>
+        $(document).ready(function(){
 
-    });
-</script>
+        });
+    </script>
 {% endblock %}

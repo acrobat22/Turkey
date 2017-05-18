@@ -104,6 +104,11 @@ class Answer
      */
     protected $creditEarned;
 
+    /**
+     * @ORM\Column(name="bonus_inscription", type="boolean")
+     */
+    protected $bonusInscription;
+
     //***************************************//
     //                                       //
     //           GENERATED CODE              //
@@ -407,5 +412,29 @@ class Answer
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set bonusInscription
+     *
+     * @param boolean $bonusInscription
+     *
+     * @return Answer
+     */
+    public function setBonusInscription($bonusInscription)
+    {
+        $this->bonusInscription = $bonusInscription;
+
+        return $this;
+    }
+
+    /**
+     * Get bonusInscription
+     *
+     * @return boolean
+     */
+    public function getBonusInscription()
+    {
+        return $this->bonusInscription;
     }
 }

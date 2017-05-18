@@ -34,32 +34,6 @@ class AskerController extends Controller
     }
 
     /**
-     * Creates a new asker entity.
-     *
-     * @Route("/new", name="asker_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $asker = new Asker();
-        $form = $this->createForm('INSEAD\TurkeyBundle\Form\AskerType', $asker);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($asker);
-            $em->flush();
-
-            return $this->redirectToRoute('asker_show', array('id' => $asker->getId()));
-        }
-
-        return $this->render('@INSEADTurkey/asker/new.html.twig', array(
-            'asker' => $asker,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
      * Finds and displays a asker entity.
      *
      * @Route("/{id}", name="asker_show")

@@ -17,6 +17,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Reponse
 {
 
+    public function __toString()
+    {
+        return $this->textReponse;
+    }
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id

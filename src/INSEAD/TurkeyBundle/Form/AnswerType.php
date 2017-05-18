@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AnswerType extends AbstractType
 {
@@ -17,14 +18,14 @@ class AnswerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastName', null, array('required' => true))
-            ->add('firstName', null, array('required' => true))
-            ->add('company', null, array('required' => true))
-            ->add('sector', null, array('required' => true))
-            ->add('jobFunction', null, array('required' => true))
-            ->add('jobLevel', null, array('required' => true))
-            ->add('location', null, array('required' => true))
-            ->add('education', null, array('required' => true))
+            ->add('lastName', TextType::class, array('required' => true))
+            ->add('firstName', TextType::class, array('required' => true))
+            ->add('company', TextType::class, array('required' => true))
+            ->add('sector', TextType::class, array('required' => true))
+            ->add('jobFunction', TextType::class, array('required' => true))
+            ->add('jobLevel', TextType::class, array('required' => true))
+            ->add('location', TextType::class, array('required' => true))
+            ->add('education', TextType::class, array('required' => true))
             ->add('gender', ChoiceType::class, [
                 'choices'=> [
                     'Female' =>'Female',

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Reponse controller.
  *
- * @Route("reponse")
+ * @Route("/")
  */
 class ReponseController extends Controller
 {
@@ -43,13 +43,48 @@ class ReponseController extends Controller
         $reponse = new Reponse();
         $form = $this->createForm('INSEAD\TurkeyBundle\Form\ReponseType', $reponse);
         $form->handleRequest($request);
+        $current_user = $this->get('helper_services')->getCurrentUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($reponse);
+
+            // Script test si réponse dans blacklist
+            $words = $this->get('helper_services')->getDictionaryWord();
+            $teststring = $reponse->getTextReponse();
+            $nbDeMots = str_word_count($teststring);
+
+            $pattern = '/';
+            $div = '';
+            foreach ($words as $word) {
+                $pattern .= $div . preg_quote($word);
+                $div = '|';
+            }
+            $pattern .= '/i';
+
+            for ($i = 0; $i < $nbDeMots; $i++) {
+                preg_match_all($pattern, $teststring, $matches);
+            }
+
+//            var_dump(empty($matches[0]));
+//            die();
+            // fin test blacklist
+
+            if (empty($matches[0])) {
+            $reponse->setAnswer($current_user);
             $em->flush();
 
             return $this->redirectToRoute('reponse_show', array('id' => $reponse->getId()));
+            } else {
+
+                $wordsInterdits = implode(", ", $matches[0]);
+                $this->get('helper_services')->setFlash('Votre réponse contient des mots interdits : '. $wordsInterdits);
+
+                return $this->render('@INSEADTurkey/reponse/new.html.twig', array(
+                    'reponse' => $reponse,
+                    'form' => $form->createView(),
+                ));
+            }
         }
 
         return $this->render('@INSEADTurkey/reponse/new.html.twig', array(
@@ -61,7 +96,7 @@ class ReponseController extends Controller
     /**
      * Finds and displays a reponse entity.
      *
-     * @Route("/{id}", name="reponse_show")
+     * @Route("/{id}/show", name="reponse_show")
      * @Method("GET")
      */
     public function showAction(Reponse $reponse)

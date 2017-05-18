@@ -1,0 +1,4 @@
+question:
+    resource: "@INSEADTurkeyBundle/Controller/QuestionController.php"
+    type:      annotation
+    prefix: /

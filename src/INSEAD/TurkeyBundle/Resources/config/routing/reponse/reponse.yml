@@ -1,0 +1,4 @@
+reponse:
+     resource: "@INSEADTurkeyBundle/Controller/ReponseController.php"
+     type: annotation
+     prefix: /

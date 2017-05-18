@@ -31,5 +31,23 @@ insead_turkey_asker:
     resource: '@INSEADTurkeyBundle/Resources/config/routing/asker/asker.yml'
     prefix: /asker/
 
+# -------------------------
+# INSEAD           QUESTION
+# -------------------------
+insead_turkey_question:
+    resource: '@INSEADTurkeyBundle/Resources/config/routing/question/question.yml'
+    prefix: /question/
 
+# -------------------------
+# INSEAD            REPONSE
+# -------------------------
+insead_turkey_reponse:
+    resource: '@INSEADTurkeyBundle/Resources/config/routing/reponse/reponse.yml'
+    prefix: /reponse/
 
+# -------------------------
+# INSEAD         DICTIONARY
+# -------------------------
+insead_turkey_dictionary:
+    resource: '@INSEADTurkeyBundle/Resources/config/routing/dictionary/dictionary.yml'
+    prefix: /dictionary/

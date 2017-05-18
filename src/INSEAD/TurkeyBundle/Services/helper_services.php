@@ -11,6 +11,7 @@ namespace INSEAD\TurkeyBundle\Services;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use INSEAD\UserBundle\Entity\User;
+use INSEAD\TurkeyBundle\Entity\Dictionary;
 
 class helper_services
 {
@@ -35,6 +36,20 @@ class helper_services
             $user = $this->em->getRepository('INSEADTurkeyBundle:Answer')->findOneByUser($user_connect);
         }
         return $user;
+    }
+
+    /**
+     * Return sous forme de tableau les mots dans Dictionary
+     *
+     */
+    public function getDictionaryWord () {
+        $dictionaryWordAllData = $this->em->getRepository('INSEADTurkeyBundle:Dictionary')->findAll();
+        $dictionaryWord = array();
+        foreach ($dictionaryWordAllData as $word) {
+            $dictionaryWord[] = $word->getWord();
+        }
+
+        return $dictionaryWord;
     }
 
     /**

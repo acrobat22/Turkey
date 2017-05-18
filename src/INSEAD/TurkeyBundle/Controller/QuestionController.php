@@ -3,6 +3,7 @@
 namespace INSEAD\TurkeyBundle\Controller;
 
 use INSEAD\TurkeyBundle\Entity\Question;
+use INSEAD\TurkeyBundle\Entity\Asker;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Question controller.
  *
- * @Route("question")
+ * @Route("/")
  */
 class QuestionController extends Controller
 {
@@ -43,13 +44,15 @@ class QuestionController extends Controller
         $question = new Question();
         $form = $this->createForm('INSEAD\TurkeyBundle\Form\QuestionType', $question);
         $form->handleRequest($request);
+        $current_user = $this->get('helper_services')->getCurrentUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
+            $question->setAsker($current_user);
             $em->flush();
 
-            return $this->redirectToRoute('question_show', array('id' => $question->getId()));
+            return $this->redirectToRoute('question_index');
         }
 
         return $this->render('@INSEADTurkey/question/new.html.twig', array(
@@ -61,7 +64,7 @@ class QuestionController extends Controller
     /**
      * Finds and displays a question entity.
      *
-     * @Route("/{id}", name="question_show")
+     * @Route("/{id}/show", name="question_show")
      * @Method("GET")
      */
     public function showAction(Question $question)
@@ -89,7 +92,7 @@ class QuestionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('question_edit', array('id' => $question->getId()));
+            return $this->redirectToRoute('question_index');
         }
 
         return $this->render('@INSEADTurkey/question/edit.html.twig', array(

@@ -19,6 +19,7 @@ class ReponseType extends AbstractType
 //            ->add('question', QuestionType::class, array('required' => false))
             ->add('textReponse')
             ->add('goodReponse', checkboxType::class, array('required' => false, 'label' => 'cocher si bonne réponse'))
+            ->add('Question', QuestionType::class)
         ;
     }
     

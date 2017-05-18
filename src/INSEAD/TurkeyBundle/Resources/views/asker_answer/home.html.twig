@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-xs-9 col-xs-offset-3">
                 {% if user.user.roles[0] == 'ROLE_ASKER' %}
-                    {# ASKER #}
-                    <a href="{{ path('asker_edit', {'id': user.id}) }}" class="btn btn-success btn_custom">Ask A Question</a>
+                    {# ASKER -> ask a question #}
+                    <a href="{{ path('question_new') }}" class="btn btn-success btn_custom">Ask A Question</a>
                 {% elseif user.user.roles[0] == 'ROLE_ANSWER' %}
                     {# ANSWER #}
                     <a href="{{ path('asker_edit', {'id': user.id}) }}" class="btn btn-success btn_custom">Start Answering</a>

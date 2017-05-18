@@ -26,7 +26,7 @@ class Question
 
     public function __toString()
     {
-        return $this->textQuestion;
+        return $this->question;
     }
 
     /**
@@ -37,7 +37,7 @@ class Question
     protected $id;
 
     /**
-     * @ORM\Column(name="textQuestion", type="string", length=255)
+     * @ORM\Column(name="question", type="string", length=255)
      */
     private $question;
 

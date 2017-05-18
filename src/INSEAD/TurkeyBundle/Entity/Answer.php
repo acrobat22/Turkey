@@ -22,6 +22,11 @@ class Answer
         $this->creditEarned = 0;
     }
 
+    public function __toString()
+    {
+        return $this->lastName;
+    }
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id

@@ -1,0 +1,4 @@
+dictionary:
+    resource: "@INSEADTurkeyBundle/Controller/DictionaryController.php"
+    type:      annotation
+    prefix: /

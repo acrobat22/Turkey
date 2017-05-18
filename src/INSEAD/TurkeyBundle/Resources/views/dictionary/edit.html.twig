@@ -5,7 +5,7 @@
     <div class="row">
         {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
     </div>
-    <h1>Question edit</h1>
+    <h1>Dictionary edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -14,7 +14,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('question_index') }}">Back to the list</a>
+            <a href="{{ path('dictionary_index') }}">Back to the list</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

@@ -15,3 +15,8 @@ services:
         class: INSEAD\TurkeyBundle\Services\helper_services
         arguments: ['@doctrine.orm.entity_manager' ,'@service_container', '@security.token_storage']
 
+#Ajout filtre twig
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }

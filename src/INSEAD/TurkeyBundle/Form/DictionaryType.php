@@ -5,22 +5,15 @@ namespace INSEAD\TurkeyBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use INSEAD\TurkeyBundle\Form\ReponseType;
 
-
-class QuestionType extends AbstractType
+class DictionaryType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('question')
-//            ->add('dateCreate')
-//            ->add('user', HiddenType::class)
-        ;
+        $builder->add('word');
     }
     
     /**
@@ -29,7 +22,7 @@ class QuestionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'INSEAD\TurkeyBundle\Entity\Question'
+            'data_class' => 'INSEAD\TurkeyBundle\Entity\Dictionary'
         ));
     }
 
@@ -38,7 +31,7 @@ class QuestionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'insead_turkeybundle_question';
+        return 'insead_turkeybundle_dictionary';
     }
 
 

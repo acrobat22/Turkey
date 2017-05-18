@@ -1,42 +1,46 @@
 {% extends '@INSEADTurkey/base.html.twig' %}
 
 {% block body %}
-    <section class="container" style="padding-top: 150px">
-        <div class="row">
-            <h1>Questions list</h1>    </div>
+<section class="container"  style="padding-top: 150px">
+    <div class="row">
+        {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
+    </div>
+    <h1>Dictionaries list</h1>
 
-
-        <table class="table table-striped" id="tableQuestionIndex">
-            <thead>
+    <table class="table table-striped" id="tableDictionaryIndex">
+        <thead>
             <tr>
                 <th>Id</th>
-                <th>Textquestion</th>
-                <th>Asker</th>
-                <th>Datecreate</th>
+                <th>Word</th>
                 <th>Actions</th>
             </tr>
-            </thead>
-            <tbody>
-            {% for question in questions %}
-                <tr>
-                    <td><a href="{{ path('question_show', { 'id': question.id }) }}">{{ question.id }}</a></td>
-                    <td>{{ question.question }}</td>
-                    <td>{{ question.asker }}</td>
-                    <td>{% if question.dateCreate %}{{ question.dateCreate|localizeddate('short', 'none') }}{% endif %}</td>
-                    <td>
-                        <a class="btn btn-info" role="button" href="{{ path('question_edit', { 'id': question.id }) }}">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        </thead>
+        <tbody>
+        {% for dictionary in dictionaries %}
+            <tr>
+                <td><a href="{{ path('dictionary_show', { 'id': dictionary.id }) }}">{{ dictionary.id }}</a></td>
+                <td>{{ dictionary.word }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dictionary_show', { 'id': dictionary.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dictionary_edit', { 'id': dictionary.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-        <a class="btn btn-primary" role="button" href="{{ path('question_new') }}">
-            Create a new question
-        </a>
-    </section>
+    <ul>
+        <li>
+            <a href="{{ path('dictionary_new') }}">Create a new dictionary</a>
+        </li>
+    </ul>
+</section>
 {% endblock %}
 {% block javascripts %}
 
@@ -68,7 +72,7 @@
          } );*/
 
         $(document).ready( function () {
-            $('#tableQuestionIndex').DataTable( {
+            $('#tableDictionaryIndex').DataTable( {
                 "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
                 "iDisplayLength": 5,
                 "language": {

@@ -17,6 +17,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Asker
 {
+
+    public function __toString()
+    {
+        return $this->last_name;
+    }
+
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id

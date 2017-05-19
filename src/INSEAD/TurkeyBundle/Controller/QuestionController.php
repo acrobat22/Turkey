@@ -25,6 +25,7 @@ class QuestionController extends Controller
     public function indexAction()
     {
         $current_user = $this->get('helper_services')->getCurrentUser();
+
         $idCurrentUser = $current_user->getId();
         $em = $this->getDoctrine()->getManager();
 
@@ -32,6 +33,7 @@ class QuestionController extends Controller
             $questions = $em->getRepository('INSEADTurkeyBundle:Question')->findBy(array('asker' =>$idCurrentUser));
         } elseif ($current_user->getUser()->getRoles()[0] == "ROLE_ANSWER") {
             $questions = $em->getRepository('INSEADTurkeyBundle:Question')->findAll();
+
         }
 
         return $this->render('@INSEADTurkey/question/index.html.twig', array(
@@ -64,6 +66,7 @@ class QuestionController extends Controller
         return $this->render('@INSEADTurkey/question/new.html.twig', array(
             'question' => $question,
             'form' => $form->createView(),
+            'user' => $current_user,
         ));
     }
 

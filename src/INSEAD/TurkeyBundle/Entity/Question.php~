@@ -57,6 +57,10 @@ class Question
      */
     private $reponses; // Notez le « s », une question est liée à plusieurs reponses
 
+    /**
+     * @ORM\OneToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Filter", cascade={"all"})
+     */
+    private $filter;
 
     //***************************************//
     //                                       //
@@ -64,120 +68,4 @@ class Question
     //                                       //
     //***************************************//
 
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set question
-     *
-     * @param string $question
-     *
-     * @return Question
-     */
-    public function setQuestion($question)
-    {
-        $this->question = $question;
-
-        return $this;
-    }
-
-    /**
-     * Get question
-     *
-     * @return string
-     */
-    public function getQuestion()
-    {
-        return $this->question;
-    }
-
-    /**
-     * Set dateCreate
-     *
-     * @param \DateTime $dateCreate
-     *
-     * @return Question
-     */
-    public function setDateCreate($dateCreate)
-    {
-        $this->dateCreate = $dateCreate;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCreate
-     *
-     * @return \DateTime
-     */
-    public function getDateCreate()
-    {
-        return $this->dateCreate;
-    }
-
-    /**
-     * Set asker
-     *
-     * @param \INSEAD\TurkeyBundle\Entity\Asker $asker
-     *
-     * @return Question
-     */
-    public function setAsker(\INSEAD\TurkeyBundle\Entity\Asker $asker = null)
-    {
-        $this->asker = $asker;
-
-        return $this;
-    }
-
-    /**
-     * Get asker
-     *
-     * @return \INSEAD\TurkeyBundle\Entity\Asker
-     */
-    public function getAsker()
-    {
-        return $this->asker;
-    }
-
-    /**
-     * Add reponse
-     *
-     * @param \INSEAD\TurkeyBundle\Entity\Reponse $reponse
-     *
-     * @return Question
-     */
-    public function addReponse(\INSEAD\TurkeyBundle\Entity\Reponse $reponse)
-    {
-        $this->reponses[] = $reponse;
-
-        return $this;
-    }
-
-    /**
-     * Remove reponse
-     *
-     * @param \INSEAD\TurkeyBundle\Entity\Reponse $reponse
-     */
-    public function removeReponse(\INSEAD\TurkeyBundle\Entity\Reponse $reponse)
-    {
-        $this->reponses->removeElement($reponse);
-    }
-
-    /**
-     * Get reponses
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getReponses()
-    {
-        return $this->reponses;
-    }
 }

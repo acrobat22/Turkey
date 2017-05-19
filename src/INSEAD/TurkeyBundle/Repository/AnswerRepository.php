@@ -14,5 +14,4 @@ use INSEAD\TurkeyBundle\Entity\Answer;
 
 class AnswerRepository extends \Doctrine\ORM\EntityRepository
 {
-
 }

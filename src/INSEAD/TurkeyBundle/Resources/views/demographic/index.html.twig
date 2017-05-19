@@ -1,0 +1,52 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+<section class="container"  style="padding-top: 150px">
+    <div class="row">
+        {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
+    </div>
+    {#--------- DEBUT Message quand base de données pas assez remplie -------------------------------------#}
+    {% for flash_message in app.session.flashBag.get('notif') %}
+        <div class="alert alert-danger text-center">
+            <strong>{{ flash_message|capitalize }}</strong>
+        </div>
+    {% endfor %}
+    {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
+
+    <h1>Demographics list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demographic in demographics %}
+            <tr>
+                <td><a href="{{ path('demographic_show', { 'id': demographic.id }) }}">{{ demographic.id }}</a></td>
+                <td>{{ demographic.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('demographic_show', { 'id': demographic.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('demographic_edit', { 'id': demographic.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('demographic_new') }}">Create a new demographic</a>
+        </li>
+    </ul>
+</section>
+{% endblock %}

@@ -28,8 +28,18 @@ class UserController extends Controller
     public function homeConnectedAction()
     {
         $current_user = $this->get('helper_services')->getCurrentUser();
+
+        if ($current_user->getUser()->getRoles()[0] == "ROLE_ASKER") {
+            $age = "";
+        } elseif ($current_user->getUser()->getRoles()[0] == "ROLE_ANSWER") {
+            $today = new \DateTime();
+            $birthdate = $current_user->getBirthdate();
+            $age = $today->diff($birthdate, true)->y;
+        }
+
         return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
             'user' => $current_user,
+            'age' => $age,
         ));
     }
 

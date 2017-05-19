@@ -15,6 +15,13 @@ services:
         class: INSEAD\TurkeyBundle\Services\helper_services
         arguments: ['@doctrine.orm.entity_manager' ,'@service_container', '@security.token_storage']
 
+# pour form question si asker_premium
+    insead.turkey.bundle.form.type.question:
+        class: INSEAD\TurkeyBundle\Form\QuestionType
+        arguments: ["@security.authorization_checker"]
+        tags:
+            - { name: form.type }
+
 #Ajout filtre twig
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl

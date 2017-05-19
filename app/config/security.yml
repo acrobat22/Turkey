@@ -7,6 +7,7 @@ security:
             ROLE_ADMIN:       [ROLE_USER, ROLE_ASKER, ROLE_ANSWER]
             ROLE_SUPER_ADMIN: ROLE_ADMIN
             ROLE_ASKER:       ROLE_USER
+            ROLE_ASKER_PREMIUM: ROLE_ASKER
             ROLE_ANSWER:       ROLE_USER
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded

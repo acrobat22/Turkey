@@ -8,7 +8,6 @@
                 <a href=""><img src="" /></a>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-offset-4 col-xs-offset-1 col-md-4 col-xs-10 custom_jumbotron">
 
@@ -73,7 +72,6 @@
                 <div class="form-group">
                     {{ form_label(edit_form.birthdate) }}
                     {{ form_widget(edit_form.birthdate) }}
-
                 </div>
                 {{ form_widget(edit_form) }}
                 <div>
@@ -82,15 +80,5 @@
                 {{ form_end(edit_form) }}
             </div>
         </div>
-        <ul>
-            <li>
-                {#<a href="{{ path('answer_index') }}">Back to the list</a>#}
-            </li>
-            {#<li>#}
-            {#{{ form_start(delete_form) }}#}
-            {#<input type="submit" value="Delete">#}
-            {#{{ form_end(delete_form) }}#}
-            {#</li>#}
-        </ul>
     </div>
 {% endblock %}

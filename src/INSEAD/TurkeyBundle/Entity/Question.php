@@ -57,6 +57,10 @@ class Question
      */
     private $reponses; // Notez le « s », une question est liée à plusieurs reponses
 
+    /**
+     * @ORM\OneToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Filter", cascade={"all"})
+     */
+    private $filter;
 
     //***************************************//
     //                                       //
@@ -179,5 +183,29 @@ class Question
     public function getReponses()
     {
         return $this->reponses;
+    }
+
+    /**
+     * Set filter
+     *
+     * @param \INSEAD\TurkeyBundle\Entity\Filter $filter
+     *
+     * @return Question
+     */
+    public function setFilter(\INSEAD\TurkeyBundle\Entity\Filter $filter = null)
+    {
+        $this->filter = $filter;
+
+        return $this;
+    }
+
+    /**
+     * Get filter
+     *
+     * @return \INSEAD\TurkeyBundle\Entity\Filter
+     */
+    public function getFilter()
+    {
+        return $this->filter;
     }
 }

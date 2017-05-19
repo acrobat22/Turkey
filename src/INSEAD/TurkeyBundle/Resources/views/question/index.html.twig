@@ -12,6 +12,7 @@
             <tr>
                 <th>Id</th>
                 <th>Question</th>
+                {#<th>Filter</th>#}
                 <th>Asker</th>
                 <th>Datecreate</th>
                 <th>Actions</th>
@@ -22,6 +23,7 @@
                 <tr>
                     <td><a href="{{ path('question_show', { 'id': question.id }) }}">{{ question.id }}</a></td>
                     <td>{{ question.question }}</td>
+                    {#<td>{{ question.filter }}</td>#}
                     <td>{{ question.asker.lastName }}</td>
                     <td>{% if question.dateCreate %}{{ question.dateCreate|localizeddate('short', 'none') }}{% endif %}</td>
                     <td>

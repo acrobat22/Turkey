@@ -80,11 +80,6 @@ class Answer
     protected $jobLevel;
 
     /**
-     * @ORM\Column(name="location", type="string", length=255, nullable=true)
-     */
-    protected $location;
-
-    /**
      * @ORM\Column(name="education", type="string", length=255, nullable=true)
      */
     protected $education;
@@ -108,6 +103,12 @@ class Answer
      * @ORM\Column(name="bonus_inscription", type="boolean")
      */
     protected $bonusInscription = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER")
+     * @ORM\JoinColumn
+     */
+    private $location;
 
     //***************************************//
     //                                       //
@@ -271,30 +272,6 @@ class Answer
     }
 
     /**
-     * Set location
-     *
-     * @param string $location
-     *
-     * @return Answer
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * Get location
-     *
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
      * Set education
      *
      * @param string $education
@@ -391,6 +368,30 @@ class Answer
     }
 
     /**
+     * Set bonusInscription
+     *
+     * @param boolean $bonusInscription
+     *
+     * @return Answer
+     */
+    public function setBonusInscription($bonusInscription)
+    {
+        $this->bonusInscription = $bonusInscription;
+
+        return $this;
+    }
+
+    /**
+     * Get bonusInscription
+     *
+     * @return boolean
+     */
+    public function getBonusInscription()
+    {
+        return $this->bonusInscription;
+    }
+
+    /**
      * Set user
      *
      * @param \INSEAD\UserBundle\Entity\User $user
@@ -415,26 +416,26 @@ class Answer
     }
 
     /**
-     * Set bonusInscription
+     * Set location
      *
-     * @param boolean $bonusInscription
+     * @param \INSEAD\TurkeyBundle\Entity\Demographic $location
      *
      * @return Answer
      */
-    public function setBonusInscription($bonusInscription)
+    public function setLocation(\INSEAD\TurkeyBundle\Entity\Demographic $location = null)
     {
-        $this->bonusInscription = $bonusInscription;
+        $this->location = $location;
 
         return $this;
     }
 
     /**
-     * Get bonusInscription
+     * Get location
      *
-     * @return boolean
+     * @return \INSEAD\TurkeyBundle\Entity\Demographic
      */
-    public function getBonusInscription()
+    public function getLocation()
     {
-        return $this->bonusInscription;
+        return $this->location;
     }
 }

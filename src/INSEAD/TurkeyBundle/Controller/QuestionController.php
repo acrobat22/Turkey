@@ -42,7 +42,7 @@ class QuestionController extends Controller
             $nbReponse[$question->getId()] = count($question->getReponses());
         }
 
-        return $this->render('@INSEADTurkey/question/index.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/question/index.html.twig', array(
             'user' => $current_user,
             'questions' => $questions,
             'nbReponse' => $nbReponse,
@@ -63,7 +63,7 @@ class QuestionController extends Controller
 
         $questionsWithFilter = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionWithFilter();
         $questionsWithOutFilter = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionWithoutFilter();
-        return $this->render('@INSEADTurkey/question/indexForAnswer.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/question/indexForAnswer.html.twig', array(
             'questionWithFilter' => $questionsWithFilter,
             'questionsWithOutFilter' => $questionsWithOutFilter,
             'user' => $current_user,
@@ -93,7 +93,7 @@ class QuestionController extends Controller
             return $this->redirectToRoute('question_index');
         }
 
-        return $this->render('@INSEADTurkey/question/new.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/question/new.html.twig', array(
             'question' => $question,
             'form' => $form->createView(),
             'user' => $current_user,
@@ -110,7 +110,7 @@ class QuestionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($question);
 
-        return $this->render('@INSEADTurkey/question/show.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/question/show.html.twig', array(
             'question' => $question,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -134,7 +134,7 @@ class QuestionController extends Controller
             return $this->redirectToRoute('question_index');
         }
 
-        return $this->render('@INSEADTurkey/question/edit.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/question/edit.html.twig', array(
             'question' => $question,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

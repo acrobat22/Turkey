@@ -22,6 +22,7 @@ color: #BB51FF ;
 /*       Edit Answer      */
 /*         select         */
 /**************************/
+/* Seleteur genre et birthdate*/
 select {
     padding: 10px !important;
     margin: 0 0 20px 0 !important;
@@ -218,4 +219,58 @@ select {
         font-size: 13px;
         font-weight: bold;
     }
+}
+
+/**/
+/**/
+.pAnswerInfo {
+    font-size: x-small;
+    margin: 0 0 1px !important;
+}
+
+.pAskerInfo {
+    font-size: x-small;
+    margin: 0 0 1px !important;
+}
+
+.center{
+    margin:auto;
+    float:none;  /* annule le float:left de bootstrap*/
+}
+
+/**************************/
+/*       index             */
+/*    admin               */
+/* Dico, demografic, topic*/
+/**************************/
+.list-group-admin >.list-group-horizontal{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+}
+.list-group-admin > .list-group-horizontal > .list-group-item {
+    border: 1px solid grey;
+    display: table-cell;
+    float: none;
+    text-align: center;
+    width: 1%;
+    border-radius: 0;
+    color: white;
+    background: dimgrey;
+    border-color: pink;
+}
+
+.list-group-admin > .list-group-horizontal > .list-group-item:focus,
+.list-group-admin > .list-group-horizontal > .list-group-item:hover {
+    color: #555;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+.list-group-admin > .list-group-horizontal > .list-group-item:first-child {
+    border-bottom-left-radius: 3px;
+}
+.list-group-admin > .list-group-horizontal > .list-group-item:last-child {
+    border-bottom-right-radius: 3px;
 }

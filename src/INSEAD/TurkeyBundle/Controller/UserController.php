@@ -25,14 +25,19 @@ class UserController extends Controller
      */
     public function homeConnectedAction()
     {
+//        Action après login :
         $current_user = $this->get('helper_services')->getCurrentUser();
 
-        $age = $this->get('helper_services')->getAgeAnswer();
+        if (empty($current_user)) {
+            return $this->render('@INSEADTurkey/backend/dasboard.html.twig');
+        } else {
+            $age = $this->get('helper_services')->getAgeAnswer();
 
-        return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
-            'user' => $current_user,
-            'age' => $age,
-        ));
+            return $this->render('@INSEADTurkey/frontend/asker_answer/home.html.twig', array(
+                'user' => $current_user,
+                'age' => $age,
+            ));
+        }
     }
 
 }

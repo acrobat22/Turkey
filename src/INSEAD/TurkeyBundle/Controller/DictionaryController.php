@@ -20,13 +20,16 @@ class DictionaryController extends Controller
      * @Route("/", name="dictionary_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $dictionaries = $em->getRepository('INSEADTurkeyBundle:Dictionary')->findAll();
+        // Mise en place pagination
+        $findDictionaries = $em->getRepository('INSEADTurkeyBundle:Dictionary')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $dictionaries = $paginator->paginate($findDictionaries, $request->query->getInt('page', 1), 5);
 
-        return $this->render('@INSEADTurkey/dictionary/index.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/dictionary/index.html.twig', array(
             'dictionaries' => $dictionaries,
         ));
     }
@@ -51,7 +54,7 @@ class DictionaryController extends Controller
             return $this->redirectToRoute('dictionary_index');
         }
 
-        return $this->render('@INSEADTurkey/dictionary/new.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/dictionary/new.html.twig', array(
             'dictionary' => $dictionary,
             'form' => $form->createView(),
         ));
@@ -67,7 +70,7 @@ class DictionaryController extends Controller
     {
         $deleteForm = $this->createDeleteForm($dictionary);
 
-        return $this->render('@INSEADTurkey/dictionary/show.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/dictionary/show.html.twig', array(
             'dictionary' => $dictionary,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +94,7 @@ class DictionaryController extends Controller
             return $this->redirectToRoute('dictionary_index');
         }
 
-        return $this->render('@INSEADTurkey/dictionary/edit.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/dictionary/edit.html.twig', array(
             'dictionary' => $dictionary,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -1,0 +1,64 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+    <section class="container"  style="padding-top: 35px">
+        <div class="row">
+            {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
+        </div>
+        {#--------- DEBUT Message quand base de données pas assez remplie -------------------------------------#}
+        {% for flash_message in app.session.flashBag.get('notif') %}
+            <div class="alert alert-danger text-center">
+                <strong>{{ flash_message|capitalize }}</strong>
+            </div>
+        {% endfor %}
+        {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
+
+        <h1>Demographics list</h1>
+
+
+        {#-------------------------------------------------------------#}
+        {# Mise en place pagination #}
+        <div class="row center">
+            {{ knp_pagination_render(dictionaries) }}
+        </div>
+        {#-------------------------------------------------------------#}
+        <div class="panel panel-default">
+            {% for dictionary in dictionaries %}
+                <div class="panel-body text-center">
+                    <h4>{{ dictionary.word }}</h4>
+                </div>
+
+                <div class="list-group-admin">
+                    <div class="list-group-horizontal">
+                        <a href="{{ path('dictionary_edit', {'id': dictionary.id } ) }}" class="list-group-item">
+                            Edit
+                            <i class="fa fa-hand-rock-o fa-lg"></i>
+                        </a>
+                        <a href="{{ path('dictionary_delete', {'id': dictionary.id } ) }}" class="list-group-item"
+                           onclick="return confirm('Are you sure?')">
+                            Delete
+                            <i class="fa fa-hand-paper-o fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="btn btn-warning"
+           role="button"
+           data-toggle="tooltip"
+           title="Home"
+           href="{{ path('home_connected') }}"
+           style="margin-right: 15px;">
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-primary"
+           role="button"
+           data-toggle="tooltip"
+           title="Create a new demographic"
+           href="{{ path('dictionary_new') }}"
+           style="margin-right: 15px;">
+            <i class="fa fa-bullseye" aria-hidden="true"></i> Create</i>
+        </a>
+
+    </section>
+{% endblock %}

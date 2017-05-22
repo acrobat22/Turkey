@@ -1,0 +1,45 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+<section class="container"  style="padding-top: 35px">
+    <div class="row">
+        {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
+    </div>
+    {#--------- DEBUT Message quand base de données pas assez remplie -------------------------------------#}
+    {% for flash_message in app.session.flashBag.get('notif') %}
+        <div class="alert alert-danger text-center">
+            <strong>{{ flash_message|capitalize }}</strong>
+        </div>
+    {% endfor %}
+    {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
+
+    <h1>Topic</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ topic.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ topic.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('topic_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('topic_edit', { 'id': topic.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+</section>
+{% endblock %}

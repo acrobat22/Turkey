@@ -152,12 +152,9 @@ class RegistrationController extends BaseRegistrationController
         // Redirection en fonction du role du user
         if ($user->getRoles()[0] == "ROLE_ASKER") {
             return $this->redirect($this->generateUrl('asker_edit', array('id' => $idUser)));
-
         } elseif ($user->getRoles()[0] == "ROLE_ANSWER") {
             $this->get('helper_services')->setFlash('Gagné un crédit de 5 cents, si vous compléter votre profil');
-
 //            return $this->redirect($this->generateUrl('answer_edit', array('id' => $idUser)));
-
             return $this->redirectToRoute('home_connected');
         }
     }

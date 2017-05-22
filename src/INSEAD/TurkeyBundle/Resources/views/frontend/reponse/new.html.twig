@@ -1,0 +1,55 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+    <section class="container"  style="padding-top: 35px">
+        <div class="row">
+            {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
+        </div>
+        {#--------- DEBUT Message quand base de données pas assez remplie -------------------------------------#}
+        {% for flash_message in app.session.flashBag.get('notif') %}
+            <div class="alert alert-danger text-center">
+                <strong>{{ flash_message|capitalize }}</strong>
+            </div>
+        {% endfor %}
+        {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
+
+        {#{{ dump(question) }}#}
+        <h1>Q:
+            <i class="fa fa-quote-left" aria-hidden="true"></i>
+            {{ question.question|capitalize }}
+            <i class="fa fa-quote-right" aria-hidden="true"></i>
+        </h1>
+        <h1>My answer:</h1>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+        {{ form_end(form) }}
+
+        <div class="row" style="display: inline-flex">
+            <a class="btn btn-warning"
+               role="button"
+               data-toggle="tooltip"
+               title="Home"
+               href="{{ path('home_connected') }}"
+               style="margin-right: 15px;">
+                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="btn btn-primary"
+               role="button"
+               data-toggle="tooltip"
+               title="Back to the list"
+               href="{{ path('question_index_answer') }}"
+               style="margin-right: 15px;">
+                <i class="fa fa-arrow-circle-o-left fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+
+    </script>
+{% endblock %}

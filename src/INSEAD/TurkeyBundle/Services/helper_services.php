@@ -26,15 +26,18 @@ class helper_services
     }
 
     /**
-     * Return current user
-     *
-     */
+ * Return current user
+ *
+ */
     public function getCurrentUser(){
         $user_connect = $this->container->get('security.token_storage')->getToken()->getUser();
+
         $user = $this->em->getRepository('INSEADTurkeyBundle:Asker')->findOneByUser($user_connect);
         if (empty($user)) {
+            //        Answer ?
             $user = $this->em->getRepository('INSEADTurkeyBundle:Answer')->findOneByUser($user_connect);
         }
+
         return $user;
     }
 

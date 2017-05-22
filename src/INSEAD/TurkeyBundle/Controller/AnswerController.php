@@ -21,13 +21,18 @@ class AnswerController extends Controller
      * @Route("/", name="answer_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $answers = $em->getRepository('INSEADTurkeyBundle:Answer')->findAll();
+        // Mise en place pagination
+        $findAnswers = $em->getRepository('INSEADTurkeyBundle:Answer')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $answers = $paginator->paginate($findAnswers, $request->query->getInt('page', 1), 5);
 
-        return $this->render('@INSEADTurkey/answer/index.html.twig', array(
+//        $answers = $em->getRepository('INSEADTurkeyBundle:Answer')->findAll();
+
+        return $this->render('@INSEADTurkey/frontend/answer/index.html.twig', array(
             'answers' => $answers,
         ));
     }
@@ -42,7 +47,7 @@ class AnswerController extends Controller
     {
         $deleteForm = $this->createDeleteForm($answer);
 
-        return $this->render('@INSEADTurkey/answer/show.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/answer/show.html.twig', array(
             'answer' => $answer,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -86,13 +91,13 @@ class AnswerController extends Controller
             }
 
             $em->flush();
-            return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
+            return $this->render('@INSEADTurkey/frontend/asker_answer/home.html.twig', array(
                 'user' => $current_user,
                 'age' => $age = $this->get('helper_services')->getAgeAnswer(),
                 'asker' => $answer));
         }
 
-        return $this->render('@INSEADTurkey/answer/edit.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/answer/edit.html.twig', array(
             'answer' => $answer,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -22,13 +22,16 @@ class AskerController extends Controller
      * @Route("/", name="asker_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $askers = $em->getRepository('INSEADTurkeyBundle:Asker')->findAll();
+        // Mise en place pagination
+        $findAskers = $em->getRepository('INSEADTurkeyBundle:Asker')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $askers = $paginator->paginate($findAskers, $request->query->getInt('page', 1), 5);
 
-        return $this->render('@INSEADTurkey/asker/index.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/asker/index.html.twig', array(
             'askers' => $askers,
         ));
     }
@@ -49,7 +52,7 @@ class AskerController extends Controller
 
         $this->get('helper_services')->setFlash('Mise à jour de votre compte : PREMIUM');
 
-        return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/asker_answer/home.html.twig', array(
             'askers' => $asker,
             'user' => $current_user,
         ));
@@ -70,7 +73,7 @@ class AskerController extends Controller
 
         $this->get('helper_services')->setFlash('Mise à jour de votre compte : BASIC.');
 
-        return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/asker_answer/home.html.twig', array(
             'askers' => $asker,
             'user' => $current_user,
         ));
@@ -86,7 +89,7 @@ class AskerController extends Controller
     {
         $deleteForm = $this->createDeleteForm($asker);
 
-        return $this->render('@INSEADTurkey/asker/show.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/asker/show.html.twig', array(
             'asker' => $asker,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -108,13 +111,13 @@ class AskerController extends Controller
             $em = $this->getDoctrine()->getManager();
             $current_user = $this->get('helper_services')->getCurrentUser();
             $em->flush();
-            return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
+            return $this->render('@INSEADTurkey/frontend/asker_answer/home.html.twig', array(
                 'user' => $current_user,
                 'age' => $age = $this->get('helper_services')->getAgeAnswer(),
                 'asker' => $asker));
         }
 
-        return $this->render('@INSEADTurkey/asker/edit.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/asker/edit.html.twig', array(
             'asker' => $asker,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

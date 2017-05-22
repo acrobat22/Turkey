@@ -5,11 +5,14 @@ namespace INSEAD\TurkeyBundle\Controller;
 use INSEAD\TurkeyBundle\Entity\Demographic;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Demographic controller.
- *
+ * @security("has_role('ROLE_ADMIN')")
  * @Route("demographic")
  */
 class DemographicController extends Controller
@@ -26,7 +29,7 @@ class DemographicController extends Controller
 
         $demographics = $em->getRepository('INSEADTurkeyBundle:Demographic')->findAll();
 
-        return $this->render('@INSEADTurkey/demographic/index.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/demographic/index.html.twig', array(
             'demographics' => $demographics,
         ));
     }
@@ -51,7 +54,7 @@ class DemographicController extends Controller
             return $this->redirectToRoute('demographic_show', array('id' => $demographic->getId()));
         }
 
-        return $this->render('@INSEADTurkey/demographic/new.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/demographic/new.html.twig', array(
             'demographic' => $demographic,
             'form' => $form->createView(),
         ));
@@ -67,7 +70,7 @@ class DemographicController extends Controller
     {
         $deleteForm = $this->createDeleteForm($demographic);
 
-        return $this->render('@INSEADTurkey/demographic/show.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/demographic/show.html.twig', array(
             'demographic' => $demographic,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +94,7 @@ class DemographicController extends Controller
             return $this->redirectToRoute('demographic_edit', array('id' => $demographic->getId()));
         }
 
-        return $this->render('@INSEADTurkey/demographic/edit.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/demographic/edit.html.twig', array(
             'demographic' => $demographic,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

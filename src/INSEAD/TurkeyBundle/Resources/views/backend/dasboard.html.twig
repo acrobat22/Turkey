@@ -1,0 +1,46 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+
+    <section class="container"  style="padding-top: 35px">
+
+        <h2>Dashboard</h2>
+        <div class="list-group">
+            <a href="{{ path('demographic_index') }}"
+               class="list-group-item "
+               data-toggle="tooltip"
+               title="click">
+                <h4 class="list-group-item-heading">Demographic section</h4>
+                <p class="pAskerInfo">Create / Edit / Show / Delete </p>
+            </a>
+            <a href="{{ path('dictionary_index') }}"
+               class="list-group-item "
+               data-toggle="tooltip"
+               title="click">
+                <h4 class="list-group-item-heading">Dictionary section</h4>
+                <p class="pAskerInfo">Create / Edit / Show / Delete </p>
+            </a>
+            <a href="{{ path('topic_index') }}"
+               class="list-group-item "
+               data-toggle="tooltip"
+               title="click">
+                <h4 class="list-group-item-heading">Topic section</h4>
+                <p class="pAskerInfo">Create / Edit / Show / Delete </p>
+            </a>
+            <a href="{{ path('asker_index') }}"
+               class="list-group-item "
+               data-toggle="tooltip"
+               title="click">
+                <h4 class="list-group-item-heading">Asker section</h4>
+                <p class="pAskerInfo">Create / Edit / Show / Delete </p>
+            </a>
+            <a href="{{ path('answer_index') }}"
+               class="list-group-item "
+               data-toggle="tooltip"
+               title="click">
+                <h4 class="list-group-item-heading">Answer section</h4>
+                <p class="pAskerInfo">Create / Edit / Show / Delete </p>
+            </a>
+        </div>
+    </section>
+{% endblock %}

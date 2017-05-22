@@ -30,7 +30,7 @@ class ReponseController extends Controller
         $question = $em->getRepository('INSEADTurkeyBundle:Question')->findOneBy(array('id' => $idQuestion));
         $reponses = $em->getRepository('INSEADTurkeyBundle:Reponse')->findBy(array('question' => $idQuestion));
 
-        return $this->render('@INSEADTurkey/reponse/index.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/reponse/index.html.twig', array(
             'user' => $current_user,
             'question' => $question,
             'reponses' => $reponses,
@@ -92,7 +92,7 @@ class ReponseController extends Controller
                 $wordsInterdits = implode(", ", $matches[0]);
                 $this->get('helper_services')->setFlash('Votre réponse contient des mots interdits : '. $wordsInterdits);
 
-                return $this->render('@INSEADTurkey/reponse/new.html.twig', array(
+                return $this->render('@INSEADTurkey/frontend/reponse/new.html.twig', array(
                     'reponse' => $reponse,
                     'question' => $question,
                     'form' => $form->createView(),
@@ -100,7 +100,7 @@ class ReponseController extends Controller
             }
         }
 
-        return $this->render('@INSEADTurkey/reponse/new.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/reponse/new.html.twig', array(
             'reponse' => $reponse,
             'question' => $question,
             'form' => $form->createView(),
@@ -117,7 +117,7 @@ class ReponseController extends Controller
     {
         $deleteForm = $this->createDeleteForm($reponse);
 
-        return $this->render('@INSEADTurkey/reponse/show.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/reponse/show.html.twig', array(
             'reponse' => $reponse,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -141,7 +141,7 @@ class ReponseController extends Controller
             return $this->redirectToRoute('reponse_edit', array('id' => $reponse->getId()));
         }
 
-        return $this->render('@INSEADTurkey/reponse/edit.html.twig', array(
+        return $this->render('@INSEADTurkey/frontend/reponse/edit.html.twig', array(
             'reponse' => $reponse,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

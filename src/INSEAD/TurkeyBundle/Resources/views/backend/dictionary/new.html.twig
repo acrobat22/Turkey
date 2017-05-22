@@ -1,0 +1,21 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+<section class="container"  style="padding-top: 35px">
+    <div class="row">
+        {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
+    </div>
+    <h1>Dictionary creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('dictionary_index') }}">Back to the list</a>
+        </li>
+    </ul>
+</section>
+{% endblock %}

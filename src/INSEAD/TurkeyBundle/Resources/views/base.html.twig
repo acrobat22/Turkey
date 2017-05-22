@@ -95,15 +95,16 @@
             <!-- ********************************************************* -->
             <!--                       FOOTER                              -->
             <!-- ********************************************************* -->
-            <footer class="navbar-fixed-bottom">
+            <footer>
                 <div class="container">
-                    <div class="text-center row">
-                        <p>Copyright &copy; Turkey © {{ 'now'|date('Y') }}</p>
+                    <div class="row" >
+                        <p class="text-align center">
+                         Copyright &copy; Turkey © {{ 'now'|date('Y') }}
+                        </p>
                     </div>
                 </div>
             </footer>
         {% endblock %}
-
 
         {% block javascripts %}
             {#<script src="{{ asset('twbs_bootstrap/js/bootstrap.min.js') }}"></script>#}

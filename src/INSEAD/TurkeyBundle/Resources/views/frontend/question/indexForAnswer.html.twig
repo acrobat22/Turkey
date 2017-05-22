@@ -1,0 +1,148 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+    <section class="container" style="padding-top: 35px">
+        <div>
+            {#Liste des question avec filtre classé par topic et par ordre alphabétique #}
+            {% for question in questionWithFilter %}
+                {# Test si des réponses ont été posté sur la question #}
+                {% if  question.reponses is empty %}
+                    {# Si pas de réponse :#}
+                    <div class="container">
+                        {% for topic in question.filter.topics|sort %}
+                            {% for location in question.filter.locations %}
+                                {#Test si question filter : gender, age, location #}
+                                {% if (question.filter.gender == user.gender or question.filter.gender == 'Female/Male') and location.id == user.location.id  %}
+                                    {#Test tranche d'age #}
+                                    {% if question.filter.ageMin <= age and age <= question.filter.ageMax   %}
+                                        <h2>{{ topic|capitalize }}</h2>
+                                        <div class="list-group">
+                                            <a href="{{ path('reponse_new', {'idQuestion': question.id }) }}"
+                                               class="list-group-item "
+                                               data-toggle="tooltip"
+                                               title="click for Answer">
+                                                <h4 class="list-group-item-heading">{{ question.question|capitalize }}</h4>
+                                                <p class="pAskerInfo">{{ question.asker.user.username }}</p>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {#Test si answer a déjà répondu pour l'éliminer question de la liste #}
+                    {% for reponse in question.reponses %}
+                        {% if reponse.answer.id != user.id %}
+                            {#Test si filtre sur la question #}
+                            {% if question.filter is not null %}
+                                <div class="container">
+                                    {% for topic in question.filter.topics|sort %}
+                                        {% for location in question.filter.locations %}
+                                            {#Test si question filter : gender, age, location #}
+                                            {% if (question.filter.gender == user.gender or question.filter.gender == 'Female/Male') and location.id == user.location.id  %}
+                                                {#Test tranche d'age #}
+                                                {% if question.filter.ageMin <= age and age <= question.filter.ageMax   %}
+                                                    <h2>{{ topic|capitalize }}</h2>
+                                                    <div class="list-group">
+                                                        <a href="{{ path('reponse_new', {'idQuestion': question.id }) }}"
+                                                           class="list-group-item "
+                                                           data-toggle="tooltip"
+                                                           title="click for Answer">
+                                                            <h4 class="list-group-item-heading">{{ question.question|capitalize }}</h4>
+                                                            <p class="pAskerInfo">{{ question.asker.user.username }}</p>
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+
+            {# Liste des questions sans filtres #}
+            <h2>List questions without topic</h2>
+            <div class="list-group">
+                {% for question in questionsWithOutFilter %}
+                    {% if question.filter is null and question.reponses is empty %}
+                        <a href="{{ path('reponse_new', {'idQuestion': question.id }) }}"
+                           class="list-group-item "
+                           data-toggle="tooltip"
+                           title="click for Answer">
+                            <h4 class="list-group-item-heading">{{ question.question|capitalize }}</h4>
+                            <p class="pAskerInfo">{{ question.asker.user.username }}</p>
+                        </a>
+                    {% else %}
+                        {% for reponse in question.reponses %}
+                            {% if reponse is null %}
+                                {#Test si answer a déjà répondu pour éliminer question de la liste #}
+                                {% if reponse.answer.id != user.id %}
+                                    <a href="{{ path('reponse_new', {'idQuestion': question.id }) }}"
+                                       class="list-group-item "
+                                       data-toggle="tooltip"
+                                       title="click for Answer">
+                                        <h4 class="list-group-item-heading">{{ question.question|capitalize }}</h4>
+                                        <p class="pAskerInfo">{{ question.asker.user.username }}</p>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row" style="display: inline-flex; margin-left: 45%">
+            <a class="btn btn-warning"
+               role="button"
+               data-toggle="tooltip"
+               title="Home"
+               href="{{ path('home_connected') }}"
+               style="margin-right: 15px;">
+                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+
+    {# Modal toutes les 5 réponses #}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Merci</h4>
+                </div>
+                <div class="modal-body">
+                    Bla bla
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+     {# Modal ouverte en fonction du creditEarned du answer #}
+    <script type="text/javascript">
+
+        var bonusInscription = "{{ user.bonusInscription }}";
+        var nbPoint = "{{ user.creditEarned }}";
+        /* Si bonus inscription elève sur nbPoint les 5 du bonus inscription */
+        if (bonusInscription == 1) {
+            nbPoint = nbPoint -5;
+        }
+        /* Si nbPoint est différent de 0 et un multiple de 5 ouverture de la modal */
+        if (nbPoint !=0 && nbPoint % 5 === 0) {
+            $('#exampleModal').modal('show');
+        } else {
+            $('#exampleModal').modal({ show: false});
+        }
+    </script>
+{% endblock %}

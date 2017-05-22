@@ -26,7 +26,7 @@ class TopicController extends Controller
 
         $topics = $em->getRepository('INSEADTurkeyBundle:Topic')->findAll();
 
-        return $this->render('@INSEADTurkey/topic/index.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/topic/index.html.twig', array(
             'topics' => $topics,
         ));
     }
@@ -51,7 +51,7 @@ class TopicController extends Controller
             return $this->redirectToRoute('topic_show', array('id' => $topic->getId()));
         }
 
-        return $this->render('@INSEADTurkey/topic/new.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/topic/new.html.twig', array(
             'topic' => $topic,
             'form' => $form->createView(),
         ));
@@ -67,7 +67,7 @@ class TopicController extends Controller
     {
         $deleteForm = $this->createDeleteForm($topic);
 
-        return $this->render('@INSEADTurkey/topic/show.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/topic/show.html.twig', array(
             'topic' => $topic,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +91,7 @@ class TopicController extends Controller
             return $this->redirectToRoute('topic_edit', array('id' => $topic->getId()));
         }
 
-        return $this->render('@INSEADTurkey/topic/edit.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/topic/edit.html.twig', array(
             'topic' => $topic,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

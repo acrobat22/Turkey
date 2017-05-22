@@ -1,0 +1,56 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+    <section class="container"  style="padding-top: 35px">
+        <div class="row">
+            {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
+        </div>
+        {#--------- DEBUT Message quand base de données pas assez remplie -------------------------------------#}
+        {% for flash_message in app.session.flashBag.get('notif') %}
+            <div class="alert alert-danger text-center">
+                <strong>{{ flash_message|capitalize }}</strong>
+            </div>
+        {% endfor %}
+        {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
+
+        <h1>Topic list</h1>
+        <div class="panel panel-default">
+            {% for topic in topics %}
+                <div class="panel-body text-center">
+                    <h4>{{ topic.name }}</h4>
+                </div>
+
+                <div class="list-group-admin">
+                    <div class="list-group-horizontal">
+                        <a href="{{ path('topic_edit', {'id': topic.id } ) }}" class="list-group-item">
+                            Edit
+                            <i class="fa fa-hand-rock-o fa-lg"></i>
+                        </a>
+                        <a href="{{ path('topic_delete', {'id': topic.id } ) }}" class="list-group-item"
+                           onclick="return confirm('Are you sure?')">
+                            Delete
+                            <i class="fa fa-hand-paper-o fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="btn btn-warning"
+           role="button"
+           data-toggle="tooltip"
+           title="Home"
+           href="{{ path('home_connected') }}"
+           style="margin-right: 15px;">
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-primary"
+           role="button"
+           data-toggle="tooltip"
+           title="Create a new demographic"
+           href="{{ path('topic_new') }}"
+           style="margin-right: 15px;">
+            <i class="fa fa-bullseye" aria-hidden="true"></i> Create</i>
+        </a>
+
+    </section>
+{% endblock %}

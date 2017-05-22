@@ -1,0 +1,56 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+<section class="container"  style="padding-top: 35px">
+
+    <h1>Question</h1>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ question.id }}</td>
+            </tr>
+            <tr>
+                <th>Question</th>
+                <td>{{ question.question }}</td>
+            </tr>
+            <tr>
+                <th>Datecreate</th>
+                <td>{% if question.dateCreate %}{{ question.dateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Asker</th>
+                <td>{{ question.asker }}</td>
+            </tr>
+            <tr>
+                <th>Reponses</th>
+                {% for reponse in question.reponses %}
+                <td>{{ question.reponses }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-sm-4 ">
+            <a class="btn btn-info" href="{{ path('question_index') }}">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="col-sm-4">
+            <a class="btn btn-info" role="button" href="{{ path('question_edit', { 'id': question.id }) }}">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="col-sm-4">
+            {{ form_start(delete_form) }}
+            {#<input type="submit" value="Delete">#}
+            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure?')">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+            {{ form_end(delete_form) }}
+        </div>
+    </div>
+</section>
+{% endblock %}

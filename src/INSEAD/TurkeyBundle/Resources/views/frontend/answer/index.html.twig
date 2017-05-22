@@ -1,0 +1,76 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+<section class="container"  style="padding-top: 35px">
+    <div class="row">
+        {#<h1 class="text-center">Hi {{ app.user.username }}!</h1>#}
+    </div>
+    {#--------- DEBUT Message quand base de données pas assez remplie -------------------------------------#}
+    {% for flash_message in app.session.flashBag.get('notif') %}
+        <div class="alert alert-danger text-center">
+            <strong>{{ flash_message|capitalize }}</strong>
+        </div>
+    {% endfor %}
+    {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
+    <h1>Answer list</h1>
+    {#-------------------------------------------------------------#}
+    {# Mise en place pagination #}
+    <div class="row center">
+        {{ knp_pagination_render(answers) }}
+    </div>
+    {#-------------------------------------------------------------#}
+    <div class="panel panel-default">
+        {% for answer in answers %}
+        <div class="panel-body">
+            <h4><strong>Username:</strong> {{ answer.user.username }}</h4>
+            <h4><strong>Email:</strong> {{ answer.user.email }}</h4>
+            <h4><strong>Lastname:</strong> {{ answer.lastname }}</h4>
+            <h4><strong>Firstname:</strong> {{ answer.firstname }}</h4>
+            <h4><strong>Company:</strong> {{ answer.company }}</h4>
+            <h4><strong>Sector:</strong> {{ answer.sector }}</h4>
+            <h4><strong>Job function:</strong> {{ answer.jobFunction }}</h4>
+            <h4><strong>Job level:</strong> {{ answer.jobLevel }}</h4>
+            <h4><strong>Demographic:</strong> {{ answer.location }}</h4>
+            <h4><strong>Education:</strong> {{ answer.education }}</h4>
+            <h4><strong>Gender:</strong> {{ answer.gender }}</h4>
+            <h4><strong>Birthdate:</strong> {{ answer.birthdate|date('Y-m-d') }}</h4>
+            <h4><strong>Age:</strong> {{ ('now'|date('Y') - answer.birthdate|date('Y') - 1) + ('now'|date('2010-m-d')|date('U') - answer.birthdate|date('2010-m-d')|date('U') >= 0 ? 1 : 0) }}</h4>
+            <h4><strong>Credit:</strong> {{ answer.creditEarned }}</h4>
+            <h4><strong>Profil complet:</strong> {% if answer.bonusInscription == 1 %}Yes{% else %}No{% endif %}</h4>
+
+        </div>
+
+        <div class="list-group-admin">
+            <div class="list-group-horizontal">
+                <a href="{{ path('answer_edit', {'id': answer.id } ) }}" class="list-group-item">
+                    Edit
+                    <i class="fa fa-hand-rock-o fa-lg"></i>
+                </a>
+                <a href="{{ path('answer_delete', {'id': answer.id } ) }}" class="list-group-item"
+                   onclick="return confirm('Are you sure?')">
+                    Delete
+                    <i class="fa fa-hand-paper-o fa-lg"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a class="btn btn-warning"
+       role="button"
+       data-toggle="tooltip"
+       title="Home"
+       href="{{ path('home_connected') }}"
+       style="margin-right: 15px;">
+        <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+    </a>
+    {#<a class="btn btn-primary"#}
+    {#role="button"#}
+    {#data-toggle="tooltip"#}
+    {#title="Create a new demographic"#}
+    {#href="{{ path('topic_new') }}"#}
+    {#style="margin-right: 15px;">#}
+    {#<i class="fa fa-bullseye" aria-hidden="true"></i> Create</i>#}
+    {#</a>#}
+
+</section>
+{% endblock %}

@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Demographic controller.
  * @security("has_role('ROLE_ADMIN')")
- * @Route("demographic")
+ * @Route("admin/demographic")
  */
 class DemographicController extends Controller
 {
@@ -63,7 +63,7 @@ class DemographicController extends Controller
     /**
      * Finds and displays a demographic entity.
      *
-     * @Route("/{id}", name="demographic_show")
+     * @Route("/{id}/show", name="demographic_show")
      * @Method("GET")
      */
     public function showAction(Demographic $demographic)
@@ -104,7 +104,7 @@ class DemographicController extends Controller
     /**
      * Deletes a demographic entity.
      *
-     * @Route("/{id}", name="demographic_delete")
+     * @Route("/{id}/delete", name="demographic_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Demographic $demographic)

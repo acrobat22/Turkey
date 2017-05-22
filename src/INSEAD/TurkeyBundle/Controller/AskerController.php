@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Asker controller.
@@ -18,7 +19,7 @@ class AskerController extends Controller
 {
     /**
      * Lists all asker entities.
-     *
+     * @security("has_role('ROLE_ADMIN')")
      * @Route("/", name="asker_index")
      * @Method("GET")
      */
@@ -31,7 +32,7 @@ class AskerController extends Controller
         $paginator  = $this->get('knp_paginator');
         $askers = $paginator->paginate($findAskers, $request->query->getInt('page', 1), 5);
 
-        return $this->render('@INSEADTurkey/frontend/asker/index.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/asker/index.html.twig', array(
             'askers' => $askers,
         ));
     }
@@ -82,7 +83,7 @@ class AskerController extends Controller
     /**
      * Finds and displays a asker entity.
      *
-     * @Route("/{id}", name="asker_show")
+     * @Route("/{id}/show", name="asker_show")
      * @Method("GET")
      */
     public function showAction(Asker $asker)
@@ -126,8 +127,8 @@ class AskerController extends Controller
 
     /**
      * Deletes a asker entity.
-     *
-     * @Route("/{id}", name="asker_delete")
+     * @security("has_role('ROLE_ADMIN')")
+     * @Route("/{id}/delete", name="asker_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Asker $asker)

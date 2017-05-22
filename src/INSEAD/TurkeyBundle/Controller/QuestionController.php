@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Question controller.
@@ -143,8 +144,8 @@ class QuestionController extends Controller
 
     /**
      * Deletes a question entity.
-     *
-     * @Route("/{id}", name="question_delete")
+     * @security("has_role('ROLE_ADMIN')")
+     * @Route("/{id}/delete", name="question_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Question $question)

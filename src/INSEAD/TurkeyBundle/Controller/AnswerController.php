@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Answer controller.
@@ -17,7 +18,7 @@ class AnswerController extends Controller
 {
     /**
      * Lists all answer entities.
-     *
+     * @security("has_role('ROLE_ADMIN')")
      * @Route("/", name="answer_index")
      * @Method("GET")
      */
@@ -32,7 +33,7 @@ class AnswerController extends Controller
 
 //        $answers = $em->getRepository('INSEADTurkeyBundle:Answer')->findAll();
 
-        return $this->render('@INSEADTurkey/frontend/answer/index.html.twig', array(
+        return $this->render('@INSEADTurkey/backend/answer/index.html.twig', array(
             'answers' => $answers,
         ));
     }
@@ -40,7 +41,7 @@ class AnswerController extends Controller
     /**
      * Finds and displays a answer entity.
      *
-     * @Route("/{id}", name="answer_show")
+     * @Route("/{id}/show", name="answer_show")
      * @Method("GET")
      */
     public function showAction(Answer $answer)
@@ -106,8 +107,8 @@ class AnswerController extends Controller
 
     /**
      * Deletes a answer entity.
-     *
-     * @Route("/{id}", name="answer_delete")
+     * @security("has_role('ROLE_ADMIN')")
+     * @Route("/{id}/delete", name="answer_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Answer $answer)

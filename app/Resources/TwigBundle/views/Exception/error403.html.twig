@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Valérie Peltier Coaching - Erreur 403</title>
+    <title>Turkey - Erreur 403</title>
 
     <!--
       o              o                 o                      o     o                                                             o
@@ -47,25 +47,19 @@
         <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
         <link rel="stylesheet" href="{{ asset('twbs_bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
-        {# Fonts section 6 - Inspiration #}
-        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-
-        {#<script type="text/javascript" src="{{ asset('bundles/vpcoaching/modernizr.custom.04022.js') }}"></script>#}
-        <script type="text/javascript" src="{{ asset('bundles/vpcoaching/modernizr.custom.63321.js') }}"></script>
 
         {#jQuery UI (optional)#}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
         {% stylesheets filter="cssrewrite, ?scssphp"
-        'bundles/vpcoaching/css/*'
+        'bundles/inseadturkey/css/css/*'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
         {% endstylesheets %}
 
     {% endblock %}
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/vpcoaching/images/Logo16x16.ico') }}" />
 </head>
 
 <body>
@@ -79,7 +73,7 @@
         </div>
         <div class="alert alert-danger text-center">
             <h1>Erreur</h1>
-            <img src="{{ asset('bundles/vpcoaching/images/error403.jpg') }}" alt="error403" />
+            <img src="" alt="error403" />
             <div>
                 <p>Il semble que vous n'ayez pas le droit d'accéder à cette page...</p>
             </div>
@@ -94,15 +88,8 @@
 <footer>
     <div class="container">
         <div class="text-center row">
-            <p>Copyright &copy; Valérie Peltier - Coaching © {{ 'now'|date('Y') }}</p>
-            <ul class="list-social">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                {#<li><a href="#"><i class="fa fa-twitter"></i></a></li>#}
-                <li><a href="https://www.linkedin.com/in/valeriepeltier" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a class="fa fa-envelope" href="#myModalContact" role="button" data-toggle="modal"></a></li>
-                <li><a class="fa fa-phone" href="tel://+33788851785"></a></li>
-            </ul>
+            <p>Copyright &copy; Turkey © {{ 'now'|date('Y') }}</p>
+
         </div>
     </div>
 </footer>
@@ -111,8 +98,7 @@
 {% block javascripts %}
     <script src="{{ asset('twbs_bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script src="{{ asset('bundles/a2lixtranslationform/js/a2lix_translation_bootstrap.js') }}"></script>
-    {% javascripts '@VPCoachingBundle/Resources/public/js/*' %}
+    {% javascripts '@INSEADTurkeyBundle/Resources/public/js/*' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 

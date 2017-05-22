@@ -51,4 +51,11 @@ insead_turkey_reponse:
 # -------------------------
 insead_turkey_dictionary:
     resource: '@INSEADTurkeyBundle/Resources/config/routing/dictionary/dictionary.yml'
-    prefix: /dictionary/
+    prefix: /
+
+# -------------------------
+# INSEAD          TOPIC
+# -------------------------
+insead_turkey_topic:
+    resource: '@INSEADTurkeyBundle/Resources/config/routing/topic/topic.yml'
+    prefix: /

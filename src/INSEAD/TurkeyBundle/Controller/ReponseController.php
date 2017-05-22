@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Reponse controller.
@@ -150,8 +151,8 @@ class ReponseController extends Controller
 
     /**
      * Deletes a reponse entity.
-     *
-     * @Route("/{id}", name="reponse_delete")
+     * @security("has_role('ROLE_ADMIN')")
+     * @Route("/{id}/delete", name="reponse_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Reponse $reponse)

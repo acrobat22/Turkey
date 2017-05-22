@@ -40,8 +40,8 @@ security:
             remember_me:
               secret:     '%secret%'
               lifetime:        900  # 15min en secondes
-#    access_control:
+    access_control:
 #        - { path: ^/?$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/admin/(login|register), role: IS_AUTHENTICATED_ANONYMOUSLY }
-#        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_ADMIN }

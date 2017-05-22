@@ -5,12 +5,14 @@ namespace INSEAD\TurkeyBundle\Controller;
 use INSEAD\TurkeyBundle\Entity\Dictionary;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Dictionary controller.
- *
- * @Route("/")
+ * @security("has_role('ROLE_ADMIN')")
+ * @Route("/admin/dictionary")
  */
 class DictionaryController extends Controller
 {
@@ -63,7 +65,7 @@ class DictionaryController extends Controller
     /**
      * Finds and displays a dictionary entity.
      *
-     * @Route("/{id}", name="dictionary_show")
+     * @Route("/{id}/show", name="dictionary_show")
      * @Method("GET")
      */
     public function showAction(Dictionary $dictionary)
@@ -104,7 +106,7 @@ class DictionaryController extends Controller
     /**
      * Deletes a dictionary entity.
      *
-     * @Route("/{id}", name="dictionary_delete")
+     * @Route("/{id}/delete", name="dictionary_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Dictionary $dictionary)

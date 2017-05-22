@@ -5,12 +5,14 @@ namespace INSEAD\TurkeyBundle\Controller;
 use INSEAD\TurkeyBundle\Entity\Topic;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Topic controller.
- *
- * @Route("topic")
+ * @security("has_role('ROLE_ADMIN')")
+ * @Route("admin/topic")
  */
 class TopicController extends Controller
 {
@@ -60,7 +62,7 @@ class TopicController extends Controller
     /**
      * Finds and displays a topic entity.
      *
-     * @Route("/{id}", name="topic_show")
+     * @Route("/{id}/show", name="topic_show")
      * @Method("GET")
      */
     public function showAction(Topic $topic)
@@ -101,7 +103,7 @@ class TopicController extends Controller
     /**
      * Deletes a topic entity.
      *
-     * @Route("/{id}", name="topic_delete")
+     * @Route("/{id}/delete", name="topic_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Topic $topic)

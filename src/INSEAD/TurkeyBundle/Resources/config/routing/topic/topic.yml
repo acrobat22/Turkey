@@ -1,0 +1,4 @@
+topic:
+     resource: "@INSEADTurkeyBundle/Controller/TopicController.php"
+     type: annotation
+     prefix: /

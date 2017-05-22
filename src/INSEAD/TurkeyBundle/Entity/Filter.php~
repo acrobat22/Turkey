@@ -14,7 +14,16 @@ class Filter
 {
     public function __toString()
     {
-        return $this->demographic;
+        return $this->gender;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->locations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -58,13 +67,13 @@ class Filter
      * @ORM\ManyToMany(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER", cascade={"all"})
      * @ORM\JoinColumn
      */
-    private $location;
+    private $locations;
 
     /**
      * @ORM\ManyToMany(targetEntity="INSEAD\TurkeyBundle\Entity\Topic", fetch="EAGER", cascade={"all"})
      * @ORM\JoinColumn
      */
-    private $topic;
+    private $topics;
 
     //***************************************//
     //                                       //
@@ -72,158 +81,4 @@ class Filter
     //                                       //
     //***************************************//
 
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set nbOfResponders
-     *
-     * @param integer $nbOfResponders
-     *
-     * @return Filter
-     */
-    public function setNbOfResponders($nbOfResponders)
-    {
-        $this->nbOfResponders = $nbOfResponders;
-
-        return $this;
-    }
-
-    /**
-     * Get nbOfResponders
-     *
-     * @return integer
-     */
-    public function getNbOfResponders()
-    {
-        return $this->nbOfResponders;
-    }
-
-    /**
-     * Set gender
-     *
-     * @param string $gender
-     *
-     * @return Filter
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return string
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     * Set ageMin
-     *
-     * @param integer $ageMin
-     *
-     * @return Filter
-     */
-    public function setAgeMin($ageMin)
-    {
-        $this->ageMin = $ageMin;
-
-        return $this;
-    }
-
-    /**
-     * Get ageMin
-     *
-     * @return integer
-     */
-    public function getAgeMin()
-    {
-        return $this->ageMin;
-    }
-
-    /**
-     * Set ageMax
-     *
-     * @param integer $ageMax
-     *
-     * @return Filter
-     */
-    public function setAgeMax($ageMax)
-    {
-        $this->ageMax = $ageMax;
-
-        return $this;
-    }
-
-    /**
-     * Get ageMax
-     *
-     * @return integer
-     */
-    public function getAgeMax()
-    {
-        return $this->ageMax;
-    }
-
-    /**
-     * Set location
-     *
-     * @param \INSEAD\TurkeyBundle\Entity\Demographic $location
-     *
-     * @return Filter
-     */
-    public function setLocation(\INSEAD\TurkeyBundle\Entity\Demographic $location = null)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * Get location
-     *
-     * @return \INSEAD\TurkeyBundle\Entity\Demographic
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * Set topic
-     *
-     * @param \INSEAD\TurkeyBundle\Entity\Topic $topic
-     *
-     * @return Filter
-     */
-    public function setTopic(\INSEAD\TurkeyBundle\Entity\Topic $topic = null)
-    {
-        $this->topic = $topic;
-
-        return $this;
-    }
-
-    /**
-     * Get topic
-     *
-     * @return \INSEAD\TurkeyBundle\Entity\Topic
-     */
-    public function getTopic()
-    {
-        return $this->topic;
-    }
 }

@@ -59,4 +59,24 @@ class helper_services
     {
         $this->container->get('session')->getFlashBag()->set('notif', $value);
     }
+
+
+    /**
+     * Return age answer current
+     */
+    public function getAgeAnswer() {
+
+        $current_user = $this->getCurrentUser();
+//        var_dump($current_user);
+//        die();
+        if (($current_user->getUser()->getRoles()[0] == "ROLE_ASKER") or ($current_user->getUser()->getRoles()[0] == "ROLE_ASKER_PREMIUM")) {
+            $age = "";
+        } elseif ($current_user->getUser()->getRoles()[0] == "ROLE_ANSWER") {
+            $today = new \DateTime();
+            $birthdate = $current_user->getBirthdate();
+            $age = $today->diff($birthdate, true)->y;
+        }
+
+        return $age;
+    }
 }

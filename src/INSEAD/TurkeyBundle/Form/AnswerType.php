@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class AnswerType extends AbstractType
 {
@@ -24,7 +25,13 @@ class AnswerType extends AbstractType
             ->add('sector', TextType::class, array('required' => true))
             ->add('jobFunction', TextType::class, array('required' => true))
             ->add('jobLevel', TextType::class, array('required' => true))
-            ->add('location', TextType::class, array('required' => true))
+            ->add('location', EntityType::class, array(
+                'class' => 'INSEAD\TurkeyBundle\Entity\Demographic',
+                'choice_label' => 'name',
+                'required' => true,
+                'multiple' => false,
+                'expanded' => true,
+            ))
             ->add('education', TextType::class, array('required' => true))
             ->add('gender', ChoiceType::class, [
                 'choices'=> [

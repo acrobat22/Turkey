@@ -1,23 +1,4 @@
-#---------------------------
-#Home interface for ANSWER
-#---------------------------
-#answer_home:
-#    path: /home
-#    defaults: { _controller: "INSEADTurkeyBundle:User:home" }
-
-#---------------------------
-# ANSWER
-#---------------------------
-answer_edit:
-    path: /{id}/edit
-    defaults: { _controller: "INSEADTurkeyBundle:Answer:edit" }
-    options:
-        expose: true
-
-answer_delete:
-    path: /{id}/delete
-    defaults: { _controller: "INSEADTurkeyBundle:Answer:delete" }
-
-answer_index:
-    path: /index
-    defaults: { _controller: "INSEADTurkeyBundle:Answer:index" }
+answer:
+    resource: "@INSEADTurkeyBundle/Controller/AnswerController.php"
+    type:      annotation
+    prefix: /

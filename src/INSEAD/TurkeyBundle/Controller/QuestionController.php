@@ -29,15 +29,45 @@ class QuestionController extends Controller
         $idCurrentUser = $current_user->getId();
         $em = $this->getDoctrine()->getManager();
 
-        if ($current_user->getUser()->getRoles()[0] == "ROLE_ASKER") {
+        if (($current_user->getUser()->getRoles()[0] == "ROLE_ASKER") or ($current_user->getUser()->getRoles()[0] == "ROLE_ASKER_PREMIUM") ) {
             $questions = $em->getRepository('INSEADTurkeyBundle:Question')->findBy(array('asker' =>$idCurrentUser));
         } elseif ($current_user->getUser()->getRoles()[0] == "ROLE_ANSWER") {
             $questions = $em->getRepository('INSEADTurkeyBundle:Question')->findAll();
+        }
 
+        /* Gestion nombre de réponse par question */
+        $nbReponse = array();
+
+        foreach ($questions as $question)
+        {
+            $nbReponse[$question->getId()] = count($question->getReponses());
         }
 
         return $this->render('@INSEADTurkey/question/index.html.twig', array(
             'questions' => $questions,
+            'nbReponse' => $nbReponse,
+        ));
+    }
+
+    /**
+     * Lists all question entities.
+     *
+     * @Route("/answer", name="question_index_answer")
+     * @Method("GET")
+     */
+    public function indexForAnswerAction()
+    {
+        $current_user = $this->get('helper_services')->getCurrentUser();
+        $age = $this->get('helper_services')->getAgeAnswer();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $questions = $em->getRepository('INSEADTurkeyBundle:Question')->findAll();
+
+        return $this->render('@INSEADTurkey/question/indexForAnswer.html.twig', array(
+            'questions' => $questions,
+            'user' => $current_user,
+            'age' => $age,
         ));
     }
 

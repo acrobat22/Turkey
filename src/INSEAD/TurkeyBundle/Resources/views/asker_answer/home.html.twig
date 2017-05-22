@@ -10,7 +10,7 @@
         {% endfor %}
         {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
         <div class="row">
-            <h1 class="text-center">Welcome {{ user.firstName|default('')|capitalize }}!</h1>
+            <h1 class="text-center">Welcome {{ user.user.username|default('') }}!</h1>
             {% if user.user.roles[0] == 'ROLE_ANSWER' %}
             <h4 class="text-center">Your points: {{ user.creditEarned }}</h4>
                 <h4 class="text-center">Age: {{ age }} </h4>
@@ -19,19 +19,19 @@
 
         <div class="row">
             <div class="col-xs-9 col-xs-offset-3">
-                {% if user.user.roles[0] == 'ROLE_ASKER' %}
+                {% if user.user.roles[0] == 'ROLE_ASKER' or user.user.roles[0] =='ROLE_ASKER_PREMIUM' %}
                     {# ASKER -> ask a question #}
                     <a href="{{ path('question_new') }}" class="btn btn_customAsker">Ask A Question</a>
                 {% elseif user.user.roles[0] == 'ROLE_ANSWER' %}
                     {# ANSWER #}
-                    <a href="{{ path('question_index') }}" class="btn btn_customAnswer">Start Answering</a>
+                    <a href="{{ path('question_index_answer') }}" class="btn btn_customAnswer">Start Answering</a>
                 {% endif %}
             </div>
         </div>
 
         <div class="row">
             <div class="col-xs-9 col-xs-offset-3">
-                {% if user.user.roles[0] == 'ROLE_ASKER' %}
+                {% if user.user.roles[0] == 'ROLE_ASKER' or user.user.roles[0] =='ROLE_ASKER_PREMIUM'%}
                     {# ASKER #}
                     <a href="{{ path('question_index') }}" class="btn btn_customAsker">My Question</a>
                 {% elseif user.user.roles[0] == 'ROLE_ANSWER' %}
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        {% if user.user.roles[0] == 'ROLE_ASKER' %}
+        {% if user.user.roles[0] == 'ROLE_ASKER' or user.user.roles[0] =='ROLE_ASKER_PREMIUM'%}
             {# ASKER #}
             <div class="row">
                 <div class="col-xs-9 col-xs-offset-3">

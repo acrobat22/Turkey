@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Answer controller.
  *
- * @Route("answer")
+ * @Route("/")
  */
 class AnswerController extends Controller
 {
@@ -88,6 +88,7 @@ class AnswerController extends Controller
             $em->flush();
             return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
                 'user' => $current_user,
+                'age' => $age = $this->get('helper_services')->getAgeAnswer(),
                 'asker' => $answer));
         }
 

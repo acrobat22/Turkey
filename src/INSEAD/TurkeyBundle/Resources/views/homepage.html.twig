@@ -1,14 +1,19 @@
 {% extends '@INSEADTurkey/base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid inscription" style="padding-top: 150px">
+    <div class="container-fluid inscription" style="padding-top: 15px">
+        {% for flash_message in app.session.flashBag.get('notif') %}
+            <div class="text-center">
+                <strong>{{ flash_message|capitalize }}</strong>
+            </div>
+        {% endfor %}
         <div class="row">
             <div class="header-logo-inscription">
                 <a href=""><img src="" /></a>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-offset-4 col-xs-offset-1 col-md-4 col-xs-10 custom_jumbotron">
+            <div class="col-md-offset-4 col-xs-offset-1 col-md-4 col-xs-10">
                 <h1>You want to...</h1>
                 <div class="form-group">
                     <a class="btn btn_customAsker" href="{{ path('fos_user_registration_register', { 'type': 'asker' }) }}" role="button">Ask questions</a>
@@ -17,7 +22,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-offset-4 col-xs-offset-1 col-md-4 col-xs-10 custom_jumbotron">
+            <div class="col-md-offset-4 col-xs-offset-1 col-md-4 col-xs-10">
                 <h1>Sign up</h1>
                 <div class="form-group">
                     <a class="btn btn_customSignUp" href="{{ path('fos_user_security_login') }}" role="button">Go!</a>

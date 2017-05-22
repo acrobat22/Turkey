@@ -92,6 +92,7 @@ class ReponseController extends Controller
 
                 return $this->render('@INSEADTurkey/reponse/new.html.twig', array(
                     'reponse' => $reponse,
+                    'question' => $question,
                     'form' => $form->createView(),
                 ));
             }
@@ -99,6 +100,7 @@ class ReponseController extends Controller
 
         return $this->render('@INSEADTurkey/reponse/new.html.twig', array(
             'reponse' => $reponse,
+            'question' => $question,
             'form' => $form->createView(),
         ));
     }

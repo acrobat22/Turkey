@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Asker controller.
  *
- * @Route("asker")
+ * @Route("/")
  */
 class AskerController extends Controller
 {
@@ -30,6 +30,49 @@ class AskerController extends Controller
 
         return $this->render('@INSEADTurkey/asker/index.html.twig', array(
             'askers' => $askers,
+        ));
+    }
+
+    /**
+     * Update premium asker.
+     *
+     * @Route("/{id}/premium", name="asker_premium")
+     * @Method("GET")
+     */
+    public function premiumAction(Asker $asker)
+    {
+        $current_user = $this->get('helper_services')->getCurrentUser();
+        $em = $this->getDoctrine()->getManager();
+
+        $asker->getUser()->setRoles(array('ROLE_ASKER_PREMIUM'));
+        $em->flush();
+
+        $this->get('helper_services')->setFlash('Mise à jour de votre compte : PREMIUM');
+
+        return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
+            'askers' => $asker,
+            'user' => $current_user,
+        ));
+    }
+
+    /**
+     * Update premium asker.
+     *
+     * @Route("/{id}/basic", name="asker_basic")
+     * @Method("GET")
+     */
+    public function basicAction(Asker $asker)
+    {
+        $current_user = $this->get('helper_services')->getCurrentUser();
+        $em = $this->getDoctrine()->getManager();
+        $asker->getUser()->setRoles(array('ROLE_ASKER'));
+        $em->flush();
+
+        $this->get('helper_services')->setFlash('Mise à jour de votre compte : BASIC.');
+
+        return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
+            'askers' => $asker,
+            'user' => $current_user,
         ));
     }
 
@@ -62,12 +105,13 @@ class AskerController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
             $current_user = $this->get('helper_services')->getCurrentUser();
+            $em->flush();
             return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
                 'user' => $current_user,
+                'age' => $age = $this->get('helper_services')->getAgeAnswer(),
                 'asker' => $asker));
-
         }
 
         return $this->render('@INSEADTurkey/asker/edit.html.twig', array(

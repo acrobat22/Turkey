@@ -17,8 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 class UserController extends Controller
 {
-
-
     /**
      * home.
      *
@@ -29,13 +27,7 @@ class UserController extends Controller
     {
         $current_user = $this->get('helper_services')->getCurrentUser();
 
-        if ($current_user->getUser()->getRoles()[0] == "ROLE_ASKER") {
-            $age = "";
-        } elseif ($current_user->getUser()->getRoles()[0] == "ROLE_ANSWER") {
-            $today = new \DateTime();
-            $birthdate = $current_user->getBirthdate();
-            $age = $today->diff($birthdate, true)->y;
-        }
+        $age = $this->get('helper_services')->getAgeAnswer();
 
         return $this->render('@INSEADTurkey/asker_answer/home.html.twig', array(
             'user' => $current_user,

@@ -76,9 +76,10 @@ class Asker
     protected $jobLevel;
 
     /**
-     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER")
+     * @ORM\JoinColumn
      */
-    protected $location;
+    private $location;
 
     /**
      * @ORM\Column(name="annual", type="integer", nullable=true)

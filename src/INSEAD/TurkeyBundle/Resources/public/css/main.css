@@ -102,8 +102,9 @@ select {
 /**************************/
 /*       home             */
 /*    asker_answer        */
-/*         button         */
+/*                        */
 /**************************/
+
 .btn_custom {
     margin-top: 5px !important;
     margin-bottom: 5px !important;
@@ -136,6 +137,18 @@ select {
     color: white ;
 }
 
+/* Mobile screen */
+/* Ecran inférieur à 767px */
+@media only screen and (max-width: 1421px) {
+    .btn_customAsker {
+        padding-top: 25px !important;
+        padding-bottom: 25px !important;
+        width: 70%;
+        font-size: 13px;
+        font-weight: bold;
+    }
+}
+
 .btn_customAnswer {
     margin-top: 5px !important;
     margin-bottom: 5px !important;
@@ -159,6 +172,19 @@ select {
     color: white ;
 }
 
+/* Mobile screen */
+/* Ecran inférieur à 767px */
+@media only screen and (max-width: 1421px) {
+    .btn_customAnswer {
+        padding-top: 25px !important;
+        padding-bottom: 25px !important;
+        width: 70%;
+        font-size: 13px;
+        font-weight: bold;
+    }
+}
+
+
 .btn_customSignUp {
     margin-top: 5px !important;
     margin-bottom: 5px !important;
@@ -180,4 +206,16 @@ select {
     background-color: #ffa500;
     border: 5px solid #ffa500;
     color: white ;
+}
+
+/* Mobile screen */
+/* Ecran inférieur à 767px */
+@media only screen and (max-width: 1421px) {
+    .btn_customSignUp {
+        padding-top: 25px !important;
+        padding-bottom: 25px !important;
+        width: 70%;
+        font-size: 13px;
+        font-weight: bold;
+    }
 }

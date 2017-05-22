@@ -25,7 +25,7 @@ class FilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Topic', EntityType::class, array(
+            ->add('Topics', EntityType::class, array(
                 'class' => 'INSEAD\TurkeyBundle\Entity\Topic',
                 'choice_label' => 'name',
                 'required' => true,
@@ -33,8 +33,7 @@ class FilterType extends AbstractType
                 'expanded' => true,
             ))
             ->add('nbOfResponders')
-//            SELECT `location` FROM `answer`
-            ->add('location', EntityType::class, array(
+            ->add('locations', EntityType::class, array(
                 'class' => 'INSEAD\TurkeyBundle\Entity\Demographic',
                 'choice_label' => 'name',
                 'required' => true,

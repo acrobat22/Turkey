@@ -11,12 +11,11 @@
 
     <div class="row">
         <div class="col-md-offset-4 col-xs-offset-1 col-md-4 col-xs-10 custom_jumbotron">
-
             <h1 class="text-center">Asker profil </h1>
             <br>
             <h2 class="text-center">
                 <i class="fa fa-quote-left fa-lg" aria-hidden="true" style="color: grey"></i>
-                {{ app.user.username|capitalize }}
+                {{ app.user.username }}
                 <i class="fa fa-quote-right fa-lg" aria-hidden="true" style="color: grey"></i>
             </h2>
 
@@ -60,7 +59,7 @@
 
             <div class="form-group">
                 {{ form_label(edit_form.location) }}
-                {{ form_widget(edit_form.location, { 'attr': {'placeholder': 'Pick your location'|trans} }) }}
+                {{ form_widget(edit_form.location) }}
                 {{ form_errors(edit_form.location) }}
             </div>
 
@@ -77,9 +76,42 @@
             </div>
 
             {{ form_widget(edit_form) }}
-
-            <div>
-                <input class="buttonCustom" type="submit" value="Edit" />
+            <div class="row" style="display: inline-flex">
+                <button class="btn btn-primary"
+                        type="submit"
+                        data-toggle="tooltip"
+                        title="Save"
+                        style="margin-right: 15px;">
+                    <i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i>
+                </button>
+                <a class="btn btn-warning"
+                   role="button"
+                   data-toggle="tooltip"
+                   title="Home"
+                   href="{{ path('home_connected') }}"
+                   style="margin-right: 15px;">
+                    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                </a>
+                {% if asker.user.roles[0] == 'ROLE_ASKER_PREMIUM' %}
+                    {# nothing#}
+                    <a class="btn btn-success"
+                       role="button"
+                       data-toggle="tooltip"
+                       title="Basic account"
+                       href="{{ path('asker_basic', { 'id': asker.id }) }}"
+                       style="margin-right: 15px;">
+                        <i class="fa fa-minus fa-2x" aria-hidden="true"></i>
+                    </a>
+                {% else %}
+                    <a class="btn btn-success"
+                       role="button"
+                       data-toggle="tooltip"
+                       title="Update premium"
+                       href="{{ path('asker_premium', { 'id': asker.id }) }}"
+                       style="margin-right: 15px;">
+                        <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
             </div>
             {{ form_end(edit_form) }}
 

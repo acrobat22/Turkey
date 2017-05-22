@@ -14,7 +14,16 @@ class Filter
 {
     public function __toString()
     {
-        return $this->demographic;
+        return $this->gender;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->locations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -58,13 +67,13 @@ class Filter
      * @ORM\ManyToMany(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER", cascade={"all"})
      * @ORM\JoinColumn
      */
-    private $location;
+    private $locations;
 
     /**
      * @ORM\ManyToMany(targetEntity="INSEAD\TurkeyBundle\Entity\Topic", fetch="EAGER", cascade={"all"})
      * @ORM\JoinColumn
      */
-    private $topic;
+    private $topics;
 
     //***************************************//
     //                                       //
@@ -180,62 +189,6 @@ class Filter
     }
 
     /**
-     * Set location
-     *
-     * @param \INSEAD\TurkeyBundle\Entity\Demographic $location
-     *
-     * @return Filter
-     */
-    public function setLocation(\INSEAD\TurkeyBundle\Entity\Demographic $location = null)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * Get location
-     *
-     * @return \INSEAD\TurkeyBundle\Entity\Demographic
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * Set topic
-     *
-     * @param \INSEAD\TurkeyBundle\Entity\Topic $topic
-     *
-     * @return Filter
-     */
-    public function setTopic(\INSEAD\TurkeyBundle\Entity\Topic $topic = null)
-    {
-        $this->topic = $topic;
-
-        return $this;
-    }
-
-    /**
-     * Get topic
-     *
-     * @return \INSEAD\TurkeyBundle\Entity\Topic
-     */
-    public function getTopic()
-    {
-        return $this->topic;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->location = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->topic = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Add location
      *
      * @param \INSEAD\TurkeyBundle\Entity\Demographic $location
@@ -244,7 +197,7 @@ class Filter
      */
     public function addLocation(\INSEAD\TurkeyBundle\Entity\Demographic $location)
     {
-        $this->location[] = $location;
+        $this->locations[] = $location;
 
         return $this;
     }
@@ -256,7 +209,17 @@ class Filter
      */
     public function removeLocation(\INSEAD\TurkeyBundle\Entity\Demographic $location)
     {
-        $this->location->removeElement($location);
+        $this->locations->removeElement($location);
+    }
+
+    /**
+     * Get locations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocations()
+    {
+        return $this->locations;
     }
 
     /**
@@ -268,7 +231,7 @@ class Filter
      */
     public function addTopic(\INSEAD\TurkeyBundle\Entity\Topic $topic)
     {
-        $this->topic[] = $topic;
+        $this->topics[] = $topic;
 
         return $this;
     }
@@ -280,6 +243,16 @@ class Filter
      */
     public function removeTopic(\INSEAD\TurkeyBundle\Entity\Topic $topic)
     {
-        $this->topic->removeElement($topic);
+        $this->topics->removeElement($topic);
+    }
+
+    /**
+     * Get topics
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTopics()
+    {
+        return $this->topics;
     }
 }

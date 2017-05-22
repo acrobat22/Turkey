@@ -76,9 +76,10 @@ class Asker
     protected $jobLevel;
 
     /**
-     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER")
+     * @ORM\JoinColumn
      */
-    protected $location;
+    private $location;
 
     /**
      * @ORM\Column(name="annual", type="integer", nullable=true)
@@ -252,30 +253,6 @@ class Asker
     }
 
     /**
-     * Set location
-     *
-     * @param string $location
-     *
-     * @return Asker
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * Get location
-     *
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
      * Set annual
      *
      * @param integer $annual
@@ -345,5 +322,29 @@ class Asker
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set location
+     *
+     * @param \INSEAD\TurkeyBundle\Entity\Demographic $location
+     *
+     * @return Asker
+     */
+    public function setLocation(\INSEAD\TurkeyBundle\Entity\Demographic $location = null)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return \INSEAD\TurkeyBundle\Entity\Demographic
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 }

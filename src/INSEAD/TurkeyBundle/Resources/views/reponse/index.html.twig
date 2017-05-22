@@ -1,45 +1,49 @@
 {% extends '@INSEADTurkey/base.html.twig' %}
 
 {% block body %}
-<section class="container" style="padding-top: 150px">
+    <style>
+        .pReponse {
+
+        }
+
+        .pAnswerInfo {
+            font-size: x-small;
+            margin: 0 0 1px !important;
+        }
+    </style>
+
+<section class="container" style="padding-top: 35px;">
     <div class="row">
         <h1>Reponses list for
             <i class="fa fa-quote-left" aria-hidden="true"></i>
             {{ question.question }}
             <i class="fa fa-quote-right" aria-hidden="true"></i>
-            by {{ question.asker|capitalize }}</h1>
+        </h1>
     </div>
     <table class="table table-striped" id="tableReponseIndex">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Textreponse</th>
-                {#<th>Datecreate</th>#}
-                <th>Goodreponse</th>
-                <th>Actions</th>
+                <th>Responses</th>
             </tr>
         </thead>
         <tbody>
         {% for reponse in reponses %}
             <tr>
-                <td><a href="{{ path('reponse_show', { 'id': reponse.id }) }}">{{ reponse.id }}</a></td>
-                <td>{{ reponse.textReponse }}</td>
-                {#<td>{% if reponse.dateCreate %}{{ reponse.dateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>#}
-                <td>{% if reponse.goodReponse %}Yes{% else %}No{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('reponse_show', { 'id': reponse.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('reponse_edit', { 'id': reponse.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <p class="pReponse">
+                        <i class="fa fa-quote-left" aria-hidden="true"></i>
+                        {{ reponse.textReponse }}
+                        <i class="fa fa-quote-right" aria-hidden="true"></i>
+                    </p>
+                    <p class="pAnswerInfo">Gender: {{ reponse.answer.gender }}</p>
+                    <p class="pAnswerInfo">Age: {{ ('now'|date('Y') - reponse.answer.birthdate|date('Y') - 1) + ('now'|date('2010-m-d')|date('U') - reponse.answer.birthdate|date('2010-m-d')|date('U') >= 0 ? 1 : 0) }}</p>
+                    <p class="pAnswerInfo">Demographic: {% if reponse.answer.location is null %} --- {% else %} {{ reponse.answer.location }}{% endif %}</p>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
     <div class="row" style="display: inline-flex">
         <a class="btn btn-warning"
            role="button"
@@ -47,7 +51,15 @@
            title="Home"
            href="{{ path('home_connected') }}"
            style="margin-right: 15px;">
-            <i class="fa fa-home" aria-hidden="true"></i>
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-primary"
+           role="button"
+           data-toggle="tooltip"
+           title="Back to the list"
+           href="{{ path('question_index') }}"
+           style="margin-right: 15px;">
+            <i class="fa fa-arrow-circle-o-left fa-2x" aria-hidden="true"></i>
         </a>
     </div>
 </section>

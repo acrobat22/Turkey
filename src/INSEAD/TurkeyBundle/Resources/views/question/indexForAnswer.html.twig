@@ -1,0 +1,79 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+    <section class="container" style="padding-top: 35px">
+        <div>
+            {# Liste des question avec filtre classé par topic et par ordre alphabétique #}
+            {% for question in questions %}
+                {# Test si answer a déjà répondu pour éliminer question de la liste #}
+                {% for reponse in question.reponses %}
+                    {% if reponse.answer.id != user.id %}
+                        {# Test si filtre sur la question #}
+                        {% if question.filter is not null %}
+                            <div class="container">
+                                {% for topic in question.filter.topics|sort %}
+                                    {% for location in question.filter.locations %}
+                                        {# Test si question filter : gender, age, location #}
+                                        {% if (question.filter.gender == user.gender or question.filter.gender == 'Female/Male') and location.id == user.location.id  %}
+                                            {# Test tranche d'age #}
+                                            {% if question.filter.ageMin <= age and age <= question.filter.ageMax   %}
+                                                <h2>{{ topic|capitalize }}</h2>
+                                                <div class="list-group">
+                                                    <a href="{{ path('reponse_new', {'idQuestion': question.id }) }}"
+                                                       class="list-group-item "
+                                                       data-toggle="tooltip"
+                                                       title="click for Answer">
+                                                        <h4 class="list-group-item-heading">{{ question.question|capitalize }}</h4>
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            {# Liste des questions sans filtres #}
+            <h2>List questions without topic</h2>
+            <div class="list-group">
+                {% for question in questions %}
+                    {# Test si answer a déjà répondu pour éliminer question de la liste #}
+                    {% for reponse in question.reponses %}
+                        {% if reponse.answer.id != user.id %}
+                            {% if question.filter is null %}
+                                <a href="{{ path('reponse_new', {'idQuestion': question.id }) }}"
+                                   class="list-group-item "
+                                   data-toggle="tooltip"
+                                   title="click for Answer">
+                                    <h4 class="list-group-item-heading">{{ question.question|capitalize }}</h4>
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row" style="display: inline-flex">
+            <a class="btn btn-warning"
+               role="button"
+               data-toggle="tooltip"
+               title="Home"
+               href="{{ path('home_connected') }}"
+               style="margin-right: 15px;">
+                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script type="text/javascript">
+
+    </script>
+{% endblock %}

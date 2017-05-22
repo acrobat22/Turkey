@@ -1,75 +1,57 @@
 {% extends '@INSEADTurkey/base.html.twig' %}
 
 {% block body %}
-    <section class="container" style="padding-top: 150px">
+    <section class="container" style="padding-top: 35px">
         <div class="row">
-            <h1>Questions list</h1>    </div>
-
-
+            <h1>My Questions</h1>
+        </div>
 
         <table class="table table-striped" id="tableQuestionIndex">
             <thead>
             <tr>
-                <th>Id</th>
                 <th>Question</th>
-                {#<th>Filter</th>#}
-                <th>Asker</th>
-                <th>Datecreate</th>
-                <th>Actions</th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             {% for question in questions %}
                 <tr>
-                    <td><a href="{{ path('question_show', { 'id': question.id }) }}">{{ question.id }}</a></td>
-                    <td>{{ question.question }}</td>
-                    {#<td>{{ question.filter }}</td>#}
-                    <td>{{ question.asker.lastName }}</td>
-                    <td>{% if question.dateCreate %}{{ question.dateCreate|localizeddate('short', 'none') }}{% endif %}</td>
+                    <td><i class="fa fa-quote-left" aria-hidden="true"></i>
+                        {{ question.question|capitalize }}
+                        <i class="fa fa-quote-right" aria-hidden="true"></i>
+                    </td>
                     <td>
-                        {#*******************#}
-                        {# BOUTON TYPE ASKER #}
-                        {#*******************#}
-                        {# modifier question #}
-                        {% if is_granted('ROLE_ASKER') %}
-                            <a class="btn btn-info"
-                               role="button"
-                               data-toggle="tooltip"
-                               title="edit"
-                               href="{{ path('question_edit', { 'id': question.id }) }}">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </a>
-                            {# liste réponse par question #}
-                            <a class="btn btn-success"
-                               role="button"
-                               data-toggle="tooltip"
-                               title="list response"
-                               href="{{ path('reponse_index', {'idQuestion': question.id }) }}">
-                                <i class="fa fa-list" aria-hidden="true"></i>
-                            </a>
-                            {# CSV #}
-                            <a class="btn"
-                               style="background-color: orange; color: white"
-                               role="button"
-                               data-toggle="tooltip"
-                               title="export CSV"
-                               href="{{ path('csvExport', {'idQuestion': question.id }) }}">
-                                <i class="fa fa-file-o" aria-hidden="true"></i>
-                            </a>
-                        {% endif %}
-                        {#*******************#}
-                        {# BOUTON TYPE ASKER #}
-                        {#*******************#}
-                        {# répondre #}
-                        {% if is_granted('ROLE_ANSWER') %}
-                            <a class="btn btn-warning"
-                               role="button"
-                               data-toggle="tooltip"
-                               title="Answer"
-                               href="{{ path('reponse_new', {'idQuestion': question.id }) }}">
-                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                            </a>
-                        {% endif %}
+                        <a class="btn btn-info"
+                           role="button"
+                           data-toggle="tooltip"
+                           title="edit"
+                           href="{{ path('question_edit', { 'id': question.id }) }}">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td>
+                        {# liste réponse par question #}
+                        <a class="btn btn-success"
+                           role="button"
+                           data-toggle="tooltip"
+                           title="list response"
+                           href="{{ path('reponse_index', {'idQuestion': question.id }) }}">
+                            {#<i class="fa fa-list" aria-hidden="true"></i>#}
+                            {{ nbReponse[question.id] }}
+                        </a>
+                    </td>
+                    <td>
+                        {# CSV #}
+                        <a class="btn"
+                           style="background-color: orange; color: white"
+                           role="button"
+                           data-toggle="tooltip"
+                           title="export CSV"
+                           href="{{ path('csvExport', {'idQuestion': question.id }) }}">
+                            <i class="fa fa-file-o" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
@@ -84,11 +66,9 @@
                style="margin-right: 15px;">
                 <i class="fa fa-home" aria-hidden="true"></i>
             </a>
-            {% if is_granted('ROLE_ASKER') %}
-                <a class="btn btn-primary" role="button" href="{{ path('question_new') }}">
-                    Create a new question
-                </a>
-            {% endif %}
+            <a class="btn btn-primary" role="button" href="{{ path('question_new') }}">
+                Create a new question
+            </a>
         </div>
     </section>
 {% endblock %}
@@ -125,28 +105,28 @@
             $('#tableQuestionIndex').DataTable( {
                 "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
                 "iDisplayLength": 50,
-                "language": {
-                    "sProcessing":     "Traitement en cours...",
-                    "sSearch":         "Rechercher&nbsp;:",
-                    "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
-                    "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                    "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
-                    "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                    "sInfoPostFix":    "",
-                    "sLoadingRecords": "Chargement en cours...",
-                    "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                    "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
-                    "oPaginate": {
-                        "sFirst":      "Premier",
-                        "sPrevious":   "Pr&eacute;c&eacute;dent",
-                        "sNext":       "Suivant",
-                        "sLast":       "Dernier"
-                    },
-                    "oAria": {
-                        "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
-                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
-                    }
-                }
+//                "language": {
+//                    "sProcessing":     "Traitement en cours...",
+//                    "sSearch":         "Rechercher&nbsp;:",
+//                    "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+//                    "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+//                    "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+//                    "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+//                    "sInfoPostFix":    "",
+//                    "sLoadingRecords": "Chargement en cours...",
+//                    "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+//                    "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+//                    "oPaginate": {
+//                        "sFirst":      "Premier",
+//                        "sPrevious":   "Pr&eacute;c&eacute;dent",
+//                        "sNext":       "Suivant",
+//                        "sLast":       "Dernier"
+//                    },
+//                    "oAria": {
+//                        "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+//                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+//                    }
+//                }
             });
         });
     </script>

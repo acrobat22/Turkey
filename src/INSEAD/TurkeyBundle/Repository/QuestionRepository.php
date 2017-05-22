@@ -13,5 +13,19 @@ use Doctrine\ORM\QueryBuilder;
 
 class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getQuestionWithFilter() {
 
+        return $this->createQueryBuilder('q')
+                    ->where('q.filter IS NOT NULL')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function getQuestionWithoutFilter() {
+
+        return $this->createQueryBuilder('q')
+            ->where('q.filter IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
 }

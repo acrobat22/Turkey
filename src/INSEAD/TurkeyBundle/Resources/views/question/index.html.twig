@@ -5,14 +5,16 @@
         <div class="row">
             <h1>My Questions</h1>
         </div>
-
         <table class="table table-striped" id="tableQuestionIndex">
             <thead>
             <tr>
                 <th>Question</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>Edit</th>
+                <th>Show <br>
+                    responses</th>
+                {% if user.user.roles[0] == 'ROLE_ANSWER_PREMIUM' %}
+                <th>Export <br> CSV</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -42,6 +44,7 @@
                             {{ nbReponse[question.id] }}
                         </a>
                     </td>
+                    {% if user.user.roles[0] == 'ROLE_ANSWER_PREMIUM' %}
                     <td>
                         {# CSV #}
                         <a class="btn"
@@ -53,6 +56,8 @@
                             <i class="fa fa-file-o" aria-hidden="true"></i>
                         </a>
                     </td>
+                    {% endif %}
+
                 </tr>
             {% endfor %}
             </tbody>

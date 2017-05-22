@@ -27,6 +27,7 @@
             </tr>
         </thead>
         <tbody>
+
         {% for reponse in reponses %}
             <tr>
                 <td>
@@ -35,9 +36,11 @@
                         {{ reponse.textReponse }}
                         <i class="fa fa-quote-right" aria-hidden="true"></i>
                     </p>
+                    {% if user.user.roles[0] == 'ROLE_ANSWER_PREMIUM' %}
                     <p class="pAnswerInfo">Gender: {{ reponse.answer.gender }}</p>
                     <p class="pAnswerInfo">Age: {{ ('now'|date('Y') - reponse.answer.birthdate|date('Y') - 1) + ('now'|date('2010-m-d')|date('U') - reponse.answer.birthdate|date('2010-m-d')|date('U') >= 0 ? 1 : 0) }}</p>
                     <p class="pAnswerInfo">Demographic: {% if reponse.answer.location is null %} --- {% else %} {{ reponse.answer.location }}{% endif %}</p>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

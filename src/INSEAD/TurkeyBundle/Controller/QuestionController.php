@@ -25,7 +25,6 @@ class QuestionController extends Controller
     public function indexAction()
     {
         $current_user = $this->get('helper_services')->getCurrentUser();
-
         $idCurrentUser = $current_user->getId();
         $em = $this->getDoctrine()->getManager();
 
@@ -44,6 +43,7 @@ class QuestionController extends Controller
         }
 
         return $this->render('@INSEADTurkey/question/index.html.twig', array(
+            'user' => $current_user,
             'questions' => $questions,
             'nbReponse' => $nbReponse,
         ));
@@ -59,13 +59,13 @@ class QuestionController extends Controller
     {
         $current_user = $this->get('helper_services')->getCurrentUser();
         $age = $this->get('helper_services')->getAgeAnswer();
-
         $em = $this->getDoctrine()->getManager();
 
-        $questions = $em->getRepository('INSEADTurkeyBundle:Question')->findAll();
-
+        $questionsWithFilter = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionWithFilter();
+        $questionsWithOutFilter = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionWithoutFilter();
         return $this->render('@INSEADTurkey/question/indexForAnswer.html.twig', array(
-            'questions' => $questions,
+            'questionWithFilter' => $questionsWithFilter,
+            'questionsWithOutFilter' => $questionsWithOutFilter,
             'user' => $current_user,
             'age' => $age,
         ));

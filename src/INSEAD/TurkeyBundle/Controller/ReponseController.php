@@ -26,14 +26,16 @@ class ReponseController extends Controller
     {
         $idQuestion = $request->get('idQuestion');
         $em = $this->getDoctrine()->getManager();
+        $current_user = $this->get('helper_services')->getCurrentUser();
         $question = $em->getRepository('INSEADTurkeyBundle:Question')->findOneBy(array('id' => $idQuestion));
-
         $reponses = $em->getRepository('INSEADTurkeyBundle:Reponse')->findBy(array('question' => $idQuestion));
 
         return $this->render('@INSEADTurkey/reponse/index.html.twig', array(
-            'reponses' => $reponses,
+            'user' => $current_user,
             'question' => $question,
+            'reponses' => $reponses,
         ));
+
     }
 
     /**
@@ -84,7 +86,7 @@ class ReponseController extends Controller
 
             $em->flush();
 
-            return $this->redirectToRoute('question_index');
+            return $this->redirectToRoute('question_index_answer');
 
             } else {
                 $wordsInterdits = implode(", ", $matches[0]);

@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="INSEAD\TurkeyBundle\Repository\QuestionRepository")
  */
 class Question
 {

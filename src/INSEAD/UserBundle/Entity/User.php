@@ -20,6 +20,8 @@ class User extends BaseUser
      */
     protected $id;
 
+
+
     //***************************************//
     //                                       //
     //           GENERATED CODE              //

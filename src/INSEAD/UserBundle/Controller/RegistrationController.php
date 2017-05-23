@@ -121,7 +121,7 @@ class RegistrationController extends BaseRegistrationController
             }
         }
 
-        return $this->container->get('templating')->renderResponse('@INSEADTurkey/asker_answer/newAsker_answer.html.twig', array(
+        return $this->container->get('templating')->renderResponse('@INSEADTurkey/frontend/asker_answer/newAsker_answer.html.twig', array(
             'form' => $form->createView(),
             'type' => $type
         ));

@@ -43,6 +43,13 @@ class Filter
     private $nbOfResponders;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="nbResponse", type="integer")
+     */
+    private $nbResponse;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="gender", type="string", length=255)
@@ -114,6 +121,30 @@ class Filter
     public function getNbOfResponders()
     {
         return $this->nbOfResponders;
+    }
+
+    /**
+     * Set nbResponse
+     *
+     * @param integer $nbResponse
+     *
+     * @return Filter
+     */
+    public function setNbResponse($nbResponse)
+    {
+        $this->nbResponse = $nbResponse;
+
+        return $this;
+    }
+
+    /**
+     * Get nbResponse
+     *
+     * @return integer
+     */
+    public function getNbResponse()
+    {
+        return $this->nbResponse;
     }
 
     /**

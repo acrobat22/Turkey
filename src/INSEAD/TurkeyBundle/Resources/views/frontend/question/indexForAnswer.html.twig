@@ -12,7 +12,7 @@
                         {% for topic in question.filter.topics|sort %}
                             {% for location in question.filter.locations %}
                                 {#Test si question filter : gender, age, location #}
-                                {% if (question.filter.gender == user.gender or question.filter.gender == 'Female/Male') and location.id == user.location.id  %}
+                                {% if (question.filter.gender == user.gender or question.filter.gender == 'Female/Male') and location.id == user.location.id and (question.filter.nbOfResponders != question.filter.nbResponse) %}
                                     {#Test tranche d'age #}
                                     {% if question.filter.ageMin <= age and age <= question.filter.ageMax   %}
                                         <h2>{{ topic|capitalize }}</h2>

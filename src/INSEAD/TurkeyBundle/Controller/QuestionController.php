@@ -73,6 +73,71 @@ class QuestionController extends Controller
     }
 
     /**
+     * Lists all question entities.
+     *
+     * @Route("/random", name="question_random_answer")
+     * @Method("GET")
+     */
+    public function RandomForAnswerAction()
+    {
+        $current_user = $this->get('helper_services')->getCurrentUser();
+        $idAnswer = $current_user->getId();
+        $age = $this->get('helper_services')->getAgeAnswer();
+
+        $em = $this->getDoctrine()->getManager();
+
+        // Isole questions Premium qui correspond au profil de Answer
+        $questionsWithFilter = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionWithFilter();
+        $QuestionsMatched = array();
+        $arrayTransit2 = array();
+        // Isole location
+        foreach ($questionsWithFilter as $question) {
+            $questionMatchLocation = array();
+            foreach (($question->getFilter()->getLocations()) as $location) {
+                if($location == $current_user->getLocation()) {
+                    $arrayTransit[] = $question;
+                }
+            }
+        }
+
+        // Isole gender, et age
+        foreach ($questionsWithFilter as $question) {
+            if ((($question->getFilter()->getAgeMin() < $age) and ($age < $question->getFilter()->getAgeMax()))
+                and ($question->getFilter()->getGender() == 'Female/Male')
+                    and ($question->getFilter()->getGender() == $current_user->getGender()))
+
+            {
+                $arrayTransit2[] = $question;
+            }
+        }
+
+        $QuestionsMatched = array_merge($arrayTransit, $arrayTransit2);
+
+        // Questions NON Premium
+        $questionsWithOutFilter = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionWithoutFilter();
+
+        foreach ($questionsWithOutFilter as $question) {
+            $QuestionsMatched[] = $question;
+        }
+
+
+        if (!empty($QuestionsMatched)) {
+            $randomQuestion = $QuestionsMatched[array_rand($QuestionsMatched)];
+        } else {
+            $randomQuestion = '';
+        }
+
+
+        return $this->render('@INSEADTurkey/frontend/question/randomQuestion.html.twig', array(
+            'user' => $current_user,
+            'question' => $randomQuestion,
+            'nb' => count($QuestionsMatched),
+            'match' => $QuestionsMatched,
+        ));
+    }
+
+
+    /**
      * Creates a new question entity.
      *
      * @Route("/new", name="question_new")

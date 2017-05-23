@@ -1,0 +1,67 @@
+{% extends '@INSEADTurkey/base.html.twig' %}
+
+{% block body %}
+    <section class="container" style="padding-top: 35px">
+
+        <div>
+            {{ dump(question) }}
+        </div>
+
+        {{ nb }}
+        <hr>
+        <hr>
+        Age, gender, and location
+        {{ dump(match) }}
+
+
+
+        <div class="row" style="display: inline-flex; margin-left: 45%">
+            <a class="btn btn-warning"
+               role="button"
+               data-toggle="tooltip"
+               title="Home"
+               href="{{ path('home_connected') }}"
+               style="margin-right: 15px;">
+                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+
+    {# Modal toutes les 5 réponses #}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Merci</h4>
+                </div>
+                <div class="modal-body">
+                    Bla bla
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+    {# Modal ouverte en fonction du creditEarned du answer #}
+    <script type="text/javascript">
+
+        var bonusInscription = "{{ user.bonusInscription }}";
+        var nbPoint = "{{ user.creditEarned }}";
+        /* Si bonus inscription elève sur nbPoint les 5 du bonus inscription */
+        if (bonusInscription == 1) {
+            nbPoint = nbPoint -5;
+        }
+        /* Si nbPoint est différent de 0 et un multiple de 5 ouverture de la modal */
+        if (nbPoint !=0 && nbPoint % 5 === 0) {
+            $('#exampleModal').modal('show');
+        } else {
+            $('#exampleModal').modal({ show: false});
+        }
+    </script>
+{% endblock %}

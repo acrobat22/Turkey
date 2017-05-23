@@ -89,6 +89,11 @@ class QuestionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
             $question->setAsker($current_user);
+            if ($question->getFilter() == null) {
+                //
+            } else {
+                $question->getFilter()->setNbResponse(0);
+            }
             $em->flush();
 
             return $this->redirectToRoute('question_index');

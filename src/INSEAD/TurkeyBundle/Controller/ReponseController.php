@@ -80,7 +80,11 @@ class ReponseController extends Controller
             if (empty($matches[0])) {
             $reponse->setAnswer($current_user);
             $reponse->setQuestion($question);
-            $question->getFilter()->setNbResponse($question->getFilter()->getNbResponse()+1);
+                if ($question->getFilter() == null) {
+                    // nothing
+                } else {
+                    $question->getFilter()->setNbResponse($question->getFilter()->getNbResponse()+1);
+                }
 
             // mise à jour compteur Answer
             $countReponseAnswer = $reponse->getAnswer()->getCreditEarned();

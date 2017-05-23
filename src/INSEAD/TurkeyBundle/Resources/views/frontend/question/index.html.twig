@@ -41,7 +41,11 @@
                            title="list response"
                            href="{{ path('reponse_index', {'idQuestion': question.id }) }}">
                             {#<i class="fa fa-list" aria-hidden="true"></i>#}
+                            {% if question.filter is null %}
+                            {{ nbReponse[question.id] }}
+                            {% else %}
                             {{ nbReponse[question.id] }} / {{ question.filter.nbOfResponders }}
+                            {% endif %}
                         </a>
                     </td>
                     {% if user.user.roles[0] == 'ROLE_ASKER_PREMIUM' %}

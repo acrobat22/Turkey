@@ -24,7 +24,8 @@
                     <a href="{{ path('question_new') }}" class="btn btn_customAsker">Ask A Question</a>
                 {% elseif user.user.roles[0] == 'ROLE_ANSWER' %}
                     {# ANSWER #}
-                    <a href="{{ path('question_index_answer') }}" class="btn btn_customAnswer">Start Answering</a>
+                    <a href="{{ path('question_random_answer') }}" class="btn btn_customAnswer">Start Answering</a>
+                    {#<a href="{{ path('question_index_answer') }}" class="btn btn_customAnswer">Start Answering</a>#}
                 {% endif %}
             </div>
         </div>

@@ -131,7 +131,7 @@ class QuestionController extends Controller
 
         return $this->render('@INSEADTurkey/frontend/question/randomQuestion.html.twig', array(
             'user' => $current_user,
-            'random' => $randomQuestion,
+            'randomQuestion' => $randomQuestion,
         ));
     }
 

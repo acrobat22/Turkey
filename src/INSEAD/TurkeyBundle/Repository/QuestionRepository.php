@@ -25,10 +25,10 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
 // 'SELECT * FROM question LEFT OUTER JOIN reponse on question.id = reponse.question_id
 // WHERE (reponse.answer_id != :idAnswer OR reponse.answer_id is null) AND question.filter_id is NOT null';
     public function getQuestionNonReponduByAnswerWithFilter($answerId) {
-        $qb = $this->getEntityManager()->createQueryBuilder();
-
+//        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb = $this->createQueryBuilder('q');
         return $qb->select('q')
-            ->from('INSEADTurkeyBundle:Question', 'q')
+            //->from('INSEADTurkeyBundle:Question', 'q')
             ->leftJoin('q.reponses', 'r', 'WITH', 'q.id=r.question')
             ->where('r.answer != :answerId')
             ->setParameter('answerId', $answerId)

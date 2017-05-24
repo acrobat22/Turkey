@@ -1,7 +1,24 @@
 {% extends '@INSEADTurkey/base.html.twig' %}
 
 {% block body %}
-    <section class="container" style="padding-top: 35px">
+    <section class="container" style="padding-top: 85px">
+
+        <div class="container">
+
+        {#Test si question filter : gender, age, location #}
+            {#Test tranche d'age #}
+            {#<h2>{{ randomQuestion.topic|capitalize }}</h2>#}
+            <div class="list-group">
+                <a href="{{ path('reponse_new', {'idQuestion': randomQuestion.id }) }}"
+                   class="list-group-item "
+                   data-toggle="tooltip"
+                   title="click for Answer">
+                    <h4 class="list-group-item-heading">{{ randomQuestion.question|capitalize }}</h4>
+                    <p class="pAskerInfo">{{ randomQuestion.asker.user.username }}</p>
+                </a>
+            </div>
+        </div>
+
 
 
         <div class="row" style="display: inline-flex; margin-left: 45%">
@@ -13,28 +30,36 @@
                style="margin-right: 15px;">
                 <i class="fa fa-home fa-2x" aria-hidden="true"></i>
             </a>
+            <a class="btn btn-warning"
+               role="button"
+               data-toggle="tooltip"
+               title="Home"
+               href="{{ path('question_random_answer') }}"
+               style="margin-right: 15px;">
+                <i class="fa fa-plane fa-2x" aria-hidden="true"> Skip</i>
+            </a>
         </div>
     </section>
 
-    {{ dump(user) }}
 
-    {# Modal toutes les 5 réponses #}
-    {#<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">#}
-        {#<div class="modal-dialog" role="document">#}
-            {#<div class="modal-content">#}
-                {#<div class="modal-header">#}
-                    {#<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
-                    {#<h4 class="modal-title" id="exampleModalLabel">Merci</h4>#}
-                {#</div>#}
-                {#<div class="modal-body">#}
-                    {#Bla bla#}
-                {#</div>#}
-                {#<div class="modal-footer">#}
-                    {#<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
-    {#</div>#}
+
+     {#Modal toutes les 5 réponses#}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Merci</h4>
+                </div>
+                <div class="modal-body">
+                    Bla bla
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
 

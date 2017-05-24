@@ -76,9 +76,10 @@ class helper_services
         } elseif ($current_user->getUser()->getRoles()[0] == "ROLE_ANSWER") {
             $today = new \DateTime();
             $birthdate = $current_user->getBirthdate();
+            if (empty($birthdate)) {
+                $age = "";
+            } else
             $age = $today->diff($birthdate, true)->y;
-        } elseif ($current_user->getUser()->getRoles()[0] == "ROLE_ANSWER" and $current_user->getUser()->getBirthdate('NULL')) {
-            $age = "";
         }
         return $age;
     }

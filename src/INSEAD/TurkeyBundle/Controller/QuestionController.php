@@ -85,54 +85,53 @@ class QuestionController extends Controller
         $age = $this->get('helper_services')->getAgeAnswer();
 
         $em = $this->getDoctrine()->getManager();
+        $quesWOF = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionNonReponduByAnswerWithFilter($idAnswer);
 
-        // Isole questions Premium qui correspond au profil de Answer
-        $questionsWithFilter = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionWithFilter();
-        $QuestionsMatched = array();
-        $arrayTransit2 = array();
-        // Isole location
-        foreach ($questionsWithFilter as $question) {
-            $questionMatchLocation = array();
-            foreach (($question->getFilter()->getLocations()) as $location) {
-                if($location == $current_user->getLocation()) {
-                    $arrayTransit[] = $question;
+        // Isole location à partir des questions non répondus du answer
+        $arrayTransit1 = array();
+        foreach ($quesWOF as $question) {
+            foreach ($question->getFilter()->getLocations() as $location) {
+                if ($location == $current_user->getLocation()) {
+                    $arrayTransit1[] = $question;
                 }
             }
         }
 
-        // Isole gender, et age
-        foreach ($questionsWithFilter as $question) {
-            if ((($question->getFilter()->getAgeMin() < $age) and ($age < $question->getFilter()->getAgeMax()))
-                and ($question->getFilter()->getGender() == 'Female/Male')
-                    and ($question->getFilter()->getGender() == $current_user->getGender()))
-
-            {
+        // Isole gender à partir des questions non répondus du answer
+        $arrayTransit2 = array();
+        foreach ($arrayTransit1 as $question) {
+            if ($question->getFilter()->getGender() == $current_user->getGender() or $question->getFilter()->getGender() == 'Female/Male') {
                 $arrayTransit2[] = $question;
             }
         }
 
-        $QuestionsMatched = array_merge($arrayTransit, $arrayTransit2);
+        // Isole age à partir des questions non répondus du answer
+        $QuestionsMatched = array();
+        foreach ($arrayTransit2 as $question) {
+            if (($question->getFilter()->getAgeMin() <= $age)
+                and ($age <= $question->getFilter()->getAgeMax()))
+            {
+                $QuestionsMatched[] = $question;
+            }
+        }
 
         // Questions NON Premium
-        $questionsWithOutFilter = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionWithoutFilter();
+        $questionsWithOutFilter = $em->getRepository('INSEADTurkeyBundle:Question')->getQuestionNonReponduByAnswerWithOutFilter($idAnswer);
 
         foreach ($questionsWithOutFilter as $question) {
             $QuestionsMatched[] = $question;
         }
 
-
+        // Test si pas de valeur en retour
         if (!empty($QuestionsMatched)) {
             $randomQuestion = $QuestionsMatched[array_rand($QuestionsMatched)];
         } else {
             $randomQuestion = '';
         }
 
-
         return $this->render('@INSEADTurkey/frontend/question/randomQuestion.html.twig', array(
             'user' => $current_user,
-            'question' => $randomQuestion,
-            'nb' => count($QuestionsMatched),
-            'match' => $QuestionsMatched,
+            'random' => $randomQuestion,
         ));
     }
 

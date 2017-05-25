@@ -1,33 +1,21 @@
 {% extends '@INSEADTurkey/base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid inscription" style="padding-top: 15px">
-        {% for flash_message in app.session.flashBag.get('notif') %}
-            <div class="text-center">
-                <strong>{{ flash_message|capitalize }}</strong>
-            </div>
-        {% endfor %}
-        <div class="row">
-            <div class="header-logo-inscription">
-                <a href=""><img src="" /></a>
-            </div>
-        </div>
+    <div class="container-fluid inscription">
         <div class="row">
             <div class="col-xs-9 col-xs-offset-3">
                 <h1>You want to...</h1>
                 <div class="form-group">
                     <a class="btn btn_customAsker" href="{{ path('fos_user_registration_register', { 'type': 'asker' }) }}" role="button">Ask questions</a>
                     <a class="btn btn_customAnswer" href="{{ path('fos_user_registration_register', { 'type': 'answer' }) }}" role="button">Answer questions</a>
+                    <a class="btn btn_customSignUp" href="{{ path('fos_user_security_login') }}" role="button">Login</a>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-9 col-xs-offset-3">
-            <h1>Sign up</h1>
-                <div class="form-group">
-                    <a class="btn btn_customSignUp" href="{{ path('fos_user_security_login') }}" role="button">Go!</a>
-                </div>
+        {% for flash_message in app.session.flashBag.get('notif') %}
+            <div class="text-center">
+                <strong>{{ flash_message|capitalize }}</strong>
             </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}

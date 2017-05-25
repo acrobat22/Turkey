@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang={{ app.request.locale }}>
-{#<html lang=en>#}
+{#<html lang={{ app.request.locale }}>#}
+<html lang=en>
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -95,13 +95,11 @@
             <!-- ********************************************************* -->
             <!--                       FOOTER                              -->
             <!-- ********************************************************* -->
-            <footer>
+            <footer class="footer">
                 <div class="container">
-                    <div class="row" >
-                        <p class="text-align center">
-                         Copyright &copy; Turkey © {{ 'now'|date('Y') }}
-                        </p>
-                    </div>
+                    <p class="text-muted text-center">
+                        Copyright &copy; Quash © {{ 'now'|date('Y') }}
+                    </p>
                 </div>
             </footer>
         {% endblock %}

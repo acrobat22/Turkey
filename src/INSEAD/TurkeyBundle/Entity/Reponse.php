@@ -31,6 +31,7 @@ class Reponse
 
     /**
      * @ORM\Column(name="textReponse", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $textReponse;
 

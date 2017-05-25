@@ -80,6 +80,7 @@ class ReponseController extends Controller
             if (empty($matches[0])) {
             $reponse->setAnswer($current_user);
             $reponse->setQuestion($question);
+            $reponse->setGoodReponse(true);
                 if ($question->getFilter() == null) {
                     // nothing
                 } else {
@@ -92,7 +93,7 @@ class ReponseController extends Controller
 
             $em->flush();
 
-            return $this->redirectToRoute('question_index_answer');
+            return $this->redirectToRoute('question_random_answer');
 
             } else {
                 $wordsInterdits = implode(", ", $matches[0]);

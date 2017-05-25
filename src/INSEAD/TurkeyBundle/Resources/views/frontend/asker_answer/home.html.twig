@@ -1,6 +1,7 @@
 {% extends '@INSEADTurkey/base.html.twig' %}
 {# Page home en fonction si Asker ou si Answer #}
 {% block body %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <section class="container"  style="padding-top: 35px">
         {#--------- DEBUT Message quand base de données pas assez remplie -------------------------------------#}
         {% for flash_message in app.session.flashBag.get('notif') %}
@@ -12,8 +13,9 @@
         <div class="row">
             <h1 class="text-center">Welcome {{ user.user.username|default('') }}!</h1>
             {% if user.user.roles[0] == 'ROLE_ANSWER' %}
-            <h4 class="text-center">My points: {{ user.creditEarned }}</h4>
-                <h4 class="text-center">Age: {{ age }} </h4>
+            <div >
+                <h4 class="text-center">My points: {{ user.creditEarned }}</h4>
+            </div>
             {% endif %}
         </div>
 

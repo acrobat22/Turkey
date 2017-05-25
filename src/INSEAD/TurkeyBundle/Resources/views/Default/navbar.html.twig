@@ -18,11 +18,11 @@
 
             {# Bouton déconnexion #}
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <a class="navbar-brand float-right" href="{{ path('fos_user_security_logout') }}" style="color: green;">
+                <a class="navbar-brand-2" href="{{ path('fos_user_security_logout') }}" style="color: green;">
                     <i class="glyphicon glyphicon-off"></i>
                 </a>
             {% else %}
-                <a class="navbar-brand"href="{{ path('fos_user_security_login') }}" style="color: red;">
+                <a class="navbar-brand-2"href="{{ path('fos_user_security_login') }}" style="color: red;">
                     <i class="glyphicon glyphicon-off"></i>
                 </a>
             {% endif %}

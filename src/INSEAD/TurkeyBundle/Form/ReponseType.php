@@ -5,8 +5,8 @@ namespace INSEAD\TurkeyBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use INSEAD\TurkeyBundle\Form\QuestionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class ReponseType extends AbstractType
 {
@@ -16,10 +16,11 @@ class ReponseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//            ->add('question', QuestionType::class, array('required' => false))
-            ->add('textReponse')
-            ->add('goodReponse', checkboxType::class, array('required' => false, 'label' => 'cocher si bonne réponse'))
-//            ->add('Question', QuestionType::class)
+            ->add('textReponse', TextType::class, array(
+                'label' => false,
+                'required' => true,
+            )
+            )
         ;
     }
     
@@ -40,6 +41,4 @@ class ReponseType extends AbstractType
     {
         return 'insead_turkeybundle_reponse';
     }
-
-
 }

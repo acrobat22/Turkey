@@ -40,10 +40,14 @@ class AnswerType extends AbstractType
             ],
             ])
             ->add('birthdate', BirthdayType::class, array(
-                'placeholder' => 'Select a value', 'required' => true ))
+                'placeholder' => 'Select a value', 'required' => true,
+                'years' => range(date('Y') -13, date('Y') -100)
+            ))
             ->add('creditEarned', HiddenType::class);
     }
-    
+
+//https://stackoverflow.com/questions/19045199/symfony2-reverse-year-order-in-date-field
+
     /**
      * {@inheritdoc}
      */

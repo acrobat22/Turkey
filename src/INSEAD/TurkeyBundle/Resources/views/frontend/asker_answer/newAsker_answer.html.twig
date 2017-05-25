@@ -19,13 +19,9 @@
             <div class="col-md-offset-4 col-xs-offset-1 col-md-4 col-xs-10">
                 <h1>{% if type == "asker" %}ASKER
                      {% else %}ANSWER
-                    {% endif %}- Renseigner vos informations</h1>
+                    {% endif %}- Sign up</h1>
                 {{ form_start(form) }}
 
-                <div class="form-group">
-                    {{ form_errors(form.username) }}
-                    {{ form_widget(form.username, { 'attr': {'placeholder': 'Pick a username'|trans} }) }}
-                </div>
                 <div class="form-group">
                     {{ form_errors(form.email) }}
                     {{ form_widget(form.email, { 'attr': {'placeholder': 'Your email adress'|trans} }) }}
@@ -38,7 +34,7 @@
 
                 <div class="form-group">
                     {{ form_errors(form.plainPassword.second) }}
-                    {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Vérif Mot de passe'} }) }}
+                    {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Password verification'} }) }}
                 </div>
 
                 <div class="row center" style="display:inline-flex; margin-left: 35%">

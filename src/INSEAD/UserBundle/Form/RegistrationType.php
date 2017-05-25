@@ -10,7 +10,7 @@ class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        $builder->remove('username');
+        $builder->remove('username');
     }
 
     public function getParent()

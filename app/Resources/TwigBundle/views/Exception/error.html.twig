@@ -1,68 +1,5 @@
-<!DOCTYPE html>
-<html lang={{ app.request.locale }}>
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Turkey - Erreur</title>
-
-    <!--
-      o              o                 o                      o     o                                                             o
-     <|>            <|>               <|>                   _<|>_  <|>                                                           <|>
-     / \            / \               / >                          < >                                                           < \
-     \o/            \o/    o__  __o   \o__ __o       __o__    o     |        o__  __o       \o__ __o__ __o      o__ __o/    o__ __o/    o__  __o
-      |              |    /v      |>   |     v\     />  \    <|>    o__/_   /v      |>       |     |     |>    /v     |    /v     |    /v      |>
-     < >            < >  />      //   / \     <\    \o       / \    |      />      //       / \   / \   / \   />     / \  />     / \  />      //
-      \o    o/\o    o/   \o    o/     \o/      /     v\      \o/    |      \o    o/         \o/   \o/   \o/   \      \o/  \      \o/  \o    o/
-       v\  /v  v\  /v     v\  /v __o   |      o       <\      |     o       v\  /v __o       |     |     |     o      |    o      |    v\  /v __o
-        <\/>    <\/>       <\/> __/>  / \  __/>  _\o__</     / \    <\__     <\/> __/>      / \   / \   / \    <\__  / \   <\__  / \    <\/> __/>
-
-
-
-                   o                           o          o                 o       o                        o     o
-                  <|>                         <|\        <|>               <|>     <|>                      <|>  _<|>_
-                  / >                         / \\o      / \               < >     / >                      / \
-                  \o__ __o     o      o       \o/ v\     \o/     o__ __o/   |      \o__ __o       o__ __o/  \o/    o      o__  __o
-                   |     v\   <|>    <|>       |   <\     |     /v     |    o__/_   |     v\     /v     |    |    <|>    /v      |>
-                  / \     <\  < >    < >      / \    \o  / \   />     / \   |      / \     <\   />     / \  / \   / \   />      //
-                  \o/      /   \o    o/       \o/     v\ \o/   \      \o/   |      \o/     o/   \      \o/  \o/   \o/   \o    o/
-                   |      o     v\  /v         |       <\ |     o      |    o       |     <|     o      |    |     |     v\  /v __o
-                  / \  __/>      <\/>         / \        < \    <\__  / \   <\__   / \    / \    <\__  / \  / \   / \     <\/> __/>
-                                  /
-                                 o
-                              __/>
-                   o__ __o           o           o__ __o         o__ __o__/_   o          o        o__ __o       o         o   __o__
-                  <|     v\         <|>         <|     v\       <|    v       <|\        <|>      /v     v\     <|>       <|>    |
-                  / \     <\        / \         / \     <\      < >           / \\o      / \     />       <\    < >       < >   / \
-                  \o/     o/      o/   \o       \o/     o/       |            \o/ v\     \o/   o/                |         |    \o/
-                   |__  _<|      <|__ __|>       |__  _<|        o__/_         |   <\     |   <|       _\__o__   o__/_ _\__o     |
-                   |       \     /       \       |       \       |            / \    \o  / \   \\          |     |         |    < >
-                  <o>      /   o/         \o    <o>       \o    <o>           \o/     v\ \o/     \         /    <o>       <o>    |
-                   |      o   /v           v\    |         v\    |             |       <\ |       o       o      |         |     o
-                  / \  __/>  />             <\  / \         <\  / \  _\o__/_  / \        < \      <\__ __/>     / \       / \  __|>_
-
-                                                                                                                                  -->
-    {% block stylesheets %}
-        <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
-        <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-        <link rel="stylesheet" href="{{ asset('twbs_bootstrap/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
-
-        {#jQuery UI (optional)#}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-
-        {% stylesheets filter="cssrewrite, ?scssphp"
-        'bundles/inseadturkey/css/*'
-        %}
-        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-        {% endstylesheets %}
-
-    {% endblock %}
-
-</head>
-
-<body>
+{% extends '@INSEADTurkey/base.html.twig' %}
+{% block body %}
 
 <!-- ********************************************************* -->
 <!--                Message erreur                             -->
@@ -71,51 +8,17 @@
     <div class="row">
         <div class="alert alert-danger text-center">
             <h1>Erreur</h1>
-            <img src="" alt="error404" />
+            <img src="{{ asset('bundles/inseadturkey/images/error.jpeg') }}" alt="error404" />
             <div>
-                <p>Un problème est survenu sur cette page... </p>
+                <p>A problem occurred on this page... </p>
+                <p>
+                    <a href="{{ path('homepage') }}" style="text-decoration: none;">
+                        Quash
+                    </a>
+                </p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ********************************************************* -->
-<!--                       FOOTER                              -->
-<!-- ********************************************************* -->
-<footer>
-    <div class="container">
-        <div class="text-center row">
-            <p>Copyright &copy; Turkey © {{ 'now'|date('Y') }}</p>
-        </div>
-    </div>
-</footer>
-
-
-{% block javascripts %}
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-    {% javascripts '@INSEADTurkeyBundle/Resources/public/js/*' %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
 {% endblock %}
-
-<!--
-|"|          ( ( (                      .      .                      |"|
-)|(          _|_|_       '. ___ .'     `  _ ,  '    .  .:::.         ()_()         _|_|_
-(o o)         (o o)      '  (> <) '    -  (o)o)  -     :(o o):  .     (o o)         (o o)
-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo--ooO'(_)--Ooo-ooO--(_)--Ooo-ooO--`o'--Ooo-ooO--(_)--Ooo-
-___        |                  ...           |"|             ( ( (             .
-/_\ `*      |.===.        o,*,(o o)         _|_|_          '. ___ .'       ,-_-|
-(o o)        {}o o{}      8(o o)(_)Ooo       (o o)         '  (> <) '      ([o o])
-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO-(_)---Ooo----ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-
-|                             ___         |             _     _       .      .        |"|
-(((         |.===.         ()_()         .|||.        |.===.      o' \,=./ `o   .  .:::.         _|_|_
-(o o)        {}o o{}        (o o)         (o o)        {}o o{}        (o o)        :(o o):  .     (o o)
-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--`o'--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
-        _
-,,,           ___           ((_           +++           (((          -*~*-          ***           |||
-(o o)         (o o)         (o o)         (o o)         (o o)         (o o)         (o o)         (o o)
-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
-                                                                                   -->
-</body>
-</html>

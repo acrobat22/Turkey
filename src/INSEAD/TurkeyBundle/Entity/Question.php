@@ -38,6 +38,7 @@ class Question
 
     /**
      * @ORM\Column(name="question", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $question;
 
@@ -59,6 +60,7 @@ class Question
 
     /**
      * @ORM\OneToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Filter", cascade={"all"})
+     * @Assert\Valid()
      */
     private $filter;
 

@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Cookie;
 
 /**
  * Question controller.
@@ -75,10 +76,10 @@ class QuestionController extends Controller
     /**
      * Lists all question entities.
      *
-     * @Route("/random", name="question_random_answer")
+     * @Route("/random/{count}", requirements={"count" = "true|false"}, name="question_random_answer")
      * @Method("GET")
      */
-    public function RandomForAnswerAction()
+    public function RandomForAnswerAction($count)
     {
         $current_user = $this->get('helper_services')->getCurrentUser();
         $idAnswer = $current_user->getId();
@@ -132,6 +133,7 @@ class QuestionController extends Controller
         return $this->render('@INSEADTurkey/frontend/question/randomQuestion.html.twig', array(
             'user' => $current_user,
             'randomQuestion' => $randomQuestion,
+            'count' => $count,
         ));
     }
 
@@ -153,14 +155,8 @@ class QuestionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
             $question->setAsker($current_user);
-            if ($question->getFilter() == null) {
-                //
-            } else {
-                $question->getFilter()->setNbResponse(0);
-            }
             $em->flush();
-
-            return $this->redirectToRoute('question_index');
+            return $this->redirectToRoute('home_connected');
         }
 
         return $this->render('@INSEADTurkey/frontend/question/new.html.twig', array(

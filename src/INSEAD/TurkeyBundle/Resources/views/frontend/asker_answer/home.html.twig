@@ -26,7 +26,7 @@
                     <a href="{{ path('question_new') }}" class="btn btn_customAsker">Ask A Question</a>
                 {% elseif user.user.roles[0] == 'ROLE_ANSWER' %}
                     {# ANSWER #}
-                    <a href="{{ path('question_random_answer') }}" class="btn btn_customAnswer">Start Answering</a>
+                    <a href="{{ path('question_random_answer', {'count': "true"}) }}" class="btn btn_customAnswer">Start Answering</a>
                     {#<a href="{{ path('question_index_answer') }}" class="btn btn_customAnswer">Start Answering</a>#}
                 {% endif %}
             </div>
@@ -36,7 +36,7 @@
             <div class="col-xs-9 col-xs-offset-3">
                 {% if user.user.roles[0] == 'ROLE_ASKER' or user.user.roles[0] =='ROLE_ASKER_PREMIUM'%}
                     {# ASKER #}
-                    <a href="{{ path('question_index') }}" class="btn btn_customAsker">My Question</a>
+                    <a href="{{ path('question_index') }}" class="btn btn_customAsker">My Questions</a>
                 {% elseif user.user.roles[0] == 'ROLE_ANSWER' %}
                     {# ANSWER #}
                     {# message profil imcomplet #}

@@ -3,7 +3,7 @@
 
 {% block body %}
 
-    <div class="container-fluid inscription" style="padding-top: 35px">
+    <div class="container">
         {% for flash_message in app.session.flashBag.get('notif') %}
             <div class="text-center">
                 <strong>{{ flash_message|capitalize }}</strong>
@@ -37,7 +37,7 @@
                     {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Password verification'} }) }}
                 </div>
 
-                <div class="row center" style="display:inline-flex; margin-left: 35%">
+                <div class="row" style="margin-left: 1em">
                     <button class="btn btn-primary"
                             type="submit"
                             data-toggle="tooltip"

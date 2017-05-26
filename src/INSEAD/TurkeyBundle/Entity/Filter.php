@@ -3,6 +3,7 @@
 namespace INSEAD\TurkeyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Filter
@@ -24,6 +25,7 @@ class Filter
     {
         $this->locations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->nbResponse = 0;
     }
 
     /**
@@ -39,6 +41,7 @@ class Filter
      * @var int
      *
      * @ORM\Column(name="nbOfResponders", type="integer")
+     * @Assert\NotBlank()
      */
     private $nbOfResponders;
 
@@ -53,6 +56,7 @@ class Filter
      * @var string
      *
      * @ORM\Column(name="gender", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $gender;
 
@@ -60,6 +64,13 @@ class Filter
      * @var int
      *
      * @ORM\Column(name="ageMin", type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *     min = "10",
+     *     max = "150",
+     *      minMessage = "min = 10",
+     *      maxMessage = "max = 150"
+     * )
      */
     private $ageMin;
 
@@ -67,18 +78,27 @@ class Filter
      * @var int
      *
      * @ORM\Column(name="ageMax", type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *     min = "10",
+     *     max = "150",
+     *      minMessage = "min = 10",
+     *      maxMessage = "max = 150"
+     * )
      */
     private $ageMax;
 
     /**
      * @ORM\ManyToMany(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER", cascade={"all"})
      * @ORM\JoinColumn
+     * @Assert\Valid()
      */
     private $locations;
 
     /**
      * @ORM\ManyToMany(targetEntity="INSEAD\TurkeyBundle\Entity\Topic", fetch="EAGER", cascade={"all"})
      * @ORM\JoinColumn
+     * @Assert\Valid()
      */
     private $topics;
 

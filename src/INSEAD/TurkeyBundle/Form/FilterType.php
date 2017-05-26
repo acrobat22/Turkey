@@ -11,6 +11,7 @@ namespace INSEAD\TurkeyBundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,14 +29,20 @@ class FilterType extends AbstractType
             ->add('Topics', EntityType::class, array(
                 'class' => 'INSEAD\TurkeyBundle\Entity\Topic',
                 'choice_label' => 'name',
+                'label' => 'Topic',
                 'required' => true,
                 'multiple' => true,
                 'expanded' => true,
             ))
-            ->add('nbOfResponders')
+            ->add('nbOfResponders', IntegerType::class, array(
+                'label' => 'Number of respondents wanted',
+                'required' => true,
+                )
+            )
             ->add('locations', EntityType::class, array(
                 'class' => 'INSEAD\TurkeyBundle\Entity\Demographic',
                 'choice_label' => 'name',
+                'label' => 'Respondent demographics',
                 'required' => true,
                 'multiple' => true,
                 'expanded' => true,
@@ -47,8 +54,14 @@ class FilterType extends AbstractType
                     'Male' =>'Male'
                 ],
             ])
-            ->add('ageMin')
-            ->add('ageMax')
+            ->add('ageMin', IntegerType::class, array(
+                'label' => 'Minimum age of respondent',
+                'required' => true,
+            ))
+            ->add('ageMax', IntegerType::class, array(
+                'label' => 'Maximum age of respondent',
+                'required' => true,
+            ))
         ;
     }
 

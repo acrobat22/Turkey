@@ -19,8 +19,6 @@
             </div>
         </div>
 
-
-
         <div class="row" style="display: inline-flex; margin-left: 45%">
             <a class="btn btn-warning"
                role="button"
@@ -32,7 +30,8 @@
             </a>
             <a class="btn btn-primary"
                role="button"
-               href="{{ path('question_random_answer') }}"
+               id="playAgain"
+               href="{{ path('question_random_answer', {'count': "false"}) }}"
                style="margin-right: 15px;">
                 <i class="fa fa-plane fa-2x" aria-hidden="true"> Skip</i>
             </a>
@@ -50,7 +49,7 @@
                     <h4 class="modal-title" id="exampleModalLabel"></h4>
                 </div>
                 <div class="modal-body">
-                    Close this popup to show you are not a robot
+                    <p style="text-align: center">Close this popup to show you are not a robot</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -58,24 +57,36 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
 {% block javascripts %}
 
     {{ parent() }}
     {# Modal ouverte en fonction du creditEarned du answer #}
     <script type="text/javascript">
+        $( document ).ready(function() {
+            /*
+            Passage d'un paramêtre par la route, si count = True l'action vient
+            de la page home
+            Si count = False l'action vient du bouton skip de cette page
+            => pas de popup à chacun des skips
+            */
+            var count = "{{ count }}";
+            if (count == "true") {
+                var bonusInscription = "{{ user.bonusInscription }}";
+                var nbPoint = "{{ user.creditEarned }}";
+                /* Si bonus inscription elève sur nbPoint les 5 du bonus inscription */
+                if (bonusInscription == 1) {
+                    nbPoint = nbPoint - 5;
+                }
+                /* Si nbPoint est différent de 0 et un multiple de 5 ouverture de la modal */
+                if (nbPoint != 0 && nbPoint % 5 === 0) {
+                    $('#exampleModal').modal('show');
+                } else {
+                    $('#exampleModal').modal({show: false});
+                }
+            }
+        });
 
-        {#var bonusInscription = "{{ user.bonusInscription }}";#}
-        {#var nbPoint = "{{ user.creditEarned }}";#}
-        {#/* Si bonus inscription elève sur nbPoint les 5 du bonus inscription */#}
-        {#if (bonusInscription == 1) {#}
-            {#nbPoint = nbPoint -5;#}
-        {#}#}
-        {#/* Si nbPoint est différent de 0 et un multiple de 5 ouverture de la modal */#}
-        {#if (nbPoint !=0 && nbPoint % 5 === 0) {#}
-            {#$('#exampleModal').modal('show');#}
-        {#} else {#}
-            {#$('#exampleModal').modal({ show: false});#}
-        {#}#}
     </script>
 {% endblock %}

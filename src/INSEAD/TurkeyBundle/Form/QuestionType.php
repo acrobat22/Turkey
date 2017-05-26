@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
 class QuestionType extends AbstractType
@@ -21,9 +22,19 @@ class QuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('question');
+        $builder->add('question', TextType::class, array(
+                'label' => false,
+                'required' => true,
+            )
+        )
+        ;
         if ($this->authorization->isGranted('ROLE_ASKER_PREMIUM')) {
-            $builder->add('filter', FilterType::class);
+            $builder->add('filter', FilterType::class, array(
+                'label' => false,
+                'required' => true,
+                )
+            )
+            ;
         }
     }
 

@@ -31,8 +31,8 @@ class AskerType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
             ))
-            ->add('annual', null, array('required' => true))
-            ->add('marketing', null, array('required' => true));
+            ->add('annual', null, array('label' => 'Annual revenue','required' => true))
+            ->add('marketing', null, array('label' => 'Annual marketing budget','required' => true));
     }
     
     /**

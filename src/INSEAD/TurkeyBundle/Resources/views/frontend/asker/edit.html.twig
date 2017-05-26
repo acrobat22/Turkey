@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<div class="container-fluid inscription" style="padding-top: 35px">
+<div class="container">
     <div class="row">
         <div class="header-logo-inscription">
             <a href=""><img src="" /></a>
@@ -76,7 +76,7 @@
             </div>
 
             {{ form_widget(edit_form) }}
-            <div class="row" style="display: inline-flex; margin-left: 30%">
+            <div class="row" style="margin-left: 1em">
                 <button class="btn btn-primary"
                         type="submit"
                         data-toggle="tooltip"
@@ -84,6 +84,7 @@
                         style="margin-right: 15px;">
                     <i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i>
                 </button>
+                {{ form_end(edit_form) }}
                 <a class="btn btn-warning"
                    role="button"
                    data-toggle="tooltip"
@@ -113,6 +114,7 @@
                     </a>
                 {% endif %}
             </div>
-            {{ form_end(edit_form) }}
-
-            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -97,7 +97,7 @@ class ReponseController extends Controller
 
             } else {
                 $wordsInterdits = implode(", ", $matches[0]);
-                $this->get('helper_services')->setFlash('Votre réponse contient des mots interdits : '. $wordsInterdits);
+                $this->get('helper_services')->setFlash('These words are forbidden: '. $wordsInterdits);
 
                 return $this->render('@INSEADTurkey/frontend/reponse/new.html.twig', array(
                     'reponse' => $reponse,

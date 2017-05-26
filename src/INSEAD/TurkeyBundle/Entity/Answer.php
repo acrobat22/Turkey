@@ -105,7 +105,7 @@ class Answer
     protected $bonusInscription = false;
 
     /**
-     * @ORM\ManyToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER", cascade={"all"})
      * @ORM\JoinColumn
      */
     private $location;

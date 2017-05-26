@@ -51,8 +51,6 @@ class AskerController extends Controller
         $asker->getUser()->setRoles(array('ROLE_ASKER_PREMIUM'));
         $em->flush();
 
-        $this->get('helper_services')->setFlash('Mise à jour de votre compte : PREMIUM');
-
         return $this->render('@INSEADTurkey/frontend/asker_answer/home.html.twig', array(
             'askers' => $asker,
             'user' => $current_user,
@@ -71,8 +69,6 @@ class AskerController extends Controller
         $em = $this->getDoctrine()->getManager();
         $asker->getUser()->setRoles(array('ROLE_ASKER'));
         $em->flush();
-
-        $this->get('helper_services')->setFlash('Mise à jour de votre compte : BASIC.');
 
         return $this->render('@INSEADTurkey/frontend/asker_answer/home.html.twig', array(
             'askers' => $asker,

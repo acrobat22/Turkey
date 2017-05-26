@@ -105,7 +105,7 @@ class Answer
     protected $bonusInscription = false;
 
     /**
-     * @ORM\ManyToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="INSEAD\TurkeyBundle\Entity\Demographic", fetch="EAGER", cascade={"all"})
      * @ORM\JoinColumn
      */
     private $location;
@@ -116,4 +116,326 @@ class Answer
     //                                       //
     //***************************************//
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return Answer
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return Answer
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set company
+     *
+     * @param string $company
+     *
+     * @return Answer
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return string
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * Set sector
+     *
+     * @param string $sector
+     *
+     * @return Answer
+     */
+    public function setSector($sector)
+    {
+        $this->sector = $sector;
+
+        return $this;
+    }
+
+    /**
+     * Get sector
+     *
+     * @return string
+     */
+    public function getSector()
+    {
+        return $this->sector;
+    }
+
+    /**
+     * Set jobFunction
+     *
+     * @param string $jobFunction
+     *
+     * @return Answer
+     */
+    public function setJobFunction($jobFunction)
+    {
+        $this->jobFunction = $jobFunction;
+
+        return $this;
+    }
+
+    /**
+     * Get jobFunction
+     *
+     * @return string
+     */
+    public function getJobFunction()
+    {
+        return $this->jobFunction;
+    }
+
+    /**
+     * Set jobLevel
+     *
+     * @param string $jobLevel
+     *
+     * @return Answer
+     */
+    public function setJobLevel($jobLevel)
+    {
+        $this->jobLevel = $jobLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get jobLevel
+     *
+     * @return string
+     */
+    public function getJobLevel()
+    {
+        return $this->jobLevel;
+    }
+
+    /**
+     * Set education
+     *
+     * @param string $education
+     *
+     * @return Answer
+     */
+    public function setEducation($education)
+    {
+        $this->education = $education;
+
+        return $this;
+    }
+
+    /**
+     * Get education
+     *
+     * @return string
+     */
+    public function getEducation()
+    {
+        return $this->education;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param string $gender
+     *
+     * @return Answer
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Set birthdate
+     *
+     * @param \DateTime $birthdate
+     *
+     * @return Answer
+     */
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    /**
+     * Get birthdate
+     *
+     * @return \DateTime
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * Set creditEarned
+     *
+     * @param integer $creditEarned
+     *
+     * @return Answer
+     */
+    public function setCreditEarned($creditEarned)
+    {
+        $this->creditEarned = $creditEarned;
+
+        return $this;
+    }
+
+    /**
+     * Get creditEarned
+     *
+     * @return integer
+     */
+    public function getCreditEarned()
+    {
+        return $this->creditEarned;
+    }
+
+    /**
+     * Set bonusInscription
+     *
+     * @param boolean $bonusInscription
+     *
+     * @return Answer
+     */
+    public function setBonusInscription($bonusInscription)
+    {
+        $this->bonusInscription = $bonusInscription;
+
+        return $this;
+    }
+
+    /**
+     * Get bonusInscription
+     *
+     * @return boolean
+     */
+    public function getBonusInscription()
+    {
+        return $this->bonusInscription;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \INSEAD\UserBundle\Entity\User $user
+     *
+     * @return Answer
+     */
+    public function setUser(\INSEAD\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \INSEAD\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set location
+     *
+     * @param \INSEAD\TurkeyBundle\Entity\Demographic $location
+     *
+     * @return Answer
+     */
+    public function setLocation(\INSEAD\TurkeyBundle\Entity\Demographic $location = null)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return \INSEAD\TurkeyBundle\Entity\Demographic
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
 }

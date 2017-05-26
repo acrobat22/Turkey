@@ -50,7 +50,7 @@ class TopicController extends Controller
             $em->persist($topic);
             $em->flush();
 
-            return $this->redirectToRoute('topic_show', array('id' => $topic->getId()));
+            return $this->redirectToRoute('topic_index');
         }
 
         return $this->render('@INSEADTurkey/backend/topic/new.html.twig', array(
@@ -90,7 +90,7 @@ class TopicController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('topic_edit', array('id' => $topic->getId()));
+            return $this->redirectToRoute('topic_index');
         }
 
         return $this->render('@INSEADTurkey/backend/topic/edit.html.twig', array(
@@ -104,20 +104,18 @@ class TopicController extends Controller
      * Deletes a topic entity.
      *
      * @Route("/{id}/delete", name="topic_delete")
-     * @Method("DELETE")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Topic $topic)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($topic);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($id) {
             $em = $this->getDoctrine()->getManager();
+            $topic = $em->getRepository('INSEADTurkeyBundle:Dictionary')->findOneById($id);
             $em->remove($topic);
             $em->flush();
-        }
-
-        return $this->redirectToRoute('topic_index');
+            return $this->redirectToRoute('topic_index');
+        } else
+            return $this->redirectToRoute('topic_index');
     }
 
     /**

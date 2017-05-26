@@ -107,20 +107,18 @@ class DictionaryController extends Controller
      * Deletes a dictionary entity.
      *
      * @Route("/{id}/delete", name="dictionary_delete")
-     * @Method("DELETE")
+     * @Method("GEt")
      */
-    public function deleteAction(Request $request, Dictionary $dictionary)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($dictionary);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($id) {
             $em = $this->getDoctrine()->getManager();
+            $dictionary = $em->getRepository('INSEADTurkeyBundle:Dictionary')->findOneById($id);
             $em->remove($dictionary);
             $em->flush();
-        }
-
-        return $this->redirectToRoute('dictionary_index');
+            return $this->redirectToRoute('dictionary_index');
+        } else
+            return $this->redirectToRoute('dictionary_index');
     }
 
     /**

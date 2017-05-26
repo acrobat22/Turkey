@@ -22,6 +22,9 @@
         <div class="panel panel-default">
             {% for asker in askers %}
                 <div class="panel-body">
+                    {% if asker.user.roles[0] == 'ROLE_ASKER_PREMIUM' %}
+                        <img class="img-responsive" src="{{ asset('bundles/inseadturkey/images/premium.png') }}" style="width: 10%;" />
+                    {% endif %}
                     <h4><strong>Username:</strong> {{ asker.user.username }}</h4>
                     <h4><strong>Email:</strong> {{ asker.user.email }}</h4>
                     <h4><strong>Lastname:</strong> {{ asker.lastname }}</h4>
@@ -40,11 +43,6 @@
                         <a href="{{ path('asker_edit', {'id': asker.id } ) }}" class="list-group-item">
                             Edit
                             <i class="fa fa-hand-rock-o fa-lg"></i>
-                        </a>
-                        <a href="{{ path('asker_delete', {'id': asker.id } ) }}" class="list-group-item"
-                           onclick="return confirm('Are you sure?')">
-                            Delete
-                            <i class="fa fa-hand-paper-o fa-lg"></i>
                         </a>
                     </div>
                 </div>

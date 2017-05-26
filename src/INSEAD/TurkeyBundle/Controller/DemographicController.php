@@ -51,7 +51,7 @@ class DemographicController extends Controller
             $em->persist($demographic);
             $em->flush();
 
-            return $this->redirectToRoute('demographic_show', array('id' => $demographic->getId()));
+            return $this->redirectToRoute('demographic_index');
         }
 
         return $this->render('@INSEADTurkey/backend/demographic/new.html.twig', array(
@@ -91,7 +91,7 @@ class DemographicController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('demographic_edit', array('id' => $demographic->getId()));
+            return $this->redirectToRoute('demographic_index');
         }
 
         return $this->render('@INSEADTurkey/backend/demographic/edit.html.twig', array(
@@ -105,19 +105,17 @@ class DemographicController extends Controller
      * Deletes a demographic entity.
      *
      * @Route("/{id}/delete", name="demographic_delete")
-     * @Method("DELETE")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Demographic $demographic)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($demographic);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($id) {
             $em = $this->getDoctrine()->getManager();
+            $demographic = $em->getRepository('INSEADTurkeyBundle:Demographic')->findOneById($id);
             $em->remove($demographic);
             $em->flush();
-        }
-
+            return $this->redirectToRoute('demographic_index');
+        } else
         return $this->redirectToRoute('demographic_index');
     }
 
@@ -132,7 +130,7 @@ class DemographicController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('demographic_delete', array('id' => $demographic->getId())))
-            ->setMethod('DELETE')
+            ->setMethod('GET')
             ->getForm()
         ;
     }

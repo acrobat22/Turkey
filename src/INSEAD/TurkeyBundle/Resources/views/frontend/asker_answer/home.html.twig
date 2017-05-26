@@ -11,6 +11,9 @@
         {% endfor %}
         {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
         <div class="row">
+            {% if user.user.roles[0] == 'ROLE_ASKER_PREMIUM' %}
+                <img class="img-responsive" src="{{ asset('bundles/inseadturkey/images/premium.png') }}" style="width: 10%; margin: 0 auto;" />
+            {% endif %}
             <h1 class="text-center">Welcome {{ user.user.username|default('') }}!</h1>
             {% if user.user.roles[0] == 'ROLE_ANSWER' %}
             <div >

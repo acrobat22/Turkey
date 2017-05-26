@@ -17,18 +17,22 @@
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+    <div class="row" style="margin-left: 1em">
+        <button class="btn btn-primary"
+                type="submit"
+                data-toggle="tooltip"
+                title="Save"
+                style="margin-right: 15px;">
+            <i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i>
+        </button>
+        {{ form_end(edit_form) }}
+        <a class="btn btn-warning"
+           role="button"
+           href="{{ path('topic_index') }}"
+           style="margin-right: 15px;">
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+        </a>
+    </div>
     {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('topic_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 </section>
 {% endblock %}

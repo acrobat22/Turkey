@@ -12,8 +12,6 @@
             </div>
         {% endfor %}
         {#--------- FIN Message quand base de données pas assez remplie -------------------------------------#}
-
-        {#{{ dump(question) }}#}
         <h1>Q:
             <i class="fa fa-quote-left" aria-hidden="true"></i>
             {{ question.question|capitalize }}
@@ -39,12 +37,4 @@
             </a>
         </div>
     </section>
-{% endblock %}
-{% block javascripts %}
-
-    {{ parent() }}
-
-    <script>
-
-    </script>
 {% endblock %}

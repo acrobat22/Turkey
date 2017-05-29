@@ -93,7 +93,7 @@ class ReponseController extends Controller
 
             $em->flush();
 
-            return $this->redirectToRoute('question_random_answer');
+            return $this->redirectToRoute('question_random_answer', array('count' =>'true'));
 
             } else {
                 $wordsInterdits = implode(", ", $matches[0]);

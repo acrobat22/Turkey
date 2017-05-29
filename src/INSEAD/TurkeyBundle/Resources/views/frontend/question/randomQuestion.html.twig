@@ -4,17 +4,12 @@
     <section class="container" style="padding-top: 85px">
 
         <div class="container">
-
-        {#Test si question filter : gender, age, location #}
-            {#Test tranche d'age #}
-            {#<h2>{{ randomQuestion.topic|capitalize }}</h2>#}
             <div class="list-group">
                 <a href="{{ path('reponse_new', {'idQuestion': randomQuestion.id }) }}"
                    class="list-group-item "
                    data-toggle="tooltip"
                    title="click for Answer">
                     <h4 class="list-group-item-heading">{{ randomQuestion.question|capitalize }}</h4>
-                    <p class="pAskerInfo">{{ randomQuestion.asker.user.username }}</p>
                 </a>
             </div>
         </div>

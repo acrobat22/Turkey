@@ -4,15 +4,15 @@
 
             {% if is_granted("ROLE_ASKER") or is_granted("ROLE_ASKER_PREMIUM") or is_granted("ROLE_ANSWER") %}
                 <a class="navbar-brand" href="{{ path('home_connected') }}">
-                    Quash
+                    qash
                 </a>
             {% elseif is_granted("ROLE_ADMIN") %}
                 <a class="navbar-brand" href="{{ path('home_connected') }}">
-                    Quash
+                    qash
                 </a>
             {% else %}
                 <a class="navbar-brand" href="{{ path('homepage') }}">
-                    Quash
+                    qash
                 </a>
             {% endif %}
 
